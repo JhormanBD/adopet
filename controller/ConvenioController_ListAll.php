@@ -1,3 +1,4 @@
+	    \"nombreConvenio\":\"{$Convenio->getnombreConvenio()}\",
 <?php
 
 /*

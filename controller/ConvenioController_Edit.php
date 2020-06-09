@@ -1,3 +1,4 @@
+        if ($idConvenio===''||$Veterinaria_idVeterinaria===''||$Fundacion_idFundacion===''||$fechaConvenio===''||$nombreConvenio===''||$duracionConvenio===''){
 <?php
 
 /*
