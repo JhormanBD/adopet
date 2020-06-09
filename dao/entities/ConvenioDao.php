@@ -102,15 +102,6 @@ class ConvenioDao implements IConvenioDao {
         }
     }
 
-
-      try {
-          $sql= "UPDATE `convenio` SET `estado`='0' WHERE `idConvenio`='$idConvenio'";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
-
     /**
      * Cambia el estado a un objeto Convenio en la base de datos con el fin 
      * de no eliminarlo para reportes futuros.
