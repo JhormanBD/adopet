@@ -30,7 +30,6 @@ class HistorialDao implements IHistorialDao {
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
     public function insert($historial) {
-        $idHistorial = $historial->getIdHistorial();
         $fechaHistorial = $historial->getFechaHistorial();
         $descripcion = $historial->getDescripcion();
         $tipo = $historial->getTipo();

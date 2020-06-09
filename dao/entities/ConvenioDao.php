@@ -55,6 +55,7 @@ class ConvenioDao implements IConvenioDao {
     public function select($convenio) {
         $idConvenio = $convenio->getIdConvenio();
 
+          $convenio->setIdConvenio($data[$i]['idConvenio']);
         try {
             $sql = "SELECT `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`, `estado`"
                     . "FROM `convenio`"
@@ -95,20 +96,7 @@ class ConvenioDao implements IConvenioDao {
         $duracionConvenio = $convenio->getDuracionConvenio();
 
       try {
-          $sql= "UPDATE `convenio` SET`idConvenio`='$idConvenio' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaConvenio`='$fechaConvenio' ,`nombreConvenio`='$nombreConvenio' ,`duracionConvenio`='$duracionConvenio' WHERE `idConvenio`='$idConvenio' ";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
-      
-  
-   public function updateEliminar($convenio){
-      $idConvenio=$convenio->getIdConvenio();
-
-
-      try {
-          $sql= "UPDATE `convenio` SET `estado`='0' WHERE `idConvenio`='$idConvenio'";
+          $sql= "UPDATE `convenio` SET`idConvenio`='$idConvenio' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaConvenio`='$fechaConvenio' ,`nombreConvenio`='$nombreConvenio' ,`duracionConvenio`='$duracionConvenio' ,`estado`='$estado' WHERE `idConvenio`='$idConvenio' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
