@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Lo sé porque lo sabe Fredy  \\
+//    Caminante no hay camino, se hace camino al andar  \\
 
 
 class Donacion {
@@ -13,7 +13,6 @@ class Donacion {
   private $idDonacion;
   private $Mascota_idMascota;
   private $Fundacion_idFundacion;
-  private $estadoDonacion;
   private $fechaDonacion;
   private $cantidad;
   private $descripcion;
@@ -68,21 +67,6 @@ class Donacion {
      */
   public function setFundacion_idFundacion($fundacion_idFundacion){
       $this->Fundacion_idFundacion = $fundacion_idFundacion;
-  }
-    /**
-     * Devuelve el valor correspondiente a estadoDonacion
-     * @return estadoDonacion
-     */
-  public function getEstadoDonacion(){
-      return $this->estadoDonacion;
-  }
-
-    /**
-     * Modifica el valor correspondiente a estadoDonacion
-     * @param estadoDonacion
-     */
-  public function setEstadoDonacion($estadoDonacion){
-      $this->estadoDonacion = $estadoDonacion;
   }
     /**
      * Devuelve el valor correspondiente a fechaDonacion

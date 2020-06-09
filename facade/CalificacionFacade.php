@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Alguna vez Anarchy se llamó Molotov ( u.u) *Nostalgia  \\
+//    ...con el mayor de los disgustos, el benévolo señor Arciniegas.  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

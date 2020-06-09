@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Hecho en sólo 6 días  \\
+//    Mi satisfacción es hacerte un poco más vago  \\
 include_once realpath('../facade/SolicitudFacade.php');
 
 
@@ -17,9 +17,12 @@ class SolicitudController {
         $usuario= new Usuario();
         $usuario->setIdUsuario($Usuario_idUsuario);
         $descripcion = strip_tags($_POST['descripcion']);
-        $Aprobacion = strip_tags($_POST['Aprobacion']);
-        $tipoSolucion = strip_tags($_POST['tipoSolucion']);
-        SolicitudFacade::insert($idSolicitud, $usuario, $descripcion, $Aprobacion, $tipoSolucion);
+        $aprobacion = strip_tags($_POST['aprobacion']);
+        $tipoSolucitud = strip_tags($_POST['tipoSolucitud']);
+        $Mascota_idMascota = strip_tags($_POST['Mascota_idMascota']);
+        $mascota= new Mascota();
+        $mascota->setIdMascota($Mascota_idMascota);
+        SolicitudFacade::insert($idSolicitud, $usuario, $descripcion, $aprobacion, $tipoSolucitud, $mascota);
 return true;
     }
 
@@ -31,8 +34,9 @@ return true;
 	    \"idSolicitud\":\"{$Solicitud->getidSolicitud()}\",
 	    \"Usuario_idUsuario_idUsuario\":\"{$Solicitud->getUsuario_idUsuario()->getidUsuario()}\",
 	    \"descripcion\":\"{$Solicitud->getdescripcion()}\",
-	    \"Aprobacion\":\"{$Solicitud->getAprobacion()}\",
-	    \"tipoSolucion\":\"{$Solicitud->gettipoSolucion()}\"
+	    \"aprobacion\":\"{$Solicitud->getaprobacion()}\",
+	    \"tipoSolucitud\":\"{$Solicitud->gettipoSolucitud()}\",
+	    \"Mascota_idMascota_idMascota\":\"{$Solicitud->getMascota_idMascota()->getidMascota()}\"
 	       },";
         }
 

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Ya están los patrones implementados, ahora sí viene lo chido...  \\
+//    ¿Cuantas frases como esta crees que puedo escribir?  \\
 
 include_once realpath('../dao/interfaz/IFoto_mascotaDao.php');
 include_once realpath('../dto/Foto_mascota.php');

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    NEVERMORE  \\
+//    La última regla es confiar en Arciniegas  \\
 
 
 interface ITipousuarioDao {

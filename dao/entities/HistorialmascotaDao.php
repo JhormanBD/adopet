@@ -5,10 +5,11 @@
               ------------------------
  */
 
-//    Puedes sugerirnos frases nuevas, se nos están acabando ( u.u)  \\
+//    ¡Vaya! ¡Al fin harás algo mejor que una calculadora!  \\
 
 include_once realpath('../dao/interfaz/IHistorialmascotaDao.php');
 include_once realpath('../dto/Historialmascota.php');
+include_once realpath('../dto/Mascota.php');
 
 class HistorialmascotaDao implements IHistorialmascotaDao{
 
@@ -29,13 +30,14 @@ private $cn;
      */
   public function insert($historialmascota){
       $idHistorialMascota=$historialmascota->getIdHistorialMascota();
-$fechaVacunaHistorialMascota=$historialmascota->getFechaVacunaHistorialMascota();
+$fechaHistorialMascota=$historialmascota->getFechaHistorialMascota();
 $descripcion=$historialmascota->getDescripcion();
 $observacion=$historialmascota->getObservacion();
+$mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
 
       try {
-          $sql= "INSERT INTO `historialmascota`( `idHistorialMascota`, `fechaVacunaHistorialMascota`, `descripcion`, `Observacion`)"
-          ."VALUES ('$idHistorialMascota','$fechaVacunaHistorialMascota','$descripcion','$observacion')";
+          $sql= "INSERT INTO `historialmascota`( `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`)"
+          ."VALUES ('$idHistorialMascota','$fechaHistorialMascota','$descripcion','$observacion','$mascota_idMascota')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -52,15 +54,18 @@ $observacion=$historialmascota->getObservacion();
       $idHistorialMascota=$historialmascota->getIdHistorialMascota();
 
       try {
-          $sql= "SELECT `idHistorialMascota`, `fechaVacunaHistorialMascota`, `descripcion`, `Observacion`"
+          $sql= "SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
           ."FROM `historialmascota`"
           ."WHERE `idHistorialMascota`='$idHistorialMascota'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
           $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
-          $historialmascota->setFechaVacunaHistorialMascota($data[$i]['fechaVacunaHistorialMascota']);
+          $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
           $historialmascota->setDescripcion($data[$i]['descripcion']);
           $historialmascota->setObservacion($data[$i]['Observacion']);
+           $mascota = new Mascota();
+           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+           $historialmascota->setMascota_idMascota($mascota);
 
           }
       return $historialmascota;      } catch (SQLException $e) {
@@ -77,12 +82,13 @@ $observacion=$historialmascota->getObservacion();
      */
   public function update($historialmascota){
       $idHistorialMascota=$historialmascota->getIdHistorialMascota();
-$fechaVacunaHistorialMascota=$historialmascota->getFechaVacunaHistorialMascota();
+$fechaHistorialMascota=$historialmascota->getFechaHistorialMascota();
 $descripcion=$historialmascota->getDescripcion();
 $observacion=$historialmascota->getObservacion();
+$mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
 
       try {
-          $sql= "UPDATE `historialmascota` SET`idHistorialMascota`='$idHistorialMascota' ,`fechaVacunaHistorialMascota`='$fechaVacunaHistorialMascota' ,`descripcion`='$descripcion' ,`Observacion`='$observacion' WHERE `idHistorialMascota`='$idHistorialMascota' ";
+          $sql= "UPDATE `historialmascota` SET`idHistorialMascota`='$idHistorialMascota' ,`fechaHistorialMascota`='$fechaHistorialMascota' ,`descripcion`='$descripcion' ,`Observacion`='$observacion' ,`Mascota_idMascota`='$mascota_idMascota' WHERE `idHistorialMascota`='$idHistorialMascota' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -114,16 +120,19 @@ $observacion=$historialmascota->getObservacion();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idHistorialMascota`, `fechaVacunaHistorialMascota`, `descripcion`, `Observacion`"
+          $sql ="SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
           ."FROM `historialmascota`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $historialmascota= new Historialmascota();
           $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
-          $historialmascota->setFechaVacunaHistorialMascota($data[$i]['fechaVacunaHistorialMascota']);
+          $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
           $historialmascota->setDescripcion($data[$i]['descripcion']);
           $historialmascota->setObservacion($data[$i]['Observacion']);
+           $mascota = new Mascota();
+           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+           $historialmascota->setMascota_idMascota($mascota);
 
           array_push($lista,$historialmascota);
           }

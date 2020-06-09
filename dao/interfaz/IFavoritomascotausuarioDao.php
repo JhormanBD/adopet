@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Oh gloria de las glorias, oh divino testamento de la eterna majestad de la creación de dios  \\
+//    La vie est composé de combien de fois nous rions avant de mourir  \\
 
 
 interface IFavoritomascotausuarioDao {
@@ -41,20 +41,6 @@ interface IFavoritomascotausuarioDao {
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function listAll();
-    /**
-     * Lista todos los objetos Favoritomascotausuario en la base de datos que coincidan con la llave primaria.
-     * @param favoritomascotausuario objeto con la(s) llave(s) primaria(s) para consultar
-     * @return Array<Favoritomascotausuario> Puede contener los objetos consultados o estar vacío
-     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
-     */
-  public function listByMascota_idMascota($favoritomascotausuario);
-    /**
-     * Lista todos los objetos Favoritomascotausuario en la base de datos que coincidan con la llave primaria.
-     * @param favoritomascotausuario objeto con la(s) llave(s) primaria(s) para consultar
-     * @return Array<Favoritomascotausuario> Puede contener los objetos consultados o estar vacío
-     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
-     */
-  public function listByUsuario_idUsuario($favoritomascotausuario);
     /**
      * Cierra la conexión actual a la base de datos
      */

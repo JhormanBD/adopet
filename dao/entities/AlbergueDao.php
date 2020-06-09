@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ...y esta no es la única frase que encontrarás...  \\
+//    Proletarios del mundo ¡Uníos!  \\
 
 include_once realpath('../dao/interfaz/IAlbergueDao.php');
 include_once realpath('../dto/Albergue.php');

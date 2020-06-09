@@ -5,22 +5,21 @@
               ------------------------
  */
 
-//    En esto paso mis sábados en la noche ( ¬.¬)  \\
+//    Bastará decir que soy Juan Pablo Castel, el pintor que mató a María Iribarne...  \\
 
 
 class Usuario {
 
   private $idUsuario;
-  private $Historial_idHistorial;
   private $TipoUsuario_idTipoUsuario;
   private $nombreUsuario;
   private $apellidoUsuario;
   private $cedula;
   private $direccion;
   private $correo;
-  private $contraseÃÂ±a;
+  private $password;
   private $estado;
-  private $fechanacimiento;
+  private $fechaNacimiento;
   private $fechaIngreso;
   private $foto;
 
@@ -43,21 +42,6 @@ class Usuario {
      */
   public function setIdUsuario($idUsuario){
       $this->idUsuario = $idUsuario;
-  }
-    /**
-     * Devuelve el valor correspondiente a Historial_idHistorial
-     * @return Historial_idHistorial
-     */
-  public function getHistorial_idHistorial(){
-      return $this->Historial_idHistorial;
-  }
-
-    /**
-     * Modifica el valor correspondiente a Historial_idHistorial
-     * @param Historial_idHistorial
-     */
-  public function setHistorial_idHistorial($historial_idHistorial){
-      $this->Historial_idHistorial = $historial_idHistorial;
   }
     /**
      * Devuelve el valor correspondiente a TipoUsuario_idTipoUsuario
@@ -150,19 +134,19 @@ class Usuario {
       $this->correo = $correo;
   }
     /**
-     * Devuelve el valor correspondiente a contraseÃÂ±a
-     * @return contraseÃÂ±a
+     * Devuelve el valor correspondiente a password
+     * @return password
      */
-  public function getContraseÃÂ±a(){
-      return $this->contraseÃÂ±a;
+  public function getPassword(){
+      return $this->password;
   }
 
     /**
-     * Modifica el valor correspondiente a contraseÃÂ±a
-     * @param contraseÃÂ±a
+     * Modifica el valor correspondiente a password
+     * @param password
      */
-  public function setContraseÃÂ±a($contraseÃÂ±a){
-      $this->contraseÃÂ±a = $contraseÃÂ±a;
+  public function setPassword($password){
+      $this->password = $password;
   }
     /**
      * Devuelve el valor correspondiente a estado
@@ -180,19 +164,19 @@ class Usuario {
       $this->estado = $estado;
   }
     /**
-     * Devuelve el valor correspondiente a fechanacimiento
-     * @return fechanacimiento
+     * Devuelve el valor correspondiente a fechaNacimiento
+     * @return fechaNacimiento
      */
-  public function getFechanacimiento(){
-      return $this->fechanacimiento;
+  public function getFechaNacimiento(){
+      return $this->fechaNacimiento;
   }
 
     /**
-     * Modifica el valor correspondiente a fechanacimiento
-     * @param fechanacimiento
+     * Modifica el valor correspondiente a fechaNacimiento
+     * @param fechaNacimiento
      */
-  public function setFechanacimiento($fechanacimiento){
-      $this->fechanacimiento = $fechanacimiento;
+  public function setFechaNacimiento($fechaNacimiento){
+      $this->fechaNacimiento = $fechaNacimiento;
   }
     /**
      * Devuelve el valor correspondiente a fechaIngreso

@@ -5,10 +5,10 @@
               ------------------------
  */
 
-//    Tu alma nos pertenece... Salve Mr. Arciniegas  \\
+//    Hecho en sólo 6 días  \\
 
 
-class Notificaciones {
+class Notificacion {
 
   private $idmensaje;
   private $fechaMensaje;
@@ -17,7 +17,7 @@ class Notificaciones {
   private $Descripcion;
 
     /**
-     * Constructor de Notificaciones
+     * Constructor de Notificacion
     */
      public function __construct(){}
 

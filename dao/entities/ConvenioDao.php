@@ -5,11 +5,11 @@
               ------------------------
  */
 
-//    Somos los amish del software  \\
+//    gravitaban alrededor del astro de la noche, y por primera vez podía la vista penetrar todos sus misterios.  \\
 
 include_once realpath('../dao/interfaz/IConvenioDao.php');
 include_once realpath('../dto/Convenio.php');
-include_once realpath('../dto/Veterinaria.php');
+include_once realpath('../dto/Vinculacion.php');
 include_once realpath('../dto/Fundacion.php');
 
 class ConvenioDao implements IConvenioDao{
@@ -30,16 +30,17 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($convenio){
-      
+      $idConvenio=$convenio->getIdConvenio();
 $veterinaria_idVeterinaria=$convenio->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 $fundacion_idFundacion=$convenio->getFundacion_idFundacion()->getIdFundacion();
 $fechaConvenio=$convenio->getFechaConvenio();
 $nombreConvenio=$convenio->getNombreConvenio();
 $duracionConvenio=$convenio->getDuracionConvenio();
+$estado=$convenio->getEstado();
 
       try {
-          $sql= "INSERT INTO `convenio`(  `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`)"
-          ."VALUES ('$veterinaria_idVeterinaria','$fundacion_idFundacion','$fechaConvenio','$nombreConvenio','$duracionConvenio')";
+          $sql= "INSERT INTO `convenio`( `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`, `estado`)"
+          ."VALUES ('$idConvenio','$veterinaria_idVeterinaria','$fundacion_idFundacion','$fechaConvenio','$nombreConvenio','$duracionConvenio','$estado')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -56,21 +57,22 @@ $duracionConvenio=$convenio->getDuracionConvenio();
       $idConvenio=$convenio->getIdConvenio();
 
       try {
-          $sql= "SELECT `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`"
+          $sql= "SELECT `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`, `estado`"
           ."FROM `convenio`"
           ."WHERE `idConvenio`='$idConvenio'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
           $convenio->setIdConvenio($data[$i]['idConvenio']);
-           $veterinaria = new Veterinaria();
-           $veterinaria->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
-           $convenio->setVeterinaria_idVeterinaria($veterinaria);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
+           $convenio->setVeterinaria_idVeterinaria($vinculacion);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $convenio->setFundacion_idFundacion($fundacion);
           $convenio->setFechaConvenio($data[$i]['fechaConvenio']);
           $convenio->setNombreConvenio($data[$i]['nombreConvenio']);
           $convenio->setDuracionConvenio($data[$i]['duracionConvenio']);
+          $convenio->setEstado($data[$i]['estado']);
 
           }
       return $convenio;      } catch (SQLException $e) {
@@ -92,22 +94,10 @@ $fundacion_idFundacion=$convenio->getFundacion_idFundacion()->getIdFundacion();
 $fechaConvenio=$convenio->getFechaConvenio();
 $nombreConvenio=$convenio->getNombreConvenio();
 $duracionConvenio=$convenio->getDuracionConvenio();
+$estado=$convenio->getEstado();
 
       try {
-          $sql= "UPDATE `convenio` SET`idConvenio`='$idConvenio' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaConvenio`='$fechaConvenio' ,`nombreConvenio`='$nombreConvenio' ,`duracionConvenio`='$duracionConvenio' WHERE `idConvenio`='$idConvenio' ";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
-      
-  
-   public function updateEliminar($convenio){
-      $idConvenio=$convenio->getIdConvenio();
-
-
-      try {
-          $sql= "UPDATE `convenio` SET `estado`='0' WHERE `idConvenio`='$idConvenio'";
+          $sql= "UPDATE `convenio` SET`idConvenio`='$idConvenio' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaConvenio`='$fechaConvenio' ,`nombreConvenio`='$nombreConvenio' ,`duracionConvenio`='$duracionConvenio' ,`estado`='$estado' WHERE `idConvenio`='$idConvenio' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -139,22 +129,23 @@ $duracionConvenio=$convenio->getDuracionConvenio();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`"
+          $sql ="SELECT `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`, `estado`"
           ."FROM `convenio`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $convenio= new Convenio();
           $convenio->setIdConvenio($data[$i]['idConvenio']);
-           $veterinaria = new Veterinaria();
-           $veterinaria->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
-           $convenio->setVeterinaria_idVeterinaria($veterinaria);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
+           $convenio->setVeterinaria_idVeterinaria($vinculacion);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $convenio->setFundacion_idFundacion($fundacion);
           $convenio->setFechaConvenio($data[$i]['fechaConvenio']);
           $convenio->setNombreConvenio($data[$i]['nombreConvenio']);
           $convenio->setDuracionConvenio($data[$i]['duracionConvenio']);
+          $convenio->setEstado($data[$i]['estado']);
 
           array_push($lista,$convenio);
           }

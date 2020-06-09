@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    404 Frase no encontrada  \\
+//    In Anarchy we trust  \\
 include_once realpath('../facade/TipousuarioFacade.php');
 
 

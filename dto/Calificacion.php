@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Tienes que considerar la posibilidad de que a Dios no le caes bien.  \\
+//    Trabajo individual singifica ganancia individual  \\
 
 
 class Calificacion {

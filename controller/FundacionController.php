@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Sabías que Anarchy se generó a sí mismo?  \\
+//    Mi satisfacción es hacerte un poco más vago  \\
 include_once realpath('../facade/FundacionFacade.php');
 
 
@@ -19,7 +19,10 @@ class FundacionController {
         $nit = strip_tags($_POST['nit']);
         $correo = strip_tags($_POST['correo']);
         $nombrepropietario = strip_tags($_POST['nombrepropietario']);
-        FundacionFacade::insert($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario);
+        $Usuario_idUsuario = strip_tags($_POST['Usuario_idUsuario']);
+        $usuario= new Usuario();
+        $usuario->setIdUsuario($Usuario_idUsuario);
+        FundacionFacade::insert($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario);
 return true;
     }
 
@@ -34,7 +37,8 @@ return true;
 	    \"telefonoFundacion\":\"{$Fundacion->gettelefonoFundacion()}\",
 	    \"nit\":\"{$Fundacion->getnit()}\",
 	    \"correo\":\"{$Fundacion->getcorreo()}\",
-	    \"nombrepropietario\":\"{$Fundacion->getnombrepropietario()}\"
+	    \"nombrepropietario\":\"{$Fundacion->getnombrepropietario()}\",
+	    \"Usuario_idUsuario_idUsuario\":\"{$Fundacion->getUsuario_idUsuario()->getidUsuario()}\"
 	       },";
         }
 

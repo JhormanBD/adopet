@@ -5,32 +5,32 @@
               ------------------------
  */
 
-//    La última regla es confiar en Arciniegas  \\
-include_once realpath('../facade/VeterinariaFacade.php');
+//    No se fije en el corte de cabello, soy mucho muy rico  \\
+include_once realpath('../facade/VinculacionFacade.php');
 
 
-class VeterinariaController {
+class VinculacionController {
 
     public static function insert(){
         $idVeterinaria = strip_tags($_POST['idVeterinaria']);
-        $nombreVeterinaria = strip_tags($_POST['nombreVeterinaria']);
+        $nombreVinculacion = strip_tags($_POST['nombreVinculacion']);
         $direccion = strip_tags($_POST['direccion']);
         $nit = strip_tags($_POST['nit']);
         $telefono = strip_tags($_POST['telefono']);
-        VeterinariaFacade::insert($idVeterinaria, $nombreVeterinaria, $direccion, $nit, $telefono);
+        VinculacionFacade::insert($idVeterinaria, $nombreVinculacion, $direccion, $nit, $telefono);
 return true;
     }
 
     public static function listAll(){
-        $list=VeterinariaFacade::listAll();
+        $list=VinculacionFacade::listAll();
         $rta="";
-        foreach ($list as $obj => $Veterinaria) {	
+        foreach ($list as $obj => $Vinculacion) {	
 	       $rta.="{
-	    \"idVeterinaria\":\"{$Veterinaria->getidVeterinaria()}\",
-	    \"nombreVeterinaria\":\"{$Veterinaria->getnombreVeterinaria()}\",
-	    \"direccion\":\"{$Veterinaria->getdireccion()}\",
-	    \"nit\":\"{$Veterinaria->getnit()}\",
-	    \"telefono\":\"{$Veterinaria->gettelefono()}\"
+	    \"idVeterinaria\":\"{$Vinculacion->getidVeterinaria()}\",
+	    \"nombreVinculacion\":\"{$Vinculacion->getnombreVinculacion()}\",
+	    \"direccion\":\"{$Vinculacion->getdireccion()}\",
+	    \"nit\":\"{$Vinculacion->getnit()}\",
+	    \"telefono\":\"{$Vinculacion->gettelefono()}\"
 	       },";
         }
 

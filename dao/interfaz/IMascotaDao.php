@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    La primera regla del proyecto es no hacer preguntas  \\
+//    Tenemos trabajos que odiamos para comprar cosas que no necesitamos.  \\
 
 
 interface IMascotaDao {

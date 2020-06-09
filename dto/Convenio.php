@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    La vie est composé de combien de fois nous rions avant de mourir  \\
+//    ¿En serio? ¿Tantos buenos frameworks y estás usando Anarchy?  \\
 
 
 class Convenio {
@@ -16,6 +16,7 @@ class Convenio {
   private $fechaConvenio;
   private $nombreConvenio;
   private $duracionConvenio;
+  private $estado;
 
     /**
      * Constructor de Convenio
@@ -111,6 +112,21 @@ class Convenio {
      */
   public function setDuracionConvenio($duracionConvenio){
       $this->duracionConvenio = $duracionConvenio;
+  }
+    /**
+     * Devuelve el valor correspondiente a estado
+     * @return estado
+     */
+  public function getEstado(){
+      return $this->estado;
+  }
+
+    /**
+     * Modifica el valor correspondiente a estado
+     * @param estado
+     */
+  public function setEstado($estado){
+      $this->estado = $estado;
   }
 
 

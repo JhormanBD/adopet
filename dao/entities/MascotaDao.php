@@ -5,14 +5,13 @@
               ------------------------
  */
 
-//    El código es tuyo, modifícalo como quieras  \\
+//    Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo.   \\
 
 include_once realpath('../dao/interfaz/IMascotaDao.php');
 include_once realpath('../dto/Mascota.php');
 include_once realpath('../dto/Especie.php');
-include_once realpath('../dto/Historialmascota.php');
 include_once realpath('../dto/Fundacion.php');
-include_once realpath('../dto/Veterinaria.php');
+include_once realpath('../dto/Vinculacion.php');
 
 class MascotaDao implements IMascotaDao{
 
@@ -34,23 +33,18 @@ private $cn;
   public function insert($mascota){
       $idMascota=$mascota->getIdMascota();
 $especie_idEspecie=$mascota->getEspecie_idEspecie()->getIdEspecie();
-$historialMascota_idHistorialMascota=$mascota->getHistorialMascota_idHistorialMascota()->getIdHistorialMascota();
 $nombreMascota=$mascota->getNombreMascota();
 $edadMascota=$mascota->getEdadMascota();
 $sexoMascota=$mascota->getSexoMascota();
 $disponibilidadMascota=$mascota->getDisponibilidadMascota();
-$esterilizado=$mascota->getEsterilizado();
 $fundacion_idFundacion=$mascota->getFundacion_idFundacion()->getIdFundacion();
 $fechaIngreso=$mascota->getFechaIngreso();
 $fechaSalida=$mascota->getFechaSalida();
-$fotoMascota=$mascota->getFotoMascota();
-$mascota_creacion=$mascota->getMascota_creacion();
-$apadrinamiento=$mascota->getApadrinamiento();
 $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 
       try {
-          $sql= "INSERT INTO `mascota`( `idMascota`, `Especie_idEspecie`, `HistorialMascota_idHistorialMascota`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `esterilizado`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `fotoMascota`, `Mascota_creacion`, `Apadrinamiento`, `Veterinaria_idVeterinaria`)"
-          ."VALUES ('$idMascota','$especie_idEspecie','$historialMascota_idHistorialMascota','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$esterilizado','$fundacion_idFundacion','$fechaIngreso','$fechaSalida','$fotoMascota','$mascota_creacion','$apadrinamiento','$veterinaria_idVeterinaria')";
+          $sql= "INSERT INTO `mascota`( `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`)"
+          ."VALUES ('$idMascota','$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$fechaSalida','$veterinaria_idVeterinaria')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -67,7 +61,7 @@ $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeteri
       $idMascota=$mascota->getIdMascota();
 
       try {
-          $sql= "SELECT `idMascota`, `Especie_idEspecie`, `HistorialMascota_idHistorialMascota`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `esterilizado`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `fotoMascota`, `Mascota_creacion`, `Apadrinamiento`, `Veterinaria_idVeterinaria`"
+          $sql= "SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`"
           ."FROM `mascota`"
           ."WHERE `idMascota`='$idMascota'";
           $data = $this->ejecutarConsulta($sql);
@@ -76,25 +70,18 @@ $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeteri
            $especie = new Especie();
            $especie->setIdEspecie($data[$i]['Especie_idEspecie']);
            $mascota->setEspecie_idEspecie($especie);
-           $historialmascota = new Historialmascota();
-           $historialmascota->setIdHistorialMascota($data[$i]['HistorialMascota_idHistorialMascota']);
-           $mascota->setHistorialMascota_idHistorialMascota($historialmascota);
           $mascota->setNombreMascota($data[$i]['nombreMascota']);
           $mascota->setEdadMascota($data[$i]['edadMascota']);
           $mascota->setSexoMascota($data[$i]['sexoMascota']);
           $mascota->setDisponibilidadMascota($data[$i]['disponibilidadMascota']);
-          $mascota->setEsterilizado($data[$i]['esterilizado']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $mascota->setFundacion_idFundacion($fundacion);
           $mascota->setFechaIngreso($data[$i]['fechaIngreso']);
           $mascota->setFechaSalida($data[$i]['fechaSalida']);
-          $mascota->setFotoMascota($data[$i]['fotoMascota']);
-          $mascota->setMascota_creacion($data[$i]['Mascota_creacion']);
-          $mascota->setApadrinamiento($data[$i]['Apadrinamiento']);
-           $veterinaria = new Veterinaria();
-           $veterinaria->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
-           $mascota->setVeterinaria_idVeterinaria($veterinaria);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
+           $mascota->setVeterinaria_idVeterinaria($vinculacion);
 
           }
       return $mascota;      } catch (SQLException $e) {
@@ -112,22 +99,17 @@ $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeteri
   public function update($mascota){
       $idMascota=$mascota->getIdMascota();
 $especie_idEspecie=$mascota->getEspecie_idEspecie()->getIdEspecie();
-$historialMascota_idHistorialMascota=$mascota->getHistorialMascota_idHistorialMascota()->getIdHistorialMascota();
 $nombreMascota=$mascota->getNombreMascota();
 $edadMascota=$mascota->getEdadMascota();
 $sexoMascota=$mascota->getSexoMascota();
 $disponibilidadMascota=$mascota->getDisponibilidadMascota();
-$esterilizado=$mascota->getEsterilizado();
 $fundacion_idFundacion=$mascota->getFundacion_idFundacion()->getIdFundacion();
 $fechaIngreso=$mascota->getFechaIngreso();
 $fechaSalida=$mascota->getFechaSalida();
-$fotoMascota=$mascota->getFotoMascota();
-$mascota_creacion=$mascota->getMascota_creacion();
-$apadrinamiento=$mascota->getApadrinamiento();
 $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 
       try {
-          $sql= "UPDATE `mascota` SET`idMascota`='$idMascota' ,`Especie_idEspecie`='$especie_idEspecie' ,`HistorialMascota_idHistorialMascota`='$historialMascota_idHistorialMascota' ,`nombreMascota`='$nombreMascota' ,`edadMascota`='$edadMascota' ,`sexoMascota`='$sexoMascota' ,`disponibilidadMascota`='$disponibilidadMascota' ,`esterilizado`='$esterilizado' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaIngreso`='$fechaIngreso' ,`fechaSalida`='$fechaSalida' ,`fotoMascota`='$fotoMascota' ,`Mascota_creacion`='$mascota_creacion' ,`Apadrinamiento`='$apadrinamiento' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' WHERE `idMascota`='$idMascota' ";
+          $sql= "UPDATE `mascota` SET`idMascota`='$idMascota' ,`Especie_idEspecie`='$especie_idEspecie' ,`nombreMascota`='$nombreMascota' ,`edadMascota`='$edadMascota' ,`sexoMascota`='$sexoMascota' ,`disponibilidadMascota`='$disponibilidadMascota' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaIngreso`='$fechaIngreso' ,`fechaSalida`='$fechaSalida' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' WHERE `idMascota`='$idMascota' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -159,7 +141,7 @@ $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeteri
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idMascota`, `Especie_idEspecie`, `HistorialMascota_idHistorialMascota`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `esterilizado`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `fotoMascota`, `Mascota_creacion`, `Apadrinamiento`, `Veterinaria_idVeterinaria`"
+          $sql ="SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`"
           ."FROM `mascota`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
@@ -169,25 +151,18 @@ $veterinaria_idVeterinaria=$mascota->getVeterinaria_idVeterinaria()->getIdVeteri
            $especie = new Especie();
            $especie->setIdEspecie($data[$i]['Especie_idEspecie']);
            $mascota->setEspecie_idEspecie($especie);
-           $historialmascota = new Historialmascota();
-           $historialmascota->setIdHistorialMascota($data[$i]['HistorialMascota_idHistorialMascota']);
-           $mascota->setHistorialMascota_idHistorialMascota($historialmascota);
           $mascota->setNombreMascota($data[$i]['nombreMascota']);
           $mascota->setEdadMascota($data[$i]['edadMascota']);
           $mascota->setSexoMascota($data[$i]['sexoMascota']);
           $mascota->setDisponibilidadMascota($data[$i]['disponibilidadMascota']);
-          $mascota->setEsterilizado($data[$i]['esterilizado']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $mascota->setFundacion_idFundacion($fundacion);
           $mascota->setFechaIngreso($data[$i]['fechaIngreso']);
           $mascota->setFechaSalida($data[$i]['fechaSalida']);
-          $mascota->setFotoMascota($data[$i]['fotoMascota']);
-          $mascota->setMascota_creacion($data[$i]['Mascota_creacion']);
-          $mascota->setApadrinamiento($data[$i]['Apadrinamiento']);
-           $veterinaria = new Veterinaria();
-           $veterinaria->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
-           $mascota->setVeterinaria_idVeterinaria($veterinaria);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
+           $mascota->setVeterinaria_idVeterinaria($vinculacion);
 
           array_push($lista,$mascota);
           }

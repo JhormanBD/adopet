@@ -5,14 +5,14 @@
               ------------------------
  */
 
-//    In Anarchy we trust  \\
+//    Traigo una pizza para ¿y se la creyó?  \\
 
 
 class Favoritomascotausuario {
 
   private $Mascota_idMascota;
   private $Usuario_idUsuario;
-  private $estadoFavoritoMascotaUsuario;
+  private $idFavoritoMascotaUsuario;
 
     /**
      * Constructor de Favoritomascotausuario
@@ -50,19 +50,19 @@ class Favoritomascotausuario {
       $this->Usuario_idUsuario = $usuario_idUsuario;
   }
     /**
-     * Devuelve el valor correspondiente a estadoFavoritoMascotaUsuario
-     * @return estadoFavoritoMascotaUsuario
+     * Devuelve el valor correspondiente a idFavoritoMascotaUsuario
+     * @return idFavoritoMascotaUsuario
      */
-  public function getEstadoFavoritoMascotaUsuario(){
-      return $this->estadoFavoritoMascotaUsuario;
+  public function getIdFavoritoMascotaUsuario(){
+      return $this->idFavoritoMascotaUsuario;
   }
 
     /**
-     * Modifica el valor correspondiente a estadoFavoritoMascotaUsuario
-     * @param estadoFavoritoMascotaUsuario
+     * Modifica el valor correspondiente a idFavoritoMascotaUsuario
+     * @param idFavoritoMascotaUsuario
      */
-  public function setEstadoFavoritoMascotaUsuario($estadoFavoritoMascotaUsuario){
-      $this->estadoFavoritoMascotaUsuario = $estadoFavoritoMascotaUsuario;
+  public function setIdFavoritoMascotaUsuario($idFavoritoMascotaUsuario){
+      $this->idFavoritoMascotaUsuario = $idFavoritoMascotaUsuario;
   }
 
 

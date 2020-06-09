@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Le he dedicado más tiempo a las frases que al software interno  \\
+//    No quiero morir sin tener cicatrices.  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

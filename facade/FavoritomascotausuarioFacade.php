@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Les traigo amor  \\
+//    Por desgracia, mi epitafio será una frase insulsa y vacía  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
@@ -35,13 +35,13 @@ class FavoritomascotausuarioFacade {
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param mascota_idMascota
    * @param usuario_idUsuario
-   * @param estadoFavoritoMascotaUsuario
+   * @param idFavoritoMascotaUsuario
    */
-  public static function insert( $mascota_idMascota,  $usuario_idUsuario,  $estadoFavoritoMascotaUsuario){
+  public static function insert( $mascota_idMascota,  $usuario_idUsuario,  $idFavoritoMascotaUsuario){
       $favoritomascotausuario = new Favoritomascotausuario();
       $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
       $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
-      $favoritomascotausuario->setEstadoFavoritoMascotaUsuario($estadoFavoritoMascotaUsuario); 
+      $favoritomascotausuario->setIdFavoritoMascotaUsuario($idFavoritoMascotaUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
@@ -53,14 +53,12 @@ class FavoritomascotausuarioFacade {
   /**
    * Selecciona un objeto Favoritomascotausuario de la base de datos a partir de su(s) llave(s) primaria(s).
    * Puede recibir NullPointerException desde los métodos del Dao
-   * @param mascota_idMascota
-   * @param usuario_idUsuario
+   * @param idFavoritoMascotaUsuario
    * @return El objeto en base de datos o Null
    */
-  public static function select($mascota_idMascota, $usuario_idUsuario){
+  public static function select($idFavoritoMascotaUsuario){
       $favoritomascotausuario = new Favoritomascotausuario();
-      $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
-      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
+      $favoritomascotausuario->setIdFavoritoMascotaUsuario($idFavoritoMascotaUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
@@ -74,11 +72,12 @@ class FavoritomascotausuarioFacade {
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param mascota_idMascota
    * @param usuario_idUsuario
-   * @param estadoFavoritoMascotaUsuario
+   * @param idFavoritoMascotaUsuario
    */
-  public static function update($mascota_idMascota, $usuario_idUsuario, $estadoFavoritoMascotaUsuario){
-      $favoritomascotausuario = self::select($mascota_idMascota, $usuario_idUsuario);
-      $favoritomascotausuario->setEstadoFavoritoMascotaUsuario($estadoFavoritoMascotaUsuario); 
+  public static function update($mascota_idMascota, $usuario_idUsuario, $idFavoritoMascotaUsuario){
+      $favoritomascotausuario = self::select($idFavoritoMascotaUsuario);
+      $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
+      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
@@ -89,13 +88,11 @@ class FavoritomascotausuarioFacade {
   /**
    * Elimina un objeto Favoritomascotausuario de la base de datos a partir de su(s) llave(s) primaria(s).
    * Puede recibir NullPointerException desde los métodos del Dao
-   * @param mascota_idMascota
-   * @param usuario_idUsuario
+   * @param idFavoritoMascotaUsuario
    */
-  public static function delete($mascota_idMascota, $usuario_idUsuario){
+  public static function delete($idFavoritoMascotaUsuario){
       $favoritomascotausuario = new Favoritomascotausuario();
-      $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
-      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
+      $favoritomascotausuario->setIdFavoritoMascotaUsuario($idFavoritoMascotaUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
@@ -112,40 +109,6 @@ class FavoritomascotausuarioFacade {
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
      $result = $favoritomascotausuarioDao->listAll();
-     $favoritomascotausuarioDao->close();
-     return $result;
-  }
-
-  /**
-   * Lista todos los objetos Favoritomascotausuario de la base de datos a partir de Mascota_idMascota.
-   * Puede recibir NullPointerException desde los métodos del Dao
-   * @param mascota_idMascota
-   * @return $result Array con los objetos en base de datos o Null
-   */
-  public static function listByMascota_idMascota($mascota_idMascota){
-      $favoritomascotausuario = new Favoritomascotausuario();
-      $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
-
-     $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
-     $result = $favoritomascotausuarioDao->listByMascota_idMascota($favoritomascotausuario);
-     $favoritomascotausuarioDao->close();
-     return $result;
-  }
-
-  /**
-   * Lista todos los objetos Favoritomascotausuario de la base de datos a partir de Usuario_idUsuario.
-   * Puede recibir NullPointerException desde los métodos del Dao
-   * @param usuario_idUsuario
-   * @return $result Array con los objetos en base de datos o Null
-   */
-  public static function listByUsuario_idUsuario($usuario_idUsuario){
-      $favoritomascotausuario = new Favoritomascotausuario();
-      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
-
-     $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
-     $result = $favoritomascotausuarioDao->listByUsuario_idUsuario($favoritomascotausuario);
      $favoritomascotausuarioDao->close();
      return $result;
   }

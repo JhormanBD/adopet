@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Tienes que considerar la posibilidad de que a Dios no le caes bien.  \\
+//    Alguna vez Anarchy se llamó Molotov ( u.u) *Nostalgia  \\
 
 
 interface IAlbergueDao {

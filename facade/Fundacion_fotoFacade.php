@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Caminante no hay camino, se hace camino al andar  \\
+//    Don´t call me gringo you f%&ing beanner  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
@@ -33,14 +33,14 @@ class Fundacion_fotoFacade {
    * Crea un objeto Fundacion_foto a partir de sus parámetros y lo guarda en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idfundacion_foto
-   * @param fundacion_fotonomre
+   * @param fundacion_fotonombre
    * @param fundacion_foto_ruta
    * @param fundacion_idFundacion
    */
-  public static function insert( $idfundacion_foto,  $fundacion_fotonomre,  $fundacion_foto_ruta,  $fundacion_idFundacion){
+  public static function insert( $idfundacion_foto,  $fundacion_fotonombre,  $fundacion_foto_ruta,  $fundacion_idFundacion){
       $fundacion_foto = new Fundacion_foto();
       $fundacion_foto->setIdfundacion_foto($idfundacion_foto); 
-      $fundacion_foto->setFundacion_fotonomre($fundacion_fotonomre); 
+      $fundacion_foto->setFundacion_fotonombre($fundacion_fotonombre); 
       $fundacion_foto->setFundacion_foto_ruta($fundacion_foto_ruta); 
       $fundacion_foto->setFundacion_idFundacion($fundacion_idFundacion); 
 
@@ -72,13 +72,13 @@ class Fundacion_fotoFacade {
    * Modifica los atributos de un objeto Fundacion_foto  ya existente en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idfundacion_foto
-   * @param fundacion_fotonomre
+   * @param fundacion_fotonombre
    * @param fundacion_foto_ruta
    * @param fundacion_idFundacion
    */
-  public static function update($idfundacion_foto, $fundacion_fotonomre, $fundacion_foto_ruta, $fundacion_idFundacion){
+  public static function update($idfundacion_foto, $fundacion_fotonombre, $fundacion_foto_ruta, $fundacion_idFundacion){
       $fundacion_foto = self::select($idfundacion_foto);
-      $fundacion_foto->setFundacion_fotonomre($fundacion_fotonomre); 
+      $fundacion_foto->setFundacion_fotonombre($fundacion_fotonombre); 
       $fundacion_foto->setFundacion_foto_ruta($fundacion_foto_ruta); 
       $fundacion_foto->setFundacion_idFundacion($fundacion_idFundacion); 
 

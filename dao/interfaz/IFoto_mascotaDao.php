@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Tranquilo, yo tampoco entiendo cómo funciona mi código  \\
+//    No te olvides de quitar mis comentarios  \\
 
 
 interface IFoto_mascotaDao {

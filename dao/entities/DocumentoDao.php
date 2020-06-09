@@ -5,13 +5,13 @@
               ------------------------
  */
 
-//    Era más fácil crear un framework que aprender a usar uno existente  \\
+//    Alguna vez Anarchy se llamó Molotov ( u.u) *Nostalgia  \\
 
-include_once realpath('../dao/interfaz/IDocumentosDao.php');
-include_once realpath('../dto/Documentos.php');
+include_once realpath('../dao/interfaz/IDocumentoDao.php');
+include_once realpath('../dto/Documento.php');
 include_once realpath('../dto/Usuario.php');
 
-class DocumentosDao implements IDocumentosDao{
+class DocumentoDao implements IDocumentoDao{
 
 private $cn;
 
@@ -23,20 +23,20 @@ private $cn;
     }
 
     /**
-     * Guarda un objeto Documentos en la base de datos.
-     * @param documentos objeto a guardar
+     * Guarda un objeto Documento en la base de datos.
+     * @param documento objeto a guardar
      * @return  Valor asignado a la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function insert($documentos){
-      $idDocumentos=$documentos->getIdDocumentos();
-$nombreDocumento=$documentos->getNombreDocumento();
-$documentosRuta=$documentos->getDocumentosRuta();
-$usuario_idUsuario=$documentos->getUsuario_idUsuario()->getIdUsuario();
+  public function insert($documento){
+      $idDocumento=$documento->getIdDocumento();
+$nombreDocumento=$documento->getNombreDocumento();
+$rutaDocumento=$documento->getRutaDocumento();
+$usuario_idUsuario=$documento->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "INSERT INTO `documentos`( `idDocumentos`, `NombreDocumento`, `DocumentosRuta`, `Usuario_idUsuario`)"
-          ."VALUES ('$idDocumentos','$nombreDocumento','$documentosRuta','$usuario_idUsuario')";
+          $sql= "INSERT INTO `documento`( `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`)"
+          ."VALUES ('$idDocumento','$nombreDocumento','$rutaDocumento','$usuario_idUsuario')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -44,48 +44,48 @@ $usuario_idUsuario=$documentos->getUsuario_idUsuario()->getIdUsuario();
   }
 
     /**
-     * Busca un objeto Documentos en la base de datos.
-     * @param documentos objeto con la(s) llave(s) primaria(s) para consultar
+     * Busca un objeto Documento en la base de datos.
+     * @param documento objeto con la(s) llave(s) primaria(s) para consultar
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function select($documentos){
-      $idDocumentos=$documentos->getIdDocumentos();
+  public function select($documento){
+      $idDocumento=$documento->getIdDocumento();
 
       try {
-          $sql= "SELECT `idDocumentos`, `NombreDocumento`, `DocumentosRuta`, `Usuario_idUsuario`"
-          ."FROM `documentos`"
-          ."WHERE `idDocumentos`='$idDocumentos'";
+          $sql= "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
+          ."FROM `documento`"
+          ."WHERE `idDocumento`='$idDocumento'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
-          $documentos->setIdDocumentos($data[$i]['idDocumentos']);
-          $documentos->setNombreDocumento($data[$i]['NombreDocumento']);
-          $documentos->setDocumentosRuta($data[$i]['DocumentosRuta']);
+          $documento->setIdDocumento($data[$i]['idDocumento']);
+          $documento->setNombreDocumento($data[$i]['nombreDocumento']);
+          $documento->setRutaDocumento($data[$i]['rutaDocumento']);
            $usuario = new Usuario();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $documentos->setUsuario_idUsuario($usuario);
+           $documento->setUsuario_idUsuario($usuario);
 
           }
-      return $documentos;      } catch (SQLException $e) {
+      return $documento;      } catch (SQLException $e) {
           throw new Exception('Primary key is null');
       return null;
       }
   }
 
     /**
-     * Modifica un objeto Documentos en la base de datos.
-     * @param documentos objeto con la información a modificar
+     * Modifica un objeto Documento en la base de datos.
+     * @param documento objeto con la información a modificar
      * @return  Valor de la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function update($documentos){
-      $idDocumentos=$documentos->getIdDocumentos();
-$nombreDocumento=$documentos->getNombreDocumento();
-$documentosRuta=$documentos->getDocumentosRuta();
-$usuario_idUsuario=$documentos->getUsuario_idUsuario()->getIdUsuario();
+  public function update($documento){
+      $idDocumento=$documento->getIdDocumento();
+$nombreDocumento=$documento->getNombreDocumento();
+$rutaDocumento=$documento->getRutaDocumento();
+$usuario_idUsuario=$documento->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "UPDATE `documentos` SET`idDocumentos`='$idDocumentos' ,`NombreDocumento`='$nombreDocumento' ,`DocumentosRuta`='$documentosRuta' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idDocumentos`='$idDocumentos' ";
+          $sql= "UPDATE `documento` SET`idDocumento`='$idDocumento' ,`nombreDocumento`='$nombreDocumento' ,`rutaDocumento`='$rutaDocumento' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idDocumento`='$idDocumento' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -93,16 +93,16 @@ $usuario_idUsuario=$documentos->getUsuario_idUsuario()->getIdUsuario();
   }
 
     /**
-     * Elimina un objeto Documentos en la base de datos.
-     * @param documentos objeto con la(s) llave(s) primaria(s) para consultar
+     * Elimina un objeto Documento en la base de datos.
+     * @param documento objeto con la(s) llave(s) primaria(s) para consultar
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function delete($documentos){
-      $idDocumentos=$documentos->getIdDocumentos();
+  public function delete($documento){
+      $idDocumento=$documento->getIdDocumento();
 
       try {
-          $sql ="DELETE FROM `documentos` WHERE `idDocumentos`='$idDocumentos'";
+          $sql ="DELETE FROM `documento` WHERE `idDocumento`='$idDocumento'";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -110,27 +110,27 @@ $usuario_idUsuario=$documentos->getUsuario_idUsuario()->getIdUsuario();
   }
 
     /**
-     * Busca un objeto Documentos en la base de datos.
-     * @return ArrayList<Documentos> Puede contener los objetos consultados o estar vacío
+     * Busca un objeto Documento en la base de datos.
+     * @return ArrayList<Documento> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idDocumentos`, `NombreDocumento`, `DocumentosRuta`, `Usuario_idUsuario`"
-          ."FROM `documentos`"
+          $sql ="SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
+          ."FROM `documento`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
-              $documentos= new Documentos();
-          $documentos->setIdDocumentos($data[$i]['idDocumentos']);
-          $documentos->setNombreDocumento($data[$i]['NombreDocumento']);
-          $documentos->setDocumentosRuta($data[$i]['DocumentosRuta']);
+              $documento= new Documento();
+          $documento->setIdDocumento($data[$i]['idDocumento']);
+          $documento->setNombreDocumento($data[$i]['nombreDocumento']);
+          $documento->setRutaDocumento($data[$i]['rutaDocumento']);
            $usuario = new Usuario();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $documentos->setUsuario_idUsuario($usuario);
+           $documento->setUsuario_idUsuario($usuario);
 
-          array_push($lista,$documentos);
+          array_push($lista,$documento);
           }
       return $lista;
       } catch (SQLException $e) {

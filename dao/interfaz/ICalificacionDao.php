@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Hey ¿cómo se llama tu café internet?  \\
+//    Sólo relájate y deja que alguien más lo haga  \\
 
 
 interface ICalificacionDao {

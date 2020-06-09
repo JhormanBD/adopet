@@ -5,13 +5,13 @@
               ------------------------
  */
 
-//    ¿Has escuchado hablar del grandioso señor Arciniegas?  \\
+//    No es una cola ni es una pila, es tu proyecto que no compila  \\
 
 
 class Fundacion_foto {
 
   private $idfundacion_foto;
-  private $fundacion_fotonomre;
+  private $fundacion_fotonombre;
   private $fundacion_foto_ruta;
   private $Fundacion_idFundacion;
 
@@ -36,19 +36,19 @@ class Fundacion_foto {
       $this->idfundacion_foto = $idfundacion_foto;
   }
     /**
-     * Devuelve el valor correspondiente a fundacion_fotonomre
-     * @return fundacion_fotonomre
+     * Devuelve el valor correspondiente a fundacion_fotonombre
+     * @return fundacion_fotonombre
      */
-  public function getFundacion_fotonomre(){
-      return $this->fundacion_fotonomre;
+  public function getFundacion_fotonombre(){
+      return $this->fundacion_fotonombre;
   }
 
     /**
-     * Modifica el valor correspondiente a fundacion_fotonomre
-     * @param fundacion_fotonomre
+     * Modifica el valor correspondiente a fundacion_fotonombre
+     * @param fundacion_fotonombre
      */
-  public function setFundacion_fotonomre($fundacion_fotonomre){
-      $this->fundacion_fotonomre = $fundacion_fotonomre;
+  public function setFundacion_fotonombre($fundacion_fotonombre){
+      $this->fundacion_fotonombre = $fundacion_fotonombre;
   }
     /**
      * Devuelve el valor correspondiente a fundacion_foto_ruta

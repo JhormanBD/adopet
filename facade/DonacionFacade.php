@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    No te olvides de quitar mis comentarios  \\
+//    Traigo una pizza para ¿y se la creyó?  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
@@ -37,18 +37,16 @@ class DonacionFacade {
    * @param idDonacion
    * @param mascota_idMascota
    * @param fundacion_idFundacion
-   * @param estadoDonacion
    * @param fechaDonacion
    * @param cantidad
    * @param descripcion
    * @param tipoDonacion_idTipoDonacion
    */
-  public static function insert( $idDonacion,  $mascota_idMascota,  $fundacion_idFundacion,  $estadoDonacion,  $fechaDonacion,  $cantidad,  $descripcion,  $tipoDonacion_idTipoDonacion){
+  public static function insert( $idDonacion,  $mascota_idMascota,  $fundacion_idFundacion,  $fechaDonacion,  $cantidad,  $descripcion,  $tipoDonacion_idTipoDonacion){
       $donacion = new Donacion();
       $donacion->setIdDonacion($idDonacion); 
       $donacion->setMascota_idMascota($mascota_idMascota); 
       $donacion->setFundacion_idFundacion($fundacion_idFundacion); 
-      $donacion->setEstadoDonacion($estadoDonacion); 
       $donacion->setFechaDonacion($fechaDonacion); 
       $donacion->setCantidad($cantidad); 
       $donacion->setDescripcion($descripcion); 
@@ -84,17 +82,15 @@ class DonacionFacade {
    * @param idDonacion
    * @param mascota_idMascota
    * @param fundacion_idFundacion
-   * @param estadoDonacion
    * @param fechaDonacion
    * @param cantidad
    * @param descripcion
    * @param tipoDonacion_idTipoDonacion
    */
-  public static function update($idDonacion, $mascota_idMascota, $fundacion_idFundacion, $estadoDonacion, $fechaDonacion, $cantidad, $descripcion, $tipoDonacion_idTipoDonacion){
+  public static function update($idDonacion, $mascota_idMascota, $fundacion_idFundacion, $fechaDonacion, $cantidad, $descripcion, $tipoDonacion_idTipoDonacion){
       $donacion = self::select($idDonacion);
       $donacion->setMascota_idMascota($mascota_idMascota); 
       $donacion->setFundacion_idFundacion($fundacion_idFundacion); 
-      $donacion->setEstadoDonacion($estadoDonacion); 
       $donacion->setFechaDonacion($fechaDonacion); 
       $donacion->setCantidad($cantidad); 
       $donacion->setDescripcion($descripcion); 

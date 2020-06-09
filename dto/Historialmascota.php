@@ -5,15 +5,16 @@
               ------------------------
  */
 
-//    Alguna vez Anarchy se llamó Molotov ( u.u) *Nostalgia  \\
+//    NEVERMORE  \\
 
 
 class Historialmascota {
 
   private $idHistorialMascota;
-  private $fechaVacunaHistorialMascota;
+  private $fechaHistorialMascota;
   private $descripcion;
   private $Observacion;
+  private $Mascota_idMascota;
 
     /**
      * Constructor de Historialmascota
@@ -36,19 +37,19 @@ class Historialmascota {
       $this->idHistorialMascota = $idHistorialMascota;
   }
     /**
-     * Devuelve el valor correspondiente a fechaVacunaHistorialMascota
-     * @return fechaVacunaHistorialMascota
+     * Devuelve el valor correspondiente a fechaHistorialMascota
+     * @return fechaHistorialMascota
      */
-  public function getFechaVacunaHistorialMascota(){
-      return $this->fechaVacunaHistorialMascota;
+  public function getFechaHistorialMascota(){
+      return $this->fechaHistorialMascota;
   }
 
     /**
-     * Modifica el valor correspondiente a fechaVacunaHistorialMascota
-     * @param fechaVacunaHistorialMascota
+     * Modifica el valor correspondiente a fechaHistorialMascota
+     * @param fechaHistorialMascota
      */
-  public function setFechaVacunaHistorialMascota($fechaVacunaHistorialMascota){
-      $this->fechaVacunaHistorialMascota = $fechaVacunaHistorialMascota;
+  public function setFechaHistorialMascota($fechaHistorialMascota){
+      $this->fechaHistorialMascota = $fechaHistorialMascota;
   }
     /**
      * Devuelve el valor correspondiente a descripcion
@@ -79,6 +80,21 @@ class Historialmascota {
      */
   public function setObservacion($observacion){
       $this->Observacion = $observacion;
+  }
+    /**
+     * Devuelve el valor correspondiente a Mascota_idMascota
+     * @return Mascota_idMascota
+     */
+  public function getMascota_idMascota(){
+      return $this->Mascota_idMascota;
+  }
+
+    /**
+     * Modifica el valor correspondiente a Mascota_idMascota
+     * @param Mascota_idMascota
+     */
+  public function setMascota_idMascota($mascota_idMascota){
+      $this->Mascota_idMascota = $mascota_idMascota;
   }
 
 

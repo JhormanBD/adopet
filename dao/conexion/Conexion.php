@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Has escuchado hablar del grandioso señor Arciniegas?  \\
+//    Si he visto más lejos es porque estoy sentado sobre los hombros de gigantes.  \\
 include_once realpath('../dao/interfaz/IConexion.php');
 
 class Conexion implements IConexion{

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Y si mejor estudias comunicación?  \\
+//    ¿Cuantas frases como esta crees que puedo escribir?  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

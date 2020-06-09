@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Si he visto más lejos es porque estoy sentado sobre los hombros de gigantes.  \\
+//    Bastará decir que soy Juan Pablo Castel, el pintor que mató a María Iribarne...  \\
 include_once realpath('../facade/Foto_mascotaFacade.php');
 
 

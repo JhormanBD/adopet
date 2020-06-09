@@ -5,11 +5,11 @@
               ------------------------
  */
 
-//    Se buscan memeros profesionales. Contacto: El benévolo señor Arciniegas  \\
-include_once realpath('../facade/NotificacionesFacade.php');
+//    Tenemos trabajos que odiamos para comprar cosas que no necesitamos.  \\
+include_once realpath('../facade/NotificacionFacade.php');
 
 
-class NotificacionesController {
+class NotificacionController {
 
     public static function insert(){
         $idmensaje = strip_tags($_POST['idmensaje']);
@@ -21,20 +21,20 @@ class NotificacionesController {
         $usuario= new Usuario();
         $usuario->setIdUsuario($Usuario_idUsuario);
         $Descripcion = strip_tags($_POST['Descripcion']);
-        NotificacionesFacade::insert($idmensaje, $fechaMensaje, $fundacion, $usuario, $Descripcion);
+        NotificacionFacade::insert($idmensaje, $fechaMensaje, $fundacion, $usuario, $Descripcion);
 return true;
     }
 
     public static function listAll(){
-        $list=NotificacionesFacade::listAll();
+        $list=NotificacionFacade::listAll();
         $rta="";
-        foreach ($list as $obj => $Notificaciones) {	
+        foreach ($list as $obj => $Notificacion) {	
 	       $rta.="{
-	    \"idmensaje\":\"{$Notificaciones->getidmensaje()}\",
-	    \"fechaMensaje\":\"{$Notificaciones->getfechaMensaje()}\",
-	    \"Fundacion_idFundacion_idFundacion\":\"{$Notificaciones->getFundacion_idFundacion()->getidFundacion()}\",
-	    \"Usuario_idUsuario_idUsuario\":\"{$Notificaciones->getUsuario_idUsuario()->getidUsuario()}\",
-	    \"Descripcion\":\"{$Notificaciones->getDescripcion()}\"
+	    \"idmensaje\":\"{$Notificacion->getidmensaje()}\",
+	    \"fechaMensaje\":\"{$Notificacion->getfechaMensaje()}\",
+	    \"Fundacion_idFundacion_idFundacion\":\"{$Notificacion->getFundacion_idFundacion()->getidFundacion()}\",
+	    \"Usuario_idUsuario_idUsuario\":\"{$Notificacion->getUsuario_idUsuario()->getidUsuario()}\",
+	    \"Descripcion\":\"{$Notificacion->getDescripcion()}\"
 	       },";
         }
 

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Lolita, luz de mi vida, fuego de mis entrañas. Pecado mío, alma mía.  \\
+//    Ojos de perro azul  \\
 
 
 interface IHistorialmascotaDao {

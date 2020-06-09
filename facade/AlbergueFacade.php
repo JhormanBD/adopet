@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Esta es una frase no referenciada  \\
+//    No se fije en el corte de cabello, soy mucho muy rico  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

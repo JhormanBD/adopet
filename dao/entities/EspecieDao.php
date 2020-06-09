@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Has escuchado hablar del grandioso señor Arciniegas?  \\
+//    Bastará decir que soy Juan Pablo Castel, el pintor que mató a María Iribarne...  \\
 
 include_once realpath('../dao/interfaz/IEspecieDao.php');
 include_once realpath('../dto/Especie.php');

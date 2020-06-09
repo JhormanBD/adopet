@@ -5,25 +5,20 @@
               ------------------------
  */
 
-//    ¡Anarchy! Apoyando la vagancia desde 2017  \\
+//    Mi satisfacción es hacerte un poco más vago  \\
 
 
 class Mascota {
 
   private $idMascota;
   private $Especie_idEspecie;
-  private $HistorialMascota_idHistorialMascota;
   private $nombreMascota;
   private $edadMascota;
   private $sexoMascota;
   private $disponibilidadMascota;
-  private $esterilizado;
   private $Fundacion_idFundacion;
   private $fechaIngreso;
   private $fechaSalida;
-  private $fotoMascota;
-  private $Mascota_creacion;
-  private $Apadrinamiento;
   private $Veterinaria_idVeterinaria;
 
     /**
@@ -60,21 +55,6 @@ class Mascota {
      */
   public function setEspecie_idEspecie($especie_idEspecie){
       $this->Especie_idEspecie = $especie_idEspecie;
-  }
-    /**
-     * Devuelve el valor correspondiente a HistorialMascota_idHistorialMascota
-     * @return HistorialMascota_idHistorialMascota
-     */
-  public function getHistorialMascota_idHistorialMascota(){
-      return $this->HistorialMascota_idHistorialMascota;
-  }
-
-    /**
-     * Modifica el valor correspondiente a HistorialMascota_idHistorialMascota
-     * @param HistorialMascota_idHistorialMascota
-     */
-  public function setHistorialMascota_idHistorialMascota($historialMascota_idHistorialMascota){
-      $this->HistorialMascota_idHistorialMascota = $historialMascota_idHistorialMascota;
   }
     /**
      * Devuelve el valor correspondiente a nombreMascota
@@ -137,21 +117,6 @@ class Mascota {
       $this->disponibilidadMascota = $disponibilidadMascota;
   }
     /**
-     * Devuelve el valor correspondiente a esterilizado
-     * @return esterilizado
-     */
-  public function getEsterilizado(){
-      return $this->esterilizado;
-  }
-
-    /**
-     * Modifica el valor correspondiente a esterilizado
-     * @param esterilizado
-     */
-  public function setEsterilizado($esterilizado){
-      $this->esterilizado = $esterilizado;
-  }
-    /**
      * Devuelve el valor correspondiente a Fundacion_idFundacion
      * @return Fundacion_idFundacion
      */
@@ -195,51 +160,6 @@ class Mascota {
      */
   public function setFechaSalida($fechaSalida){
       $this->fechaSalida = $fechaSalida;
-  }
-    /**
-     * Devuelve el valor correspondiente a fotoMascota
-     * @return fotoMascota
-     */
-  public function getFotoMascota(){
-      return $this->fotoMascota;
-  }
-
-    /**
-     * Modifica el valor correspondiente a fotoMascota
-     * @param fotoMascota
-     */
-  public function setFotoMascota($fotoMascota){
-      $this->fotoMascota = $fotoMascota;
-  }
-    /**
-     * Devuelve el valor correspondiente a Mascota_creacion
-     * @return Mascota_creacion
-     */
-  public function getMascota_creacion(){
-      return $this->Mascota_creacion;
-  }
-
-    /**
-     * Modifica el valor correspondiente a Mascota_creacion
-     * @param Mascota_creacion
-     */
-  public function setMascota_creacion($mascota_creacion){
-      $this->Mascota_creacion = $mascota_creacion;
-  }
-    /**
-     * Devuelve el valor correspondiente a Apadrinamiento
-     * @return Apadrinamiento
-     */
-  public function getApadrinamiento(){
-      return $this->Apadrinamiento;
-  }
-
-    /**
-     * Modifica el valor correspondiente a Apadrinamiento
-     * @param Apadrinamiento
-     */
-  public function setApadrinamiento($apadrinamiento){
-      $this->Apadrinamiento = $apadrinamiento;
   }
     /**
      * Devuelve el valor correspondiente a Veterinaria_idVeterinaria

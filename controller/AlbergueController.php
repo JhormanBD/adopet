@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    La gente siempre me pregunta si conozco a Tyler Durden.  \\
+//    Pero el ruiseñor no respondió; yacía muerto sobre las altas hierbas, con el corazón traspasado de espinas.  \\
 include_once realpath('../facade/AlbergueFacade.php');
 
 

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¡Anarchy! Apoyando la vagancia desde 2017  \\
+//    Yo <3 Cúcuta  \\
 
 include_once realpath('../dao/conexion/Conexion.php');
 include_once realpath('../dao/interfaz/IFactoryDao.php');
@@ -31,14 +31,6 @@ class FactoryDao implements IFactoryDao{
         return new AlbergueDao($this->conn->obtener($dbName));
     }
      /**
-     * Devuelve una instancia de ApadrinamientomascotausuarioDao con una conexiÃ³n que depende del gestor de base de datos
-     * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de ApadrinamientomascotausuarioDao
-     */
-     public function getApadrinamientomascotausuarioDao($dbName){
-        return new ApadrinamientomascotausuarioDao($this->conn->obtener($dbName));
-    }
-     /**
      * Devuelve una instancia de CalificacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
      * @return instancia de CalificacionDao
@@ -55,12 +47,12 @@ class FactoryDao implements IFactoryDao{
         return new ConvenioDao($this->conn->obtener($dbName));
     }
      /**
-     * Devuelve una instancia de DocumentosDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de DocumentoDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de DocumentosDao
+     * @return instancia de DocumentoDao
      */
-     public function getDocumentosDao($dbName){
-        return new DocumentosDao($this->conn->obtener($dbName));
+     public function getDocumentoDao($dbName){
+        return new DocumentoDao($this->conn->obtener($dbName));
     }
      /**
      * Devuelve una instancia de DonacionDao con una conexiÃ³n que depende del gestor de base de datos
@@ -111,6 +103,14 @@ class FactoryDao implements IFactoryDao{
         return new Fundacion_fotoDao($this->conn->obtener($dbName));
     }
      /**
+     * Devuelve una instancia de FundacionvinculacionDao con una conexiÃ³n que depende del gestor de base de datos
+     * @param dbName Nombre o identificador de la base de datos a conectar
+     * @return instancia de FundacionvinculacionDao
+     */
+     public function getFundacionvinculacionDao($dbName){
+        return new FundacionvinculacionDao($this->conn->obtener($dbName));
+    }
+     /**
      * Devuelve una instancia de HistorialDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
      * @return instancia de HistorialDao
@@ -135,12 +135,20 @@ class FactoryDao implements IFactoryDao{
         return new MascotaDao($this->conn->obtener($dbName));
     }
      /**
-     * Devuelve una instancia de NotificacionesDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de NotificacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de NotificacionesDao
+     * @return instancia de NotificacionDao
      */
-     public function getNotificacionesDao($dbName){
-        return new NotificacionesDao($this->conn->obtener($dbName));
+     public function getNotificacionDao($dbName){
+        return new NotificacionDao($this->conn->obtener($dbName));
+    }
+     /**
+     * Devuelve una instancia de RedsocialDao con una conexiÃ³n que depende del gestor de base de datos
+     * @param dbName Nombre o identificador de la base de datos a conectar
+     * @return instancia de RedsocialDao
+     */
+     public function getRedsocialDao($dbName){
+        return new RedsocialDao($this->conn->obtener($dbName));
     }
      /**
      * Devuelve una instancia de SolicitudDao con una conexiÃ³n que depende del gestor de base de datos
@@ -175,12 +183,12 @@ class FactoryDao implements IFactoryDao{
         return new UsuarioDao($this->conn->obtener($dbName));
     }
      /**
-     * Devuelve una instancia de VeterinariaDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de VinculacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de VeterinariaDao
+     * @return instancia de VinculacionDao
      */
-     public function getVeterinariaDao($dbName){
-        return new VeterinariaDao($this->conn->obtener($dbName));
+     public function getVinculacionDao($dbName){
+        return new VinculacionDao($this->conn->obtener($dbName));
     }
 
 }

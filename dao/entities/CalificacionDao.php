@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    El gran hermano te vigila  \\
+//    ¿Generar buen código o poner frases graciosas? ¡La frase! ¡La frase!  \\
 
 include_once realpath('../dao/interfaz/ICalificacionDao.php');
 include_once realpath('../dto/Calificacion.php');

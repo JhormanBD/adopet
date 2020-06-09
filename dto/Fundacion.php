@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Soy la sonrisa burlona y vengativa de Jack  \\
+//    Recuerda, cuando enciendas la molotov, debes arrojarla  \\
 
 
 class Fundacion {
@@ -17,6 +17,7 @@ class Fundacion {
   private $nit;
   private $correo;
   private $nombrepropietario;
+  private $Usuario_idUsuario;
 
     /**
      * Constructor de Fundacion
@@ -127,6 +128,21 @@ class Fundacion {
      */
   public function setNombrepropietario($nombrepropietario){
       $this->nombrepropietario = $nombrepropietario;
+  }
+    /**
+     * Devuelve el valor correspondiente a Usuario_idUsuario
+     * @return Usuario_idUsuario
+     */
+  public function getUsuario_idUsuario(){
+      return $this->Usuario_idUsuario;
+  }
+
+    /**
+     * Modifica el valor correspondiente a Usuario_idUsuario
+     * @param Usuario_idUsuario
+     */
+  public function setUsuario_idUsuario($usuario_idUsuario){
+      $this->Usuario_idUsuario = $usuario_idUsuario;
   }
 
 

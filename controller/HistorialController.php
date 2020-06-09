@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    La última regla es confiar en Arciniegas  \\
+//    ¡Alza el puño y ven! ¡En la hoguera hay de beber!  \\
 include_once realpath('../facade/HistorialFacade.php');
 
 
@@ -15,7 +15,11 @@ class HistorialController {
         $idHistorial = strip_tags($_POST['idHistorial']);
         $fechaHistorial = strip_tags($_POST['fechaHistorial']);
         $Descripcion = strip_tags($_POST['Descripcion']);
-        HistorialFacade::insert($idHistorial, $fechaHistorial, $Descripcion);
+        $tipo = strip_tags($_POST['tipo']);
+        $Usuario_idUsuario = strip_tags($_POST['Usuario_idUsuario']);
+        $usuario= new Usuario();
+        $usuario->setIdUsuario($Usuario_idUsuario);
+        HistorialFacade::insert($idHistorial, $fechaHistorial, $Descripcion, $tipo, $usuario);
 return true;
     }
 
@@ -26,7 +30,9 @@ return true;
 	       $rta.="{
 	    \"idHistorial\":\"{$Historial->getidHistorial()}\",
 	    \"fechaHistorial\":\"{$Historial->getfechaHistorial()}\",
-	    \"Descripcion\":\"{$Historial->getDescripcion()}\"
+	    \"Descripcion\":\"{$Historial->getDescripcion()}\",
+	    \"tipo\":\"{$Historial->gettipo()}\",
+	    \"Usuario_idUsuario_idUsuario\":\"{$Historial->getUsuario_idUsuario()->getidUsuario()}\"
 	       },";
         }
 

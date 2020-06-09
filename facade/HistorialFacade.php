@@ -5,12 +5,13 @@
               ------------------------
  */
 
-//    Esta es tu vida y se acaba a cada minuto.  \\
+//    ¡Santos frameworks Batman!  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Historial.php');
 require_once realpath('../dao/interfaz/IHistorialDao.php');
+require_once realpath('../dto/Usuario.php');
 
 class HistorialFacade {
 
@@ -34,12 +35,16 @@ class HistorialFacade {
    * @param idHistorial
    * @param fechaHistorial
    * @param descripcion
+   * @param tipo
+   * @param usuario_idUsuario
    */
-  public static function insert( $idHistorial,  $fechaHistorial,  $descripcion){
+  public static function insert( $idHistorial,  $fechaHistorial,  $descripcion,  $tipo,  $usuario_idUsuario){
       $historial = new Historial();
       $historial->setIdHistorial($idHistorial); 
       $historial->setFechaHistorial($fechaHistorial); 
       $historial->setDescripcion($descripcion); 
+      $historial->setTipo($tipo); 
+      $historial->setUsuario_idUsuario($usuario_idUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $historialDao =$FactoryDao->gethistorialDao(self::getDataBaseDefault());
@@ -71,11 +76,15 @@ class HistorialFacade {
    * @param idHistorial
    * @param fechaHistorial
    * @param descripcion
+   * @param tipo
+   * @param usuario_idUsuario
    */
-  public static function update($idHistorial, $fechaHistorial, $descripcion){
+  public static function update($idHistorial, $fechaHistorial, $descripcion, $tipo, $usuario_idUsuario){
       $historial = self::select($idHistorial);
       $historial->setFechaHistorial($fechaHistorial); 
       $historial->setDescripcion($descripcion); 
+      $historial->setTipo($tipo); 
+      $historial->setUsuario_idUsuario($usuario_idUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $historialDao =$FactoryDao->gethistorialDao(self::getDataBaseDefault());
