@@ -5,14 +5,14 @@
               ------------------------
  */
 
-//    No dejes el código del futuro en manos humanas  \\
+//    Todo lo que alguna vez amaste te rechazará o morirá.  \\
 
-include_once realpath('../dao/interfaz/INotificacionesDao.php');
-include_once realpath('../dto/Notificaciones.php');
+include_once realpath('../dao/interfaz/INotificacionDao.php');
+include_once realpath('../dto/Notificacion.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Usuario.php');
 
-class NotificacionesDao implements INotificacionesDao{
+class NotificacionDao implements INotificacionDao{
 
 private $cn;
 
@@ -24,20 +24,20 @@ private $cn;
     }
 
     /**
-     * Guarda un objeto Notificaciones en la base de datos.
-     * @param notificaciones objeto a guardar
+     * Guarda un objeto Notificacion en la base de datos.
+     * @param notificacion objeto a guardar
      * @return  Valor asignado a la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function insert($notificaciones){
-      $idmensaje=$notificaciones->getIdmensaje();
-$fechaMensaje=$notificaciones->getFechaMensaje();
-$fundacion_idFundacion=$notificaciones->getFundacion_idFundacion()->getIdFundacion();
-$usuario_idUsuario=$notificaciones->getUsuario_idUsuario()->getIdUsuario();
-$descripcion=$notificaciones->getDescripcion();
+  public function insert($notificacion){
+      $idmensaje=$notificacion->getIdmensaje();
+$fechaMensaje=$notificacion->getFechaMensaje();
+$fundacion_idFundacion=$notificacion->getFundacion_idFundacion()->getIdFundacion();
+$usuario_idUsuario=$notificacion->getUsuario_idUsuario()->getIdUsuario();
+$descripcion=$notificacion->getDescripcion();
 
       try {
-          $sql= "INSERT INTO `notificaciones`( `idmensaje`, `fechaMensaje`, `Fundacion_idFundacion`, `Usuario_idUsuario`, `Descripcion`)"
+          $sql= "INSERT INTO `notificacion`( `idmensaje`, `fechaMensaje`, `Fundacion_idFundacion`, `Usuario_idUsuario`, `Descripcion`)"
           ."VALUES ('$idmensaje','$fechaMensaje','$fundacion_idFundacion','$usuario_idUsuario','$descripcion')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
@@ -46,52 +46,52 @@ $descripcion=$notificaciones->getDescripcion();
   }
 
     /**
-     * Busca un objeto Notificaciones en la base de datos.
-     * @param notificaciones objeto con la(s) llave(s) primaria(s) para consultar
+     * Busca un objeto Notificacion en la base de datos.
+     * @param notificacion objeto con la(s) llave(s) primaria(s) para consultar
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function select($notificaciones){
-      $idmensaje=$notificaciones->getIdmensaje();
+  public function select($notificacion){
+      $idmensaje=$notificacion->getIdmensaje();
 
       try {
           $sql= "SELECT `idmensaje`, `fechaMensaje`, `Fundacion_idFundacion`, `Usuario_idUsuario`, `Descripcion`"
-          ."FROM `notificaciones`"
+          ."FROM `notificacion`"
           ."WHERE `idmensaje`='$idmensaje'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
-          $notificaciones->setIdmensaje($data[$i]['idmensaje']);
-          $notificaciones->setFechaMensaje($data[$i]['fechaMensaje']);
+          $notificacion->setIdmensaje($data[$i]['idmensaje']);
+          $notificacion->setFechaMensaje($data[$i]['fechaMensaje']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
-           $notificaciones->setFundacion_idFundacion($fundacion);
+           $notificacion->setFundacion_idFundacion($fundacion);
            $usuario = new Usuario();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $notificaciones->setUsuario_idUsuario($usuario);
-          $notificaciones->setDescripcion($data[$i]['Descripcion']);
+           $notificacion->setUsuario_idUsuario($usuario);
+          $notificacion->setDescripcion($data[$i]['Descripcion']);
 
           }
-      return $notificaciones;      } catch (SQLException $e) {
+      return $notificacion;      } catch (SQLException $e) {
           throw new Exception('Primary key is null');
       return null;
       }
   }
 
     /**
-     * Modifica un objeto Notificaciones en la base de datos.
-     * @param notificaciones objeto con la información a modificar
+     * Modifica un objeto Notificacion en la base de datos.
+     * @param notificacion objeto con la información a modificar
      * @return  Valor de la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function update($notificaciones){
-      $idmensaje=$notificaciones->getIdmensaje();
-$fechaMensaje=$notificaciones->getFechaMensaje();
-$fundacion_idFundacion=$notificaciones->getFundacion_idFundacion()->getIdFundacion();
-$usuario_idUsuario=$notificaciones->getUsuario_idUsuario()->getIdUsuario();
-$descripcion=$notificaciones->getDescripcion();
+  public function update($notificacion){
+      $idmensaje=$notificacion->getIdmensaje();
+$fechaMensaje=$notificacion->getFechaMensaje();
+$fundacion_idFundacion=$notificacion->getFundacion_idFundacion()->getIdFundacion();
+$usuario_idUsuario=$notificacion->getUsuario_idUsuario()->getIdUsuario();
+$descripcion=$notificacion->getDescripcion();
 
       try {
-          $sql= "UPDATE `notificaciones` SET`idmensaje`='$idmensaje' ,`fechaMensaje`='$fechaMensaje' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`Usuario_idUsuario`='$usuario_idUsuario' ,`Descripcion`='$descripcion' WHERE `idmensaje`='$idmensaje' ";
+          $sql= "UPDATE `notificacion` SET`idmensaje`='$idmensaje' ,`fechaMensaje`='$fechaMensaje' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`Usuario_idUsuario`='$usuario_idUsuario' ,`Descripcion`='$descripcion' WHERE `idmensaje`='$idmensaje' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -99,16 +99,16 @@ $descripcion=$notificaciones->getDescripcion();
   }
 
     /**
-     * Elimina un objeto Notificaciones en la base de datos.
-     * @param notificaciones objeto con la(s) llave(s) primaria(s) para consultar
+     * Elimina un objeto Notificacion en la base de datos.
+     * @param notificacion objeto con la(s) llave(s) primaria(s) para consultar
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function delete($notificaciones){
-      $idmensaje=$notificaciones->getIdmensaje();
+  public function delete($notificacion){
+      $idmensaje=$notificacion->getIdmensaje();
 
       try {
-          $sql ="DELETE FROM `notificaciones` WHERE `idmensaje`='$idmensaje'";
+          $sql ="DELETE FROM `notificacion` WHERE `idmensaje`='$idmensaje'";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -116,30 +116,30 @@ $descripcion=$notificaciones->getDescripcion();
   }
 
     /**
-     * Busca un objeto Notificaciones en la base de datos.
-     * @return ArrayList<Notificaciones> Puede contener los objetos consultados o estar vacío
+     * Busca un objeto Notificacion en la base de datos.
+     * @return ArrayList<Notificacion> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function listAll(){
       $lista = array();
       try {
           $sql ="SELECT `idmensaje`, `fechaMensaje`, `Fundacion_idFundacion`, `Usuario_idUsuario`, `Descripcion`"
-          ."FROM `notificaciones`"
+          ."FROM `notificacion`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
-              $notificaciones= new Notificaciones();
-          $notificaciones->setIdmensaje($data[$i]['idmensaje']);
-          $notificaciones->setFechaMensaje($data[$i]['fechaMensaje']);
+              $notificacion= new Notificacion();
+          $notificacion->setIdmensaje($data[$i]['idmensaje']);
+          $notificacion->setFechaMensaje($data[$i]['fechaMensaje']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
-           $notificaciones->setFundacion_idFundacion($fundacion);
+           $notificacion->setFundacion_idFundacion($fundacion);
            $usuario = new Usuario();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $notificaciones->setUsuario_idUsuario($usuario);
-          $notificaciones->setDescripcion($data[$i]['Descripcion']);
+           $notificacion->setUsuario_idUsuario($usuario);
+          $notificacion->setDescripcion($data[$i]['Descripcion']);
 
-          array_push($lista,$notificaciones);
+          array_push($lista,$notificacion);
           }
       return $lista;
       } catch (SQLException $e) {

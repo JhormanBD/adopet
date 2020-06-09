@@ -5,13 +5,12 @@
               ------------------------
  */
 
-//    Hey ¿cómo se llama tu café internet?  \\
+//    Ahora tú puedes ser el tipo con el látigo  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Usuario.php');
 require_once realpath('../dao/interfaz/IUsuarioDao.php');
-require_once realpath('../dto/Historial.php');
 require_once realpath('../dto/Tipousuario.php');
 
 class UsuarioFacade {
@@ -34,32 +33,30 @@ class UsuarioFacade {
    * Crea un objeto Usuario a partir de sus parámetros y lo guarda en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idUsuario
-   * @param historial_idHistorial
    * @param tipoUsuario_idTipoUsuario
    * @param nombreUsuario
    * @param apellidoUsuario
    * @param cedula
    * @param direccion
    * @param correo
-   * @param contraseÃÂ±a
+   * @param password
    * @param estado
-   * @param fechanacimiento
+   * @param fechaNacimiento
    * @param fechaIngreso
    * @param foto
    */
-  public static function insert( $idUsuario,  $historial_idHistorial,  $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,  $correo,  $contraseÃÂ±a,  $estado,  $fechanacimiento,  $fechaIngreso,  $foto){
+  public static function insert( $idUsuario,  $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,  $correo,  $password,  $estado,  $fechaNacimiento,  $fechaIngreso,  $foto){
       $usuario = new Usuario();
       $usuario->setIdUsuario($idUsuario); 
-      $usuario->setHistorial_idHistorial($historial_idHistorial); 
       $usuario->setTipoUsuario_idTipoUsuario($tipoUsuario_idTipoUsuario); 
       $usuario->setNombreUsuario($nombreUsuario); 
       $usuario->setApellidoUsuario($apellidoUsuario); 
       $usuario->setCedula($cedula); 
       $usuario->setDireccion($direccion); 
       $usuario->setCorreo($correo); 
-      $usuario->setContraseÃÂ±a($contraseÃÂ±a); 
+      $usuario->setPassword($password); 
       $usuario->setEstado($estado); 
-      $usuario->setFechanacimiento($fechanacimiento); 
+      $usuario->setFechaNacimiento($fechaNacimiento); 
       $usuario->setFechaIngreso($fechaIngreso); 
       $usuario->setFoto($foto); 
 
@@ -91,31 +88,29 @@ class UsuarioFacade {
    * Modifica los atributos de un objeto Usuario  ya existente en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idUsuario
-   * @param historial_idHistorial
    * @param tipoUsuario_idTipoUsuario
    * @param nombreUsuario
    * @param apellidoUsuario
    * @param cedula
    * @param direccion
    * @param correo
-   * @param contraseÃÂ±a
+   * @param password
    * @param estado
-   * @param fechanacimiento
+   * @param fechaNacimiento
    * @param fechaIngreso
    * @param foto
    */
-  public static function update($idUsuario, $historial_idHistorial, $tipoUsuario_idTipoUsuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $contraseÃÂ±a, $estado, $fechanacimiento, $fechaIngreso, $foto){
+  public static function update($idUsuario, $tipoUsuario_idTipoUsuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto){
       $usuario = self::select($idUsuario);
-      $usuario->setHistorial_idHistorial($historial_idHistorial); 
       $usuario->setTipoUsuario_idTipoUsuario($tipoUsuario_idTipoUsuario); 
       $usuario->setNombreUsuario($nombreUsuario); 
       $usuario->setApellidoUsuario($apellidoUsuario); 
       $usuario->setCedula($cedula); 
       $usuario->setDireccion($direccion); 
       $usuario->setCorreo($correo); 
-      $usuario->setContraseÃÂ±a($contraseÃÂ±a); 
+      $usuario->setPassword($password); 
       $usuario->setEstado($estado); 
-      $usuario->setFechanacimiento($fechanacimiento); 
+      $usuario->setFechaNacimiento($fechaNacimiento); 
       $usuario->setFechaIngreso($fechaIngreso); 
       $usuario->setFoto($foto); 
 

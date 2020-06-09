@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    A vote for Bart is a vote for Anarchy!  \\
+//    Damos paso a la anarquía...  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

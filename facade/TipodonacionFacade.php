@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Me arreglas mi impresora?  \\
+//    ¿Me ayudas con la tesis?  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Cuando la gente cree que está muriendo, te escucha en lugar de esperar su turno para hablar.  \\
+//    Soy la sonrisa burlona y vengativa de Jack  \\
 
 interface IConexion {
 

@@ -5,19 +5,19 @@
               ------------------------
  */
 
-//    Pero el ruiseñor no respondió; yacía muerto sobre las altas hierbas, con el corazón traspasado de espinas.  \\
+//    Oh gloria de las glorias, oh divino testamento de la eterna majestad de la creación de dios  \\
 
 
-class Veterinaria {
+class Vinculacion {
 
   private $idVeterinaria;
-  private $nombreVeterinaria;
+  private $nombreVinculacion;
   private $direccion;
   private $nit;
   private $telefono;
 
     /**
-     * Constructor de Veterinaria
+     * Constructor de Vinculacion
     */
      public function __construct(){}
 
@@ -37,19 +37,19 @@ class Veterinaria {
       $this->idVeterinaria = $idVeterinaria;
   }
     /**
-     * Devuelve el valor correspondiente a nombreVeterinaria
-     * @return nombreVeterinaria
+     * Devuelve el valor correspondiente a nombreVinculacion
+     * @return nombreVinculacion
      */
-  public function getNombreVeterinaria(){
-      return $this->nombreVeterinaria;
+  public function getNombreVinculacion(){
+      return $this->nombreVinculacion;
   }
 
     /**
-     * Modifica el valor correspondiente a nombreVeterinaria
-     * @param nombreVeterinaria
+     * Modifica el valor correspondiente a nombreVinculacion
+     * @param nombreVinculacion
      */
-  public function setNombreVeterinaria($nombreVeterinaria){
-      $this->nombreVeterinaria = $nombreVeterinaria;
+  public function setNombreVinculacion($nombreVinculacion){
+      $this->nombreVinculacion = $nombreVinculacion;
   }
     /**
      * Devuelve el valor correspondiente a direccion

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Has escuchado hablar del grandioso señor Arciniegas?  \\
+//    Ella no te quiere </3 mejor ponte a programar  \\
 
 
 class Tipousuario {

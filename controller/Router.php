@@ -5,27 +5,28 @@
               ------------------------
  */
 
-//    Ahora con 25% menos groserías  \\
+//    Esta es tu vida y se acaba a cada minuto.  \\
 include_once realpath('AlbergueController.php');
-include_once realpath('ApadrinamientomascotausuarioController.php');
 include_once realpath('CalificacionController.php');
 include_once realpath('ConvenioController.php');
-include_once realpath('DocumentosController.php');
+include_once realpath('DocumentoController.php');
 include_once realpath('DonacionController.php');
 include_once realpath('EspecieController.php');
 include_once realpath('FavoritomascotausuarioController.php');
 include_once realpath('Foto_mascotaController.php');
 include_once realpath('FundacionController.php');
 include_once realpath('Fundacion_fotoController.php');
+include_once realpath('FundacionvinculacionController.php');
 include_once realpath('HistorialController.php');
 include_once realpath('HistorialmascotaController.php');
 include_once realpath('MascotaController.php');
-include_once realpath('NotificacionesController.php');
+include_once realpath('NotificacionController.php');
+include_once realpath('RedsocialController.php');
 include_once realpath('SolicitudController.php');
 include_once realpath('TipodonacionController.php');
 include_once realpath('TipousuarioController.php');
 include_once realpath('UsuarioController.php');
-include_once realpath('VeterinariaController.php');
+include_once realpath('VinculacionController.php');
 
 $ruta = strip_tags($_POST['ruta']);
     	$rtn = "";
@@ -35,12 +36,6 @@ $ruta = strip_tags($_POST['ruta']);
     			break;
     		case 'AlbergueList':
     			$rtn = AlbergueController::listAll();
-    			break;
-           case 'ApadrinamientomascotausuarioInsert':
-    			$rtn = ApadrinamientomascotausuarioController::insert();
-    			break;
-    		case 'ApadrinamientomascotausuarioList':
-    			$rtn = ApadrinamientomascotausuarioController::listAll();
     			break;
            case 'CalificacionInsert':
     			$rtn = CalificacionController::insert();
@@ -54,11 +49,11 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'ConvenioList':
     			$rtn = ConvenioController::listAll();
     			break;
-           case 'DocumentosInsert':
-    			$rtn = DocumentosController::insert();
+           case 'DocumentoInsert':
+    			$rtn = DocumentoController::insert();
     			break;
-    		case 'DocumentosList':
-    			$rtn = DocumentosController::listAll();
+    		case 'DocumentoList':
+    			$rtn = DocumentoController::listAll();
     			break;
            case 'DonacionInsert':
     			$rtn = DonacionController::insert();
@@ -96,6 +91,12 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'Fundacion_fotoList':
     			$rtn = Fundacion_fotoController::listAll();
     			break;
+           case 'FundacionvinculacionInsert':
+    			$rtn = FundacionvinculacionController::insert();
+    			break;
+    		case 'FundacionvinculacionList':
+    			$rtn = FundacionvinculacionController::listAll();
+    			break;
            case 'HistorialInsert':
     			$rtn = HistorialController::insert();
     			break;
@@ -114,11 +115,17 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'MascotaList':
     			$rtn = MascotaController::listAll();
     			break;
-           case 'NotificacionesInsert':
-    			$rtn = NotificacionesController::insert();
+           case 'NotificacionInsert':
+    			$rtn = NotificacionController::insert();
     			break;
-    		case 'NotificacionesList':
-    			$rtn = NotificacionesController::listAll();
+    		case 'NotificacionList':
+    			$rtn = NotificacionController::listAll();
+    			break;
+           case 'RedsocialInsert':
+    			$rtn = RedsocialController::insert();
+    			break;
+    		case 'RedsocialList':
+    			$rtn = RedsocialController::listAll();
     			break;
            case 'SolicitudInsert':
     			$rtn = SolicitudController::insert();
@@ -144,11 +151,11 @@ $ruta = strip_tags($_POST['ruta']);
     		case 'UsuarioList':
     			$rtn = UsuarioController::listAll();
     			break;
-           case 'VeterinariaInsert':
-    			$rtn = VeterinariaController::insert();
+           case 'VinculacionInsert':
+    			$rtn = VinculacionController::insert();
     			break;
-    		case 'VeterinariaList':
-    			$rtn = VeterinariaController::listAll();
+    		case 'VinculacionList':
+    			$rtn = VinculacionController::listAll();
     			break;
     		default:
     			$rtn="404 Ruta no encontrada.";

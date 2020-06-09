@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Eres capaz de hackear mi Facebook?  \\
+//    La última regla es confiar en Arciniegas  \\
 
 
 interface ITipodonacionDao {

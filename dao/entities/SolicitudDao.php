@@ -5,11 +5,12 @@
               ------------------------
  */
 
-//    Por desgracia, mi epitafio será una frase insulsa y vacía  \\
+//    Le he dedicado más tiempo a las frases que al software interno  \\
 
 include_once realpath('../dao/interfaz/ISolicitudDao.php');
 include_once realpath('../dto/Solicitud.php');
 include_once realpath('../dto/Usuario.php');
+include_once realpath('../dto/Mascota.php');
 
 class SolicitudDao implements ISolicitudDao{
 
@@ -33,11 +34,12 @@ private $cn;
 $usuario_idUsuario=$solicitud->getUsuario_idUsuario()->getIdUsuario();
 $descripcion=$solicitud->getDescripcion();
 $aprobacion=$solicitud->getAprobacion();
-$tipoSolucion=$solicitud->getTipoSolucion();
+$tipoSolucitud=$solicitud->getTipoSolucitud();
+$mascota_idMascota=$solicitud->getMascota_idMascota()->getIdMascota();
 
       try {
-          $sql= "INSERT INTO `solicitud`( `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `Aprobacion`, `tipoSolucion`)"
-          ."VALUES ('$idSolicitud','$usuario_idUsuario','$descripcion','$aprobacion','$tipoSolucion')";
+          $sql= "INSERT INTO `solicitud`( `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `aprobacion`, `tipoSolucitud`, `Mascota_idMascota`)"
+          ."VALUES ('$idSolicitud','$usuario_idUsuario','$descripcion','$aprobacion','$tipoSolucitud','$mascota_idMascota')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -54,7 +56,7 @@ $tipoSolucion=$solicitud->getTipoSolucion();
       $idSolicitud=$solicitud->getIdSolicitud();
 
       try {
-          $sql= "SELECT `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `Aprobacion`, `tipoSolucion`"
+          $sql= "SELECT `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `aprobacion`, `tipoSolucitud`, `Mascota_idMascota`"
           ."FROM `solicitud`"
           ."WHERE `idSolicitud`='$idSolicitud'";
           $data = $this->ejecutarConsulta($sql);
@@ -64,8 +66,11 @@ $tipoSolucion=$solicitud->getTipoSolucion();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
            $solicitud->setUsuario_idUsuario($usuario);
           $solicitud->setDescripcion($data[$i]['descripcion']);
-          $solicitud->setAprobacion($data[$i]['Aprobacion']);
-          $solicitud->setTipoSolucion($data[$i]['tipoSolucion']);
+          $solicitud->setAprobacion($data[$i]['aprobacion']);
+          $solicitud->setTipoSolucitud($data[$i]['tipoSolucitud']);
+           $mascota = new Mascota();
+           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+           $solicitud->setMascota_idMascota($mascota);
 
           }
       return $solicitud;      } catch (SQLException $e) {
@@ -85,10 +90,11 @@ $tipoSolucion=$solicitud->getTipoSolucion();
 $usuario_idUsuario=$solicitud->getUsuario_idUsuario()->getIdUsuario();
 $descripcion=$solicitud->getDescripcion();
 $aprobacion=$solicitud->getAprobacion();
-$tipoSolucion=$solicitud->getTipoSolucion();
+$tipoSolucitud=$solicitud->getTipoSolucitud();
+$mascota_idMascota=$solicitud->getMascota_idMascota()->getIdMascota();
 
       try {
-          $sql= "UPDATE `solicitud` SET`idSolicitud`='$idSolicitud' ,`Usuario_idUsuario`='$usuario_idUsuario' ,`descripcion`='$descripcion' ,`Aprobacion`='$aprobacion' ,`tipoSolucion`='$tipoSolucion' WHERE `idSolicitud`='$idSolicitud' ";
+          $sql= "UPDATE `solicitud` SET`idSolicitud`='$idSolicitud' ,`Usuario_idUsuario`='$usuario_idUsuario' ,`descripcion`='$descripcion' ,`aprobacion`='$aprobacion' ,`tipoSolucitud`='$tipoSolucitud' ,`Mascota_idMascota`='$mascota_idMascota' WHERE `idSolicitud`='$idSolicitud' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -120,7 +126,7 @@ $tipoSolucion=$solicitud->getTipoSolucion();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `Aprobacion`, `tipoSolucion`"
+          $sql ="SELECT `idSolicitud`, `Usuario_idUsuario`, `descripcion`, `aprobacion`, `tipoSolucitud`, `Mascota_idMascota`"
           ."FROM `solicitud`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
@@ -131,8 +137,11 @@ $tipoSolucion=$solicitud->getTipoSolucion();
            $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
            $solicitud->setUsuario_idUsuario($usuario);
           $solicitud->setDescripcion($data[$i]['descripcion']);
-          $solicitud->setAprobacion($data[$i]['Aprobacion']);
-          $solicitud->setTipoSolucion($data[$i]['tipoSolucion']);
+          $solicitud->setAprobacion($data[$i]['aprobacion']);
+          $solicitud->setTipoSolucitud($data[$i]['tipoSolucitud']);
+           $mascota = new Mascota();
+           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+           $solicitud->setMascota_idMascota($mascota);
 
           array_push($lista,$solicitud);
           }

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Todo lo que alguna vez amaste te rechazará o morirá.  \\
+//    ¡Anarchy! Apoyando la vagancia desde 2017  \\
 
 
 interface IConvenioDao {

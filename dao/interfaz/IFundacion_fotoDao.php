@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Ojos de perro azul  \\
+//    Estadistas informan que una linea de código equivale a un sorbo de café  \\
 
 
 interface IFundacion_fotoDao {

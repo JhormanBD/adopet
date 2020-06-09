@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Cuando la gente cree que está muriendo, te escucha en lugar de esperar su turno para hablar.  \\
+//    Estadistas informan que una linea de código equivale a un sorbo de café  \\
 
 
 class Historial {
@@ -13,6 +13,8 @@ class Historial {
   private $idHistorial;
   private $fechaHistorial;
   private $Descripcion;
+  private $tipo;
+  private $Usuario_idUsuario;
 
     /**
      * Constructor de Historial
@@ -63,6 +65,36 @@ class Historial {
      */
   public function setDescripcion($descripcion){
       $this->Descripcion = $descripcion;
+  }
+    /**
+     * Devuelve el valor correspondiente a tipo
+     * @return tipo
+     */
+  public function getTipo(){
+      return $this->tipo;
+  }
+
+    /**
+     * Modifica el valor correspondiente a tipo
+     * @param tipo
+     */
+  public function setTipo($tipo){
+      $this->tipo = $tipo;
+  }
+    /**
+     * Devuelve el valor correspondiente a Usuario_idUsuario
+     * @return Usuario_idUsuario
+     */
+  public function getUsuario_idUsuario(){
+      return $this->Usuario_idUsuario;
+  }
+
+    /**
+     * Modifica el valor correspondiente a Usuario_idUsuario
+     * @param Usuario_idUsuario
+     */
+  public function setUsuario_idUsuario($usuario_idUsuario){
+      $this->Usuario_idUsuario = $usuario_idUsuario;
   }
 
 

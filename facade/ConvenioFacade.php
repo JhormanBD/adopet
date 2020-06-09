@@ -5,13 +5,13 @@
               ------------------------
  */
 
-//    Recuerda, cuando enciendas la molotov, debes arrojarla  \\
+//    La segunda regla de Anarchy es no hablar de Anarchy  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Convenio.php');
 require_once realpath('../dao/interfaz/IConvenioDao.php');
-require_once realpath('../dto/Veterinaria.php');
+require_once realpath('../dto/Vinculacion.php');
 require_once realpath('../dto/Fundacion.php');
 
 class ConvenioFacade {
@@ -39,14 +39,17 @@ class ConvenioFacade {
    * @param fechaConvenio
    * @param nombreConvenio
    * @param duracionConvenio
+   * @param estado
    */
-  public static function insert( $veterinaria_idVeterinaria,  $fundacion_idFundacion,  $fechaConvenio,  $nombreConvenio,  $duracionConvenio){
+  public static function insert( $idConvenio,  $veterinaria_idVeterinaria,  $fundacion_idFundacion,  $fechaConvenio,  $nombreConvenio,  $duracionConvenio,  $estado){
       $convenio = new Convenio();
+      $convenio->setIdConvenio($idConvenio); 
       $convenio->setVeterinaria_idVeterinaria($veterinaria_idVeterinaria); 
       $convenio->setFundacion_idFundacion($fundacion_idFundacion); 
       $convenio->setFechaConvenio($fechaConvenio); 
       $convenio->setNombreConvenio($nombreConvenio); 
       $convenio->setDuracionConvenio($duracionConvenio); 
+      $convenio->setEstado($estado); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $convenioDao =$FactoryDao->getconvenioDao(self::getDataBaseDefault());
@@ -81,29 +84,22 @@ class ConvenioFacade {
    * @param fechaConvenio
    * @param nombreConvenio
    * @param duracionConvenio
+   * @param estado
    */
-  public static function update($idConvenio, $veterinaria_idVeterinaria, $fundacion_idFundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio){
+  public static function update($idConvenio, $veterinaria_idVeterinaria, $fundacion_idFundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio, $estado){
       $convenio = self::select($idConvenio);
       $convenio->setVeterinaria_idVeterinaria($veterinaria_idVeterinaria); 
       $convenio->setFundacion_idFundacion($fundacion_idFundacion); 
       $convenio->setFechaConvenio($fechaConvenio); 
       $convenio->setNombreConvenio($nombreConvenio); 
       $convenio->setDuracionConvenio($duracionConvenio); 
+      $convenio->setEstado($estado); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $convenioDao =$FactoryDao->getconvenioDao(self::getDataBaseDefault());
      $convenioDao->update($convenio);
      $convenioDao->close();
   }
-  
-  public static function updateEliminar($idConvenio){
-      $convenio = self::select($idConvenio);
-      
-      $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $convenioDao =$FactoryDao->getconvenioDao(self::getDataBaseDefault());
-     $convenioDao->updateEliminar($convenio);
-     $convenioDao->close();
-  } 
 
   /**
    * Elimina un objeto Convenio de la base de datos a partir de su(s) llave(s) primaria(s).

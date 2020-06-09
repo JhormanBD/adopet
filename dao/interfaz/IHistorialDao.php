@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Generar buen código o poner frases graciosas? ¡La frase! ¡La frase!  \\
+//    Ella existió sólo en un sueño. Él es un poema que el poeta nunca escribió.  \\
 
 
 interface IHistorialDao {

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Ojitos de luz de luna  \\
+//    ¿Sabías que Anarchy se generó a sí mismo?  \\
 include_once realpath('../facade/EspecieFacade.php');
 
 

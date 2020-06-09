@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Nuestra empresa cuenta con una división sólo para las frases. Disfrútalas  \\
+//    Sólo relájate y deja que alguien más lo haga  \\
 
 include_once realpath('../dao/interfaz/IDonacionDao.php');
 include_once realpath('../dto/Donacion.php');
@@ -34,15 +34,14 @@ private $cn;
       $idDonacion=$donacion->getIdDonacion();
 $mascota_idMascota=$donacion->getMascota_idMascota()->getIdMascota();
 $fundacion_idFundacion=$donacion->getFundacion_idFundacion()->getIdFundacion();
-$estadoDonacion=$donacion->getEstadoDonacion();
 $fechaDonacion=$donacion->getFechaDonacion();
 $cantidad=$donacion->getCantidad();
 $descripcion=$donacion->getDescripcion();
 $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdTipoDonacion();
 
       try {
-          $sql= "INSERT INTO `donacion`( `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `estadoDonacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`)"
-          ."VALUES ('$idDonacion','$mascota_idMascota','$fundacion_idFundacion','$estadoDonacion','$fechaDonacion','$cantidad','$descripcion','$tipoDonacion_idTipoDonacion')";
+          $sql= "INSERT INTO `donacion`( `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`)"
+          ."VALUES ('$idDonacion','$mascota_idMascota','$fundacion_idFundacion','$fechaDonacion','$cantidad','$descripcion','$tipoDonacion_idTipoDonacion')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -59,7 +58,7 @@ $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdT
       $idDonacion=$donacion->getIdDonacion();
 
       try {
-          $sql= "SELECT `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `estadoDonacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`"
+          $sql= "SELECT `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`"
           ."FROM `donacion`"
           ."WHERE `idDonacion`='$idDonacion'";
           $data = $this->ejecutarConsulta($sql);
@@ -71,7 +70,6 @@ $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdT
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $donacion->setFundacion_idFundacion($fundacion);
-          $donacion->setEstadoDonacion($data[$i]['estadoDonacion']);
           $donacion->setFechaDonacion($data[$i]['fechaDonacion']);
           $donacion->setCantidad($data[$i]['cantidad']);
           $donacion->setDescripcion($data[$i]['descripcion']);
@@ -96,14 +94,13 @@ $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdT
       $idDonacion=$donacion->getIdDonacion();
 $mascota_idMascota=$donacion->getMascota_idMascota()->getIdMascota();
 $fundacion_idFundacion=$donacion->getFundacion_idFundacion()->getIdFundacion();
-$estadoDonacion=$donacion->getEstadoDonacion();
 $fechaDonacion=$donacion->getFechaDonacion();
 $cantidad=$donacion->getCantidad();
 $descripcion=$donacion->getDescripcion();
 $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdTipoDonacion();
 
       try {
-          $sql= "UPDATE `donacion` SET`idDonacion`='$idDonacion' ,`Mascota_idMascota`='$mascota_idMascota' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`estadoDonacion`='$estadoDonacion' ,`fechaDonacion`='$fechaDonacion' ,`cantidad`='$cantidad' ,`descripcion`='$descripcion' ,`TipoDonacion_idTipoDonacion`='$tipoDonacion_idTipoDonacion' WHERE `idDonacion`='$idDonacion' ";
+          $sql= "UPDATE `donacion` SET`idDonacion`='$idDonacion' ,`Mascota_idMascota`='$mascota_idMascota' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaDonacion`='$fechaDonacion' ,`cantidad`='$cantidad' ,`descripcion`='$descripcion' ,`TipoDonacion_idTipoDonacion`='$tipoDonacion_idTipoDonacion' WHERE `idDonacion`='$idDonacion' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -135,7 +132,7 @@ $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdT
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `estadoDonacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`"
+          $sql ="SELECT `idDonacion`, `Mascota_idMascota`, `Fundacion_idFundacion`, `fechaDonacion`, `cantidad`, `descripcion`, `TipoDonacion_idTipoDonacion`"
           ."FROM `donacion`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
@@ -148,7 +145,6 @@ $tipoDonacion_idTipoDonacion=$donacion->getTipoDonacion_idTipoDonacion()->getIdT
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
            $donacion->setFundacion_idFundacion($fundacion);
-          $donacion->setEstadoDonacion($data[$i]['estadoDonacion']);
           $donacion->setFechaDonacion($data[$i]['fechaDonacion']);
           $donacion->setCantidad($data[$i]['cantidad']);
           $donacion->setDescripcion($data[$i]['descripcion']);

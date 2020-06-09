@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Si mi madre entendiera mi código, estaría orgullosa  \\
+//    Antes que me hubiera apasionado por mujer alguna, jugué mi corazón al azar y me lo ganó la Violencia.  \\
 
 
 interface IFundacionDao {

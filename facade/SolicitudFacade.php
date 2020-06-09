@@ -5,13 +5,14 @@
               ------------------------
  */
 
-//    Era más fácil crear un framework que aprender a usar uno existente  \\
+//    gravitaban alrededor del astro de la noche, y por primera vez podía la vista penetrar todos sus misterios.  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Solicitud.php');
 require_once realpath('../dao/interfaz/ISolicitudDao.php');
 require_once realpath('../dto/Usuario.php');
+require_once realpath('../dto/Mascota.php');
 
 class SolicitudFacade {
 
@@ -36,15 +37,17 @@ class SolicitudFacade {
    * @param usuario_idUsuario
    * @param descripcion
    * @param aprobacion
-   * @param tipoSolucion
+   * @param tipoSolucitud
+   * @param mascota_idMascota
    */
-  public static function insert( $idSolicitud,  $usuario_idUsuario,  $descripcion,  $aprobacion,  $tipoSolucion){
+  public static function insert( $idSolicitud,  $usuario_idUsuario,  $descripcion,  $aprobacion,  $tipoSolucitud,  $mascota_idMascota){
       $solicitud = new Solicitud();
       $solicitud->setIdSolicitud($idSolicitud); 
       $solicitud->setUsuario_idUsuario($usuario_idUsuario); 
       $solicitud->setDescripcion($descripcion); 
       $solicitud->setAprobacion($aprobacion); 
-      $solicitud->setTipoSolucion($tipoSolucion); 
+      $solicitud->setTipoSolucitud($tipoSolucitud); 
+      $solicitud->setMascota_idMascota($mascota_idMascota); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $solicitudDao =$FactoryDao->getsolicitudDao(self::getDataBaseDefault());
@@ -77,14 +80,16 @@ class SolicitudFacade {
    * @param usuario_idUsuario
    * @param descripcion
    * @param aprobacion
-   * @param tipoSolucion
+   * @param tipoSolucitud
+   * @param mascota_idMascota
    */
-  public static function update($idSolicitud, $usuario_idUsuario, $descripcion, $aprobacion, $tipoSolucion){
+  public static function update($idSolicitud, $usuario_idUsuario, $descripcion, $aprobacion, $tipoSolucitud, $mascota_idMascota){
       $solicitud = self::select($idSolicitud);
       $solicitud->setUsuario_idUsuario($usuario_idUsuario); 
       $solicitud->setDescripcion($descripcion); 
       $solicitud->setAprobacion($aprobacion); 
-      $solicitud->setTipoSolucion($tipoSolucion); 
+      $solicitud->setTipoSolucitud($tipoSolucitud); 
+      $solicitud->setMascota_idMascota($mascota_idMascota); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $solicitudDao =$FactoryDao->getsolicitudDao(self::getDataBaseDefault());

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Me ayudas con la tesis?  \\
+//    Yo <3 Cúcuta  \\
 include_once realpath('../facade/FavoritomascotausuarioFacade.php');
 
 
@@ -18,8 +18,8 @@ class FavoritomascotausuarioController {
         $Usuario_idUsuario = strip_tags($_POST['Usuario_idUsuario']);
         $usuario= new Usuario();
         $usuario->setIdUsuario($Usuario_idUsuario);
-        $estadoFavoritoMascotaUsuario = strip_tags($_POST['estadoFavoritoMascotaUsuario']);
-        FavoritomascotausuarioFacade::insert($mascota, $usuario, $estadoFavoritoMascotaUsuario);
+        $idFavoritoMascotaUsuario = strip_tags($_POST['idFavoritoMascotaUsuario']);
+        FavoritomascotausuarioFacade::insert($mascota, $usuario, $idFavoritoMascotaUsuario);
 return true;
     }
 
@@ -30,7 +30,7 @@ return true;
 	       $rta.="{
 	    \"Mascota_idMascota_idMascota\":\"{$Favoritomascotausuario->getMascota_idMascota()->getidMascota()}\",
 	    \"Usuario_idUsuario_idUsuario\":\"{$Favoritomascotausuario->getUsuario_idUsuario()->getidUsuario()}\",
-	    \"estadoFavoritoMascotaUsuario\":\"{$Favoritomascotausuario->getestadoFavoritoMascotaUsuario()}\"
+	    \"idFavoritoMascotaUsuario\":\"{$Favoritomascotausuario->getidFavoritoMascotaUsuario()}\"
 	       },";
         }
 

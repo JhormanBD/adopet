@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Caminante no hay camino, se hace camino al andar  \\
+//    Mátalos a todos, y que dios elija  \\
 
 include_once realpath('../dao/interfaz/ITipodonacionDao.php');
 include_once realpath('../dto/Tipodonacion.php');

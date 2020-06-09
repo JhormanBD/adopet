@@ -5,10 +5,11 @@
               ------------------------
  */
 
-//    Don´t call me gringo you f%&ing beanner  \\
+//    Antes que me hubiera apasionado por mujer alguna, jugué mi corazón al azar y me lo ganó la Violencia.  \\
 
 include_once realpath('../dao/interfaz/IHistorialDao.php');
 include_once realpath('../dto/Historial.php');
+include_once realpath('../dto/Usuario.php');
 
 class HistorialDao implements IHistorialDao{
 
@@ -31,10 +32,12 @@ private $cn;
       $idHistorial=$historial->getIdHistorial();
 $fechaHistorial=$historial->getFechaHistorial();
 $descripcion=$historial->getDescripcion();
+$tipo=$historial->getTipo();
+$usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "INSERT INTO `historial`( `idHistorial`, `fechaHistorial`, `Descripcion`)"
-          ."VALUES ('$idHistorial','$fechaHistorial','$descripcion')";
+          $sql= "INSERT INTO `historial`( `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`)"
+          ."VALUES ('$idHistorial','$fechaHistorial','$descripcion','$tipo','$usuario_idUsuario')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -51,7 +54,7 @@ $descripcion=$historial->getDescripcion();
       $idHistorial=$historial->getIdHistorial();
 
       try {
-          $sql= "SELECT `idHistorial`, `fechaHistorial`, `Descripcion`"
+          $sql= "SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
           ."FROM `historial`"
           ."WHERE `idHistorial`='$idHistorial'";
           $data = $this->ejecutarConsulta($sql);
@@ -59,6 +62,10 @@ $descripcion=$historial->getDescripcion();
           $historial->setIdHistorial($data[$i]['idHistorial']);
           $historial->setFechaHistorial($data[$i]['fechaHistorial']);
           $historial->setDescripcion($data[$i]['Descripcion']);
+          $historial->setTipo($data[$i]['tipo']);
+           $usuario = new Usuario();
+           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+           $historial->setUsuario_idUsuario($usuario);
 
           }
       return $historial;      } catch (SQLException $e) {
@@ -77,9 +84,11 @@ $descripcion=$historial->getDescripcion();
       $idHistorial=$historial->getIdHistorial();
 $fechaHistorial=$historial->getFechaHistorial();
 $descripcion=$historial->getDescripcion();
+$tipo=$historial->getTipo();
+$usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "UPDATE `historial` SET`idHistorial`='$idHistorial' ,`fechaHistorial`='$fechaHistorial' ,`Descripcion`='$descripcion' WHERE `idHistorial`='$idHistorial' ";
+          $sql= "UPDATE `historial` SET`idHistorial`='$idHistorial' ,`fechaHistorial`='$fechaHistorial' ,`Descripcion`='$descripcion' ,`tipo`='$tipo' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idHistorial`='$idHistorial' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -111,7 +120,7 @@ $descripcion=$historial->getDescripcion();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idHistorial`, `fechaHistorial`, `Descripcion`"
+          $sql ="SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
           ."FROM `historial`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
@@ -120,6 +129,10 @@ $descripcion=$historial->getDescripcion();
           $historial->setIdHistorial($data[$i]['idHistorial']);
           $historial->setFechaHistorial($data[$i]['fechaHistorial']);
           $historial->setDescripcion($data[$i]['Descripcion']);
+          $historial->setTipo($data[$i]['tipo']);
+           $usuario = new Usuario();
+           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+           $historial->setUsuario_idUsuario($usuario);
 
           array_push($lista,$historial);
           }

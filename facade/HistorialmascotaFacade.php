@@ -5,12 +5,13 @@
               ------------------------
  */
 
-//    No hay de qué so no más de papa  \\
+//    Proletarios del mundo ¡Uníos!  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Historialmascota.php');
 require_once realpath('../dao/interfaz/IHistorialmascotaDao.php');
+require_once realpath('../dto/Mascota.php');
 
 class HistorialmascotaFacade {
 
@@ -32,16 +33,18 @@ class HistorialmascotaFacade {
    * Crea un objeto Historialmascota a partir de sus parámetros y lo guarda en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idHistorialMascota
-   * @param fechaVacunaHistorialMascota
+   * @param fechaHistorialMascota
    * @param descripcion
    * @param observacion
+   * @param mascota_idMascota
    */
-  public static function insert( $idHistorialMascota,  $fechaVacunaHistorialMascota,  $descripcion,  $observacion){
+  public static function insert( $idHistorialMascota,  $fechaHistorialMascota,  $descripcion,  $observacion,  $mascota_idMascota){
       $historialmascota = new Historialmascota();
       $historialmascota->setIdHistorialMascota($idHistorialMascota); 
-      $historialmascota->setFechaVacunaHistorialMascota($fechaVacunaHistorialMascota); 
+      $historialmascota->setFechaHistorialMascota($fechaHistorialMascota); 
       $historialmascota->setDescripcion($descripcion); 
       $historialmascota->setObservacion($observacion); 
+      $historialmascota->setMascota_idMascota($mascota_idMascota); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $historialmascotaDao =$FactoryDao->gethistorialmascotaDao(self::getDataBaseDefault());
@@ -71,15 +74,17 @@ class HistorialmascotaFacade {
    * Modifica los atributos de un objeto Historialmascota  ya existente en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idHistorialMascota
-   * @param fechaVacunaHistorialMascota
+   * @param fechaHistorialMascota
    * @param descripcion
    * @param observacion
+   * @param mascota_idMascota
    */
-  public static function update($idHistorialMascota, $fechaVacunaHistorialMascota, $descripcion, $observacion){
+  public static function update($idHistorialMascota, $fechaHistorialMascota, $descripcion, $observacion, $mascota_idMascota){
       $historialmascota = self::select($idHistorialMascota);
-      $historialmascota->setFechaVacunaHistorialMascota($fechaVacunaHistorialMascota); 
+      $historialmascota->setFechaHistorialMascota($fechaHistorialMascota); 
       $historialmascota->setDescripcion($descripcion); 
       $historialmascota->setObservacion($observacion); 
+      $historialmascota->setMascota_idMascota($mascota_idMascota); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $historialmascotaDao =$FactoryDao->gethistorialmascotaDao(self::getDataBaseDefault());

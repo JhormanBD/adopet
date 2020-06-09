@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Sabías que Anarchy se generó a sí mismo?  \\
+//    ¡Santos frameworks Batman!  \\
 include_once realpath('../facade/HistorialmascotaFacade.php');
 
 
@@ -13,10 +13,13 @@ class HistorialmascotaController {
 
     public static function insert(){
         $idHistorialMascota = strip_tags($_POST['idHistorialMascota']);
-        $fechaVacunaHistorialMascota = strip_tags($_POST['fechaVacunaHistorialMascota']);
+        $fechaHistorialMascota = strip_tags($_POST['fechaHistorialMascota']);
         $descripcion = strip_tags($_POST['descripcion']);
         $Observacion = strip_tags($_POST['Observacion']);
-        HistorialmascotaFacade::insert($idHistorialMascota, $fechaVacunaHistorialMascota, $descripcion, $Observacion);
+        $Mascota_idMascota = strip_tags($_POST['Mascota_idMascota']);
+        $mascota= new Mascota();
+        $mascota->setIdMascota($Mascota_idMascota);
+        HistorialmascotaFacade::insert($idHistorialMascota, $fechaHistorialMascota, $descripcion, $Observacion, $mascota);
 return true;
     }
 
@@ -26,9 +29,10 @@ return true;
         foreach ($list as $obj => $Historialmascota) {	
 	       $rta.="{
 	    \"idHistorialMascota\":\"{$Historialmascota->getidHistorialMascota()}\",
-	    \"fechaVacunaHistorialMascota\":\"{$Historialmascota->getfechaVacunaHistorialMascota()}\",
+	    \"fechaHistorialMascota\":\"{$Historialmascota->getfechaHistorialMascota()}\",
 	    \"descripcion\":\"{$Historialmascota->getdescripcion()}\",
-	    \"Observacion\":\"{$Historialmascota->getObservacion()}\"
+	    \"Observacion\":\"{$Historialmascota->getObservacion()}\",
+	    \"Mascota_idMascota_idMascota\":\"{$Historialmascota->getMascota_idMascota()->getidMascota()}\"
 	       },";
         }
 

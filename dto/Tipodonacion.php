@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿No es más sencillo hacer todo en el Main?  \\
+//    Nada mejor que el código hecho a mano.  \\
 
 
 class Tipodonacion {

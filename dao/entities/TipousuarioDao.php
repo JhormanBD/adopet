@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Un tequila, antes de que empiecen los trancazos  \\
+//    Mi satisfacción es hacerte un poco más vago  \\
 
 include_once realpath('../dao/interfaz/ITipousuarioDao.php');
 include_once realpath('../dto/Tipousuario.php');

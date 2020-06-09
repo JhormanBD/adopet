@@ -5,10 +5,11 @@
               ------------------------
  */
 
-//    ¡Santos frameworks Batman!  \\
+//    Todos los animales son iguales, pero algunos animales son más iguales que otros  \\
 
 include_once realpath('../dao/interfaz/IFundacionDao.php');
 include_once realpath('../dto/Fundacion.php');
+include_once realpath('../dto/Usuario.php');
 
 class FundacionDao implements IFundacionDao{
 
@@ -35,10 +36,11 @@ $telefonoFundacion=$fundacion->getTelefonoFundacion();
 $nit=$fundacion->getNit();
 $correo=$fundacion->getCorreo();
 $nombrepropietario=$fundacion->getNombrepropietario();
+$usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "INSERT INTO `fundacion`( `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`)"
-          ."VALUES ('$idFundacion','$nombreFundacion','$direccionFundacion','$telefonoFundacion','$nit','$correo','$nombrepropietario')";
+          $sql= "INSERT INTO `fundacion`( `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`)"
+          ."VALUES ('$idFundacion','$nombreFundacion','$direccionFundacion','$telefonoFundacion','$nit','$correo','$nombrepropietario','$usuario_idUsuario')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -55,7 +57,7 @@ $nombrepropietario=$fundacion->getNombrepropietario();
       $idFundacion=$fundacion->getIdFundacion();
 
       try {
-          $sql= "SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`"
+          $sql= "SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`"
           ."FROM `fundacion`"
           ."WHERE `idFundacion`='$idFundacion'";
           $data = $this->ejecutarConsulta($sql);
@@ -67,6 +69,9 @@ $nombrepropietario=$fundacion->getNombrepropietario();
           $fundacion->setNit($data[$i]['nit']);
           $fundacion->setCorreo($data[$i]['correo']);
           $fundacion->setNombrepropietario($data[$i]['nombrepropietario']);
+           $usuario = new Usuario();
+           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+           $fundacion->setUsuario_idUsuario($usuario);
 
           }
       return $fundacion;      } catch (SQLException $e) {
@@ -89,9 +94,10 @@ $telefonoFundacion=$fundacion->getTelefonoFundacion();
 $nit=$fundacion->getNit();
 $correo=$fundacion->getCorreo();
 $nombrepropietario=$fundacion->getNombrepropietario();
+$usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "UPDATE `fundacion` SET`idFundacion`='$idFundacion' ,`nombreFundacion`='$nombreFundacion' ,`direccionFundacion`='$direccionFundacion' ,`telefonoFundacion`='$telefonoFundacion' ,`nit`='$nit' ,`correo`='$correo' ,`nombrepropietario`='$nombrepropietario' WHERE `idFundacion`='$idFundacion' ";
+          $sql= "UPDATE `fundacion` SET`idFundacion`='$idFundacion' ,`nombreFundacion`='$nombreFundacion' ,`direccionFundacion`='$direccionFundacion' ,`telefonoFundacion`='$telefonoFundacion' ,`nit`='$nit' ,`correo`='$correo' ,`nombrepropietario`='$nombrepropietario' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idFundacion`='$idFundacion' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -123,7 +129,7 @@ $nombrepropietario=$fundacion->getNombrepropietario();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`"
+          $sql ="SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`"
           ."FROM `fundacion`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
@@ -136,6 +142,9 @@ $nombrepropietario=$fundacion->getNombrepropietario();
           $fundacion->setNit($data[$i]['nit']);
           $fundacion->setCorreo($data[$i]['correo']);
           $fundacion->setNombrepropietario($data[$i]['nombrepropietario']);
+           $usuario = new Usuario();
+           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+           $fundacion->setUsuario_idUsuario($usuario);
 
           array_push($lista,$fundacion);
           }

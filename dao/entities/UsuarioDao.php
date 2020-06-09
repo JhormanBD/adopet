@@ -5,11 +5,10 @@
               ------------------------
  */
 
-//    ¿Sabías que hay una vida afuera de tu cuarto?  \\
+//    Ya están los patrones implementados, ahora sí viene lo chido...  \\
 
 include_once realpath('../dao/interfaz/IUsuarioDao.php');
 include_once realpath('../dto/Usuario.php');
-include_once realpath('../dto/Historial.php');
 include_once realpath('../dto/Tipousuario.php');
 
 class UsuarioDao implements IUsuarioDao{
@@ -31,22 +30,21 @@ private $cn;
      */
   public function insert($usuario){
       $idUsuario=$usuario->getIdUsuario();
-$historial_idHistorial=$usuario->getHistorial_idHistorial()->getIdHistorial();
 $tipoUsuario_idTipoUsuario=$usuario->getTipoUsuario_idTipoUsuario()->getIdTipoUsuario();
 $nombreUsuario=$usuario->getNombreUsuario();
 $apellidoUsuario=$usuario->getApellidoUsuario();
 $cedula=$usuario->getCedula();
 $direccion=$usuario->getDireccion();
 $correo=$usuario->getCorreo();
-$contraseÃÂ±a=$usuario->getContraseÃÂ±a();
+$password=$usuario->getPassword();
 $estado=$usuario->getEstado();
-$fechanacimiento=$usuario->getFechanacimiento();
+$fechaNacimiento=$usuario->getFechaNacimiento();
 $fechaIngreso=$usuario->getFechaIngreso();
 $foto=$usuario->getFoto();
 
       try {
-          $sql= "INSERT INTO `usuario`( `idUsuario`, `Historial_idHistorial`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `contraseÃÂ±a`, `estado`, `fechanacimiento`, `fechaIngreso`, `foto`)"
-          ."VALUES ('$idUsuario','$historial_idHistorial','$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$contraseÃÂ±a','$estado','$fechanacimiento','$fechaIngreso','$foto')";
+          $sql= "INSERT INTO `usuario`( `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`)"
+          ."VALUES ('$idUsuario','$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$password','$estado','$fechaNacimiento','$fechaIngreso','$foto')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -63,15 +61,12 @@ $foto=$usuario->getFoto();
       $idUsuario=$usuario->getIdUsuario();
 
       try {
-          $sql= "SELECT `idUsuario`, `Historial_idHistorial`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `contraseÃÂ±a`, `estado`, `fechanacimiento`, `fechaIngreso`, `foto`"
+          $sql= "SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
           ."FROM `usuario`"
           ."WHERE `idUsuario`='$idUsuario'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
           $usuario->setIdUsuario($data[$i]['idUsuario']);
-           $historial = new Historial();
-           $historial->setIdHistorial($data[$i]['Historial_idHistorial']);
-           $usuario->setHistorial_idHistorial($historial);
            $tipousuario = new Tipousuario();
            $tipousuario->setIdTipoUsuario($data[$i]['TipoUsuario_idTipoUsuario']);
            $usuario->setTipoUsuario_idTipoUsuario($tipousuario);
@@ -80,9 +75,9 @@ $foto=$usuario->getFoto();
           $usuario->setCedula($data[$i]['cedula']);
           $usuario->setDireccion($data[$i]['direccion']);
           $usuario->setCorreo($data[$i]['correo']);
-          $usuario->setContraseÃÂ±a($data[$i]['contraseÃÂ±a']);
+          $usuario->setPassword($data[$i]['password']);
           $usuario->setEstado($data[$i]['estado']);
-          $usuario->setFechanacimiento($data[$i]['fechanacimiento']);
+          $usuario->setFechaNacimiento($data[$i]['fechaNacimiento']);
           $usuario->setFechaIngreso($data[$i]['fechaIngreso']);
           $usuario->setFoto($data[$i]['foto']);
 
@@ -101,21 +96,20 @@ $foto=$usuario->getFoto();
      */
   public function update($usuario){
       $idUsuario=$usuario->getIdUsuario();
-$historial_idHistorial=$usuario->getHistorial_idHistorial()->getIdHistorial();
 $tipoUsuario_idTipoUsuario=$usuario->getTipoUsuario_idTipoUsuario()->getIdTipoUsuario();
 $nombreUsuario=$usuario->getNombreUsuario();
 $apellidoUsuario=$usuario->getApellidoUsuario();
 $cedula=$usuario->getCedula();
 $direccion=$usuario->getDireccion();
 $correo=$usuario->getCorreo();
-$contraseÃÂ±a=$usuario->getContraseÃÂ±a();
+$password=$usuario->getPassword();
 $estado=$usuario->getEstado();
-$fechanacimiento=$usuario->getFechanacimiento();
+$fechaNacimiento=$usuario->getFechaNacimiento();
 $fechaIngreso=$usuario->getFechaIngreso();
 $foto=$usuario->getFoto();
 
       try {
-          $sql= "UPDATE `usuario` SET`idUsuario`='$idUsuario' ,`Historial_idHistorial`='$historial_idHistorial' ,`TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' ,`contraseÃÂ±a`='$contraseÃÂ±a' ,`estado`='$estado' ,`fechanacimiento`='$fechanacimiento' ,`fechaIngreso`='$fechaIngreso' ,`foto`='$foto' WHERE `idUsuario`='$idUsuario' ";
+          $sql= "UPDATE `usuario` SET`idUsuario`='$idUsuario' ,`TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' ,`password`='$password' ,`estado`='$estado' ,`fechaNacimiento`='$fechaNacimiento' ,`fechaIngreso`='$fechaIngreso' ,`foto`='$foto' WHERE `idUsuario`='$idUsuario' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -147,16 +141,13 @@ $foto=$usuario->getFoto();
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idUsuario`, `Historial_idHistorial`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `contraseÃÂ±a`, `estado`, `fechanacimiento`, `fechaIngreso`, `foto`"
+          $sql ="SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
           ."FROM `usuario`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $usuario= new Usuario();
           $usuario->setIdUsuario($data[$i]['idUsuario']);
-           $historial = new Historial();
-           $historial->setIdHistorial($data[$i]['Historial_idHistorial']);
-           $usuario->setHistorial_idHistorial($historial);
            $tipousuario = new Tipousuario();
            $tipousuario->setIdTipoUsuario($data[$i]['TipoUsuario_idTipoUsuario']);
            $usuario->setTipoUsuario_idTipoUsuario($tipousuario);
@@ -165,9 +156,9 @@ $foto=$usuario->getFoto();
           $usuario->setCedula($data[$i]['cedula']);
           $usuario->setDireccion($data[$i]['direccion']);
           $usuario->setCorreo($data[$i]['correo']);
-          $usuario->setContraseÃÂ±a($data[$i]['contraseÃÂ±a']);
+          $usuario->setPassword($data[$i]['password']);
           $usuario->setEstado($data[$i]['estado']);
-          $usuario->setFechanacimiento($data[$i]['fechanacimiento']);
+          $usuario->setFechaNacimiento($data[$i]['fechaNacimiento']);
           $usuario->setFechaIngreso($data[$i]['fechaIngreso']);
           $usuario->setFoto($data[$i]['foto']);
 

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    ¿Cansado de escribir bugs? tranquilo, los escribimos por ti  \\
+//    No hay de qué so no más de papa  \\
 include_once realpath('../facade/Fundacion_fotoFacade.php');
 
 
@@ -13,12 +13,12 @@ class Fundacion_fotoController {
 
     public static function insert(){
         $idfundacion_foto = strip_tags($_POST['idfundacion_foto']);
-        $fundacion_fotonomre = strip_tags($_POST['fundacion_fotonomre']);
+        $fundacion_fotonombre = strip_tags($_POST['fundacion_fotonombre']);
         $fundacion_foto_ruta = strip_tags($_POST['fundacion_foto_ruta']);
         $Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
         $fundacion= new Fundacion();
         $fundacion->setIdFundacion($Fundacion_idFundacion);
-        Fundacion_fotoFacade::insert($idfundacion_foto, $fundacion_fotonomre, $fundacion_foto_ruta, $fundacion);
+        Fundacion_fotoFacade::insert($idfundacion_foto, $fundacion_fotonombre, $fundacion_foto_ruta, $fundacion);
 return true;
     }
 
@@ -28,7 +28,7 @@ return true;
         foreach ($list as $obj => $Fundacion_foto) {	
 	       $rta.="{
 	    \"idfundacion_foto\":\"{$Fundacion_foto->getidfundacion_foto()}\",
-	    \"fundacion_fotonomre\":\"{$Fundacion_foto->getfundacion_fotonomre()}\",
+	    \"fundacion_fotonombre\":\"{$Fundacion_foto->getfundacion_fotonombre()}\",
 	    \"fundacion_foto_ruta\":\"{$Fundacion_foto->getfundacion_foto_ruta()}\",
 	    \"Fundacion_idFundacion_idFundacion\":\"{$Fundacion_foto->getFundacion_idFundacion()->getidFundacion()}\"
 	       },";

@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Vine a Comala porque me dijeron que acá vivía mi padre, un tal Pedro Páramo.  \\
+//    El gran hermano te vigila  \\
 include_once realpath('../facade/ConvenioFacade.php');
 
 
@@ -13,16 +13,17 @@ class ConvenioController {
 
     public static function insert(){
         $idConvenio = strip_tags($_POST['idConvenio']);
-        $Veterinaria_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
-        $veterinaria= new Veterinaria();
-        $veterinaria->setIdVeterinaria($Veterinaria_idVeterinaria);
+        $Vinculacion_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
+        $vinculacion= new Vinculacion();
+        $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
         $Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
         $fundacion= new Fundacion();
         $fundacion->setIdFundacion($Fundacion_idFundacion);
         $fechaConvenio = strip_tags($_POST['fechaConvenio']);
         $nombreConvenio = strip_tags($_POST['nombreConvenio']);
         $duracionConvenio = strip_tags($_POST['duracionConvenio']);
-        ConvenioFacade::insert($idConvenio, $veterinaria, $fundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio);
+        $estado = strip_tags($_POST['estado']);
+        ConvenioFacade::insert($idConvenio, $vinculacion, $fundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio, $estado);
 return true;
     }
 
@@ -36,7 +37,8 @@ return true;
 	    \"Fundacion_idFundacion_idFundacion\":\"{$Convenio->getFundacion_idFundacion()->getidFundacion()}\",
 	    \"fechaConvenio\":\"{$Convenio->getfechaConvenio()}\",
 	    \"nombreConvenio\":\"{$Convenio->getnombreConvenio()}\",
-	    \"duracionConvenio\":\"{$Convenio->getduracionConvenio()}\"
+	    \"duracionConvenio\":\"{$Convenio->getduracionConvenio()}\",
+	    \"estado\":\"{$Convenio->getestado()}\"
 	       },";
         }
 

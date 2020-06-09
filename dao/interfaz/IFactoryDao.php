@@ -5,28 +5,29 @@
               ------------------------
  */
 
-//    ¿Eres capaz de hackear mi Facebook?  \\
+//    La gente siempre me pregunta si conozco a Tyler Durden.  \\
 
 include_once realpath('../dao/entities/AlbergueDao.php');
-include_once realpath('../dao/entities/ApadrinamientomascotausuarioDao.php');
 include_once realpath('../dao/entities/CalificacionDao.php');
 include_once realpath('../dao/entities/ConvenioDao.php');
-include_once realpath('../dao/entities/DocumentosDao.php');
+include_once realpath('../dao/entities/DocumentoDao.php');
 include_once realpath('../dao/entities/DonacionDao.php');
 include_once realpath('../dao/entities/EspecieDao.php');
 include_once realpath('../dao/entities/FavoritomascotausuarioDao.php');
 include_once realpath('../dao/entities/Foto_mascotaDao.php');
 include_once realpath('../dao/entities/FundacionDao.php');
 include_once realpath('../dao/entities/Fundacion_fotoDao.php');
+include_once realpath('../dao/entities/FundacionvinculacionDao.php');
 include_once realpath('../dao/entities/HistorialDao.php');
 include_once realpath('../dao/entities/HistorialmascotaDao.php');
 include_once realpath('../dao/entities/MascotaDao.php');
-include_once realpath('../dao/entities/NotificacionesDao.php');
+include_once realpath('../dao/entities/NotificacionDao.php');
+include_once realpath('../dao/entities/RedsocialDao.php');
 include_once realpath('../dao/entities/SolicitudDao.php');
 include_once realpath('../dao/entities/TipodonacionDao.php');
 include_once realpath('../dao/entities/TipousuarioDao.php');
 include_once realpath('../dao/entities/UsuarioDao.php');
-include_once realpath('../dao/entities/VeterinariaDao.php');
+include_once realpath('../dao/entities/VinculacionDao.php');
 
 
 interface IFactoryDao {
@@ -37,12 +38,6 @@ interface IFactoryDao {
      * @return instancia de AlbergueDao
      */
      public function getAlbergueDao($dbName);
-     /**
-     * Devuelve una instancia de ApadrinamientomascotausuarioDao con una conexiÃ³n que depende del gestor de base de datos
-     * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de ApadrinamientomascotausuarioDao
-     */
-     public function getApadrinamientomascotausuarioDao($dbName);
      /**
      * Devuelve una instancia de CalificacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
@@ -56,11 +51,11 @@ interface IFactoryDao {
      */
      public function getConvenioDao($dbName);
      /**
-     * Devuelve una instancia de DocumentosDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de DocumentoDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de DocumentosDao
+     * @return instancia de DocumentoDao
      */
-     public function getDocumentosDao($dbName);
+     public function getDocumentoDao($dbName);
      /**
      * Devuelve una instancia de DonacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
@@ -98,6 +93,12 @@ interface IFactoryDao {
      */
      public function getFundacion_fotoDao($dbName);
      /**
+     * Devuelve una instancia de FundacionvinculacionDao con una conexiÃ³n que depende del gestor de base de datos
+     * @param dbName Nombre o identificador de la base de datos a conectar
+     * @return instancia de FundacionvinculacionDao
+     */
+     public function getFundacionvinculacionDao($dbName);
+     /**
      * Devuelve una instancia de HistorialDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
      * @return instancia de HistorialDao
@@ -116,11 +117,17 @@ interface IFactoryDao {
      */
      public function getMascotaDao($dbName);
      /**
-     * Devuelve una instancia de NotificacionesDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de NotificacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de NotificacionesDao
+     * @return instancia de NotificacionDao
      */
-     public function getNotificacionesDao($dbName);
+     public function getNotificacionDao($dbName);
+     /**
+     * Devuelve una instancia de RedsocialDao con una conexiÃ³n que depende del gestor de base de datos
+     * @param dbName Nombre o identificador de la base de datos a conectar
+     * @return instancia de RedsocialDao
+     */
+     public function getRedsocialDao($dbName);
      /**
      * Devuelve una instancia de SolicitudDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
@@ -146,11 +153,11 @@ interface IFactoryDao {
      */
      public function getUsuarioDao($dbName);
      /**
-     * Devuelve una instancia de VeterinariaDao con una conexiÃ³n que depende del gestor de base de datos
+     * Devuelve una instancia de VinculacionDao con una conexiÃ³n que depende del gestor de base de datos
      * @param dbName Nombre o identificador de la base de datos a conectar
-     * @return instancia de VeterinariaDao
+     * @return instancia de VinculacionDao
      */
-     public function getVeterinariaDao($dbName);
+     public function getVinculacionDao($dbName);
 
 }
 //That`s all folks!

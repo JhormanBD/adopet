@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Todo lo que alguna vez amaste te rechazará o morirá.  \\
+//    Somos los amish del software  \\
 include_once realpath('../facade/UsuarioFacade.php');
 
 
@@ -13,9 +13,6 @@ class UsuarioController {
 
     public static function insert(){
         $idUsuario = strip_tags($_POST['idUsuario']);
-        $Historial_idHistorial = strip_tags($_POST['Historial_idHistorial']);
-        $historial= new Historial();
-        $historial->setIdHistorial($Historial_idHistorial);
         $Tipousuario_idTipoUsuario = strip_tags($_POST['TipoUsuario_idTipoUsuario']);
         $tipousuario= new Tipousuario();
         $tipousuario->setIdTipoUsuario($Tipousuario_idTipoUsuario);
@@ -24,12 +21,12 @@ class UsuarioController {
         $cedula = strip_tags($_POST['cedula']);
         $direccion = strip_tags($_POST['direccion']);
         $correo = strip_tags($_POST['correo']);
-        $contraseÃÂ±a = strip_tags($_POST['contraseÃÂ±a']);
+        $password = strip_tags($_POST['password']);
         $estado = strip_tags($_POST['estado']);
-        $fechanacimiento = strip_tags($_POST['fechanacimiento']);
+        $fechaNacimiento = strip_tags($_POST['fechaNacimiento']);
         $fechaIngreso = strip_tags($_POST['fechaIngreso']);
         $foto = strip_tags($_POST['foto']);
-        UsuarioFacade::insert($idUsuario, $historial, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $contraseÃÂ±a, $estado, $fechanacimiento, $fechaIngreso, $foto);
+        UsuarioFacade::insert($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto);
 return true;
     }
 
@@ -39,16 +36,15 @@ return true;
         foreach ($list as $obj => $Usuario) {	
 	       $rta.="{
 	    \"idUsuario\":\"{$Usuario->getidUsuario()}\",
-	    \"Historial_idHistorial_idHistorial\":\"{$Usuario->getHistorial_idHistorial()->getidHistorial()}\",
 	    \"TipoUsuario_idTipoUsuario_idTipoUsuario\":\"{$Usuario->getTipoUsuario_idTipoUsuario()->getidTipoUsuario()}\",
 	    \"nombreUsuario\":\"{$Usuario->getnombreUsuario()}\",
 	    \"apellidoUsuario\":\"{$Usuario->getapellidoUsuario()}\",
 	    \"cedula\":\"{$Usuario->getcedula()}\",
 	    \"direccion\":\"{$Usuario->getdireccion()}\",
 	    \"correo\":\"{$Usuario->getcorreo()}\",
-	    \"contraseÃÂ±a\":\"{$Usuario->getcontraseÃÂ±a()}\",
+	    \"password\":\"{$Usuario->getpassword()}\",
 	    \"estado\":\"{$Usuario->getestado()}\",
-	    \"fechanacimiento\":\"{$Usuario->getfechanacimiento()}\",
+	    \"fechaNacimiento\":\"{$Usuario->getfechaNacimiento()}\",
 	    \"fechaIngreso\":\"{$Usuario->getfechaIngreso()}\",
 	    \"foto\":\"{$Usuario->getfoto()}\"
 	       },";

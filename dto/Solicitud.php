@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    404 Frase no encontrada  \\
+//    Por desgracia, mi epitafio será una frase insulsa y vacía  \\
 
 
 class Solicitud {
@@ -13,8 +13,9 @@ class Solicitud {
   private $idSolicitud;
   private $Usuario_idUsuario;
   private $descripcion;
-  private $Aprobacion;
-  private $tipoSolucion;
+  private $aprobacion;
+  private $tipoSolucitud;
+  private $Mascota_idMascota;
 
     /**
      * Constructor de Solicitud
@@ -67,34 +68,49 @@ class Solicitud {
       $this->descripcion = $descripcion;
   }
     /**
-     * Devuelve el valor correspondiente a Aprobacion
-     * @return Aprobacion
+     * Devuelve el valor correspondiente a aprobacion
+     * @return aprobacion
      */
   public function getAprobacion(){
-      return $this->Aprobacion;
+      return $this->aprobacion;
   }
 
     /**
-     * Modifica el valor correspondiente a Aprobacion
-     * @param Aprobacion
+     * Modifica el valor correspondiente a aprobacion
+     * @param aprobacion
      */
   public function setAprobacion($aprobacion){
-      $this->Aprobacion = $aprobacion;
+      $this->aprobacion = $aprobacion;
   }
     /**
-     * Devuelve el valor correspondiente a tipoSolucion
-     * @return tipoSolucion
+     * Devuelve el valor correspondiente a tipoSolucitud
+     * @return tipoSolucitud
      */
-  public function getTipoSolucion(){
-      return $this->tipoSolucion;
+  public function getTipoSolucitud(){
+      return $this->tipoSolucitud;
   }
 
     /**
-     * Modifica el valor correspondiente a tipoSolucion
-     * @param tipoSolucion
+     * Modifica el valor correspondiente a tipoSolucitud
+     * @param tipoSolucitud
      */
-  public function setTipoSolucion($tipoSolucion){
-      $this->tipoSolucion = $tipoSolucion;
+  public function setTipoSolucitud($tipoSolucitud){
+      $this->tipoSolucitud = $tipoSolucitud;
+  }
+    /**
+     * Devuelve el valor correspondiente a Mascota_idMascota
+     * @return Mascota_idMascota
+     */
+  public function getMascota_idMascota(){
+      return $this->Mascota_idMascota;
+  }
+
+    /**
+     * Modifica el valor correspondiente a Mascota_idMascota
+     * @param Mascota_idMascota
+     */
+  public function setMascota_idMascota($mascota_idMascota){
+      $this->Mascota_idMascota = $mascota_idMascota;
   }
 
 

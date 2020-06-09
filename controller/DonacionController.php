@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    Todo lo que alguna vez amaste te rechazará o morirá.  \\
+//    Nada mejor que el código hecho a mano.  \\
 include_once realpath('../facade/DonacionFacade.php');
 
 
@@ -19,14 +19,13 @@ class DonacionController {
         $Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
         $fundacion= new Fundacion();
         $fundacion->setIdFundacion($Fundacion_idFundacion);
-        $estadoDonacion = strip_tags($_POST['estadoDonacion']);
         $fechaDonacion = strip_tags($_POST['fechaDonacion']);
         $cantidad = strip_tags($_POST['cantidad']);
         $descripcion = strip_tags($_POST['descripcion']);
         $Tipodonacion_idTipoDonacion = strip_tags($_POST['TipoDonacion_idTipoDonacion']);
         $tipodonacion= new Tipodonacion();
         $tipodonacion->setIdTipoDonacion($Tipodonacion_idTipoDonacion);
-        DonacionFacade::insert($idDonacion, $mascota, $fundacion, $estadoDonacion, $fechaDonacion, $cantidad, $descripcion, $tipodonacion);
+        DonacionFacade::insert($idDonacion, $mascota, $fundacion, $fechaDonacion, $cantidad, $descripcion, $tipodonacion);
 return true;
     }
 
@@ -38,7 +37,6 @@ return true;
 	    \"idDonacion\":\"{$Donacion->getidDonacion()}\",
 	    \"Mascota_idMascota_idMascota\":\"{$Donacion->getMascota_idMascota()->getidMascota()}\",
 	    \"Fundacion_idFundacion_idFundacion\":\"{$Donacion->getFundacion_idFundacion()->getidFundacion()}\",
-	    \"estadoDonacion\":\"{$Donacion->getestadoDonacion()}\",
 	    \"fechaDonacion\":\"{$Donacion->getfechaDonacion()}\",
 	    \"cantidad\":\"{$Donacion->getcantidad()}\",
 	    \"descripcion\":\"{$Donacion->getdescripcion()}\",

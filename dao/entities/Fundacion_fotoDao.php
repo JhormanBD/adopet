@@ -5,7 +5,7 @@
               ------------------------
  */
 
-//    They call me Mr. Espagueti  \\
+//    ¡Santos frameworks Batman!  \\
 
 include_once realpath('../dao/interfaz/IFundacion_fotoDao.php');
 include_once realpath('../dto/Fundacion_foto.php');
@@ -30,13 +30,13 @@ private $cn;
      */
   public function insert($fundacion_foto){
       $idfundacion_foto=$fundacion_foto->getIdfundacion_foto();
-$fundacion_fotonomre=$fundacion_foto->getFundacion_fotonomre();
+$fundacion_fotonombre=$fundacion_foto->getFundacion_fotonombre();
 $fundacion_foto_ruta=$fundacion_foto->getFundacion_foto_ruta();
 $fundacion_idFundacion=$fundacion_foto->getFundacion_idFundacion()->getIdFundacion();
 
       try {
-          $sql= "INSERT INTO `fundacion_foto`( `idfundacion_foto`, `fundacion_fotonomre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`)"
-          ."VALUES ('$idfundacion_foto','$fundacion_fotonomre','$fundacion_foto_ruta','$fundacion_idFundacion')";
+          $sql= "INSERT INTO `fundacion_foto`( `idfundacion_foto`, `fundacion_fotonombre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`)"
+          ."VALUES ('$idfundacion_foto','$fundacion_fotonombre','$fundacion_foto_ruta','$fundacion_idFundacion')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -53,13 +53,13 @@ $fundacion_idFundacion=$fundacion_foto->getFundacion_idFundacion()->getIdFundaci
       $idfundacion_foto=$fundacion_foto->getIdfundacion_foto();
 
       try {
-          $sql= "SELECT `idfundacion_foto`, `fundacion_fotonomre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`"
+          $sql= "SELECT `idfundacion_foto`, `fundacion_fotonombre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`"
           ."FROM `fundacion_foto`"
           ."WHERE `idfundacion_foto`='$idfundacion_foto'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
           $fundacion_foto->setIdfundacion_foto($data[$i]['idfundacion_foto']);
-          $fundacion_foto->setFundacion_fotonomre($data[$i]['fundacion_fotonomre']);
+          $fundacion_foto->setFundacion_fotonombre($data[$i]['fundacion_fotonombre']);
           $fundacion_foto->setFundacion_foto_ruta($data[$i]['fundacion_foto_ruta']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
@@ -80,12 +80,12 @@ $fundacion_idFundacion=$fundacion_foto->getFundacion_idFundacion()->getIdFundaci
      */
   public function update($fundacion_foto){
       $idfundacion_foto=$fundacion_foto->getIdfundacion_foto();
-$fundacion_fotonomre=$fundacion_foto->getFundacion_fotonomre();
+$fundacion_fotonombre=$fundacion_foto->getFundacion_fotonombre();
 $fundacion_foto_ruta=$fundacion_foto->getFundacion_foto_ruta();
 $fundacion_idFundacion=$fundacion_foto->getFundacion_idFundacion()->getIdFundacion();
 
       try {
-          $sql= "UPDATE `fundacion_foto` SET`idfundacion_foto`='$idfundacion_foto' ,`fundacion_fotonomre`='$fundacion_fotonomre' ,`fundacion_foto_ruta`='$fundacion_foto_ruta' ,`Fundacion_idFundacion`='$fundacion_idFundacion' WHERE `idfundacion_foto`='$idfundacion_foto' ";
+          $sql= "UPDATE `fundacion_foto` SET`idfundacion_foto`='$idfundacion_foto' ,`fundacion_fotonombre`='$fundacion_fotonombre' ,`fundacion_foto_ruta`='$fundacion_foto_ruta' ,`Fundacion_idFundacion`='$fundacion_idFundacion' WHERE `idfundacion_foto`='$idfundacion_foto' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -117,14 +117,14 @@ $fundacion_idFundacion=$fundacion_foto->getFundacion_idFundacion()->getIdFundaci
   public function listAll(){
       $lista = array();
       try {
-          $sql ="SELECT `idfundacion_foto`, `fundacion_fotonomre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`"
+          $sql ="SELECT `idfundacion_foto`, `fundacion_fotonombre`, `fundacion_foto_ruta`, `Fundacion_idFundacion`"
           ."FROM `fundacion_foto`"
           ."WHERE 1";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $fundacion_foto= new Fundacion_foto();
           $fundacion_foto->setIdfundacion_foto($data[$i]['idfundacion_foto']);
-          $fundacion_foto->setFundacion_fotonomre($data[$i]['fundacion_fotonomre']);
+          $fundacion_foto->setFundacion_fotonombre($data[$i]['fundacion_fotonombre']);
           $fundacion_foto->setFundacion_foto_ruta($data[$i]['fundacion_foto_ruta']);
            $fundacion = new Fundacion();
            $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);

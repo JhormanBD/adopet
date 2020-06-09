@@ -5,12 +5,13 @@
               ------------------------
  */
 
-//    Lolita, luz de mi vida, fuego de mis entrañas. Pecado mío, alma mía.  \\
+//    Recuerda, cuando enciendas la molotov, debes arrojarla  \\
 
 require_once realpath('../facade/GlobalController.php');
 require_once realpath('../dao/interfaz/IFactoryDao.php');
 require_once realpath('../dto/Fundacion.php');
 require_once realpath('../dao/interfaz/IFundacionDao.php');
+require_once realpath('../dto/Usuario.php');
 
 class FundacionFacade {
 
@@ -38,8 +39,9 @@ class FundacionFacade {
    * @param nit
    * @param correo
    * @param nombrepropietario
+   * @param usuario_idUsuario
    */
-  public static function insert( $idFundacion,  $nombreFundacion,  $direccionFundacion,  $telefonoFundacion,  $nit,  $correo,  $nombrepropietario){
+  public static function insert( $idFundacion,  $nombreFundacion,  $direccionFundacion,  $telefonoFundacion,  $nit,  $correo,  $nombrepropietario,  $usuario_idUsuario){
       $fundacion = new Fundacion();
       $fundacion->setIdFundacion($idFundacion); 
       $fundacion->setNombreFundacion($nombreFundacion); 
@@ -48,6 +50,7 @@ class FundacionFacade {
       $fundacion->setNit($nit); 
       $fundacion->setCorreo($correo); 
       $fundacion->setNombrepropietario($nombrepropietario); 
+      $fundacion->setUsuario_idUsuario($usuario_idUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $fundacionDao =$FactoryDao->getfundacionDao(self::getDataBaseDefault());
@@ -83,8 +86,9 @@ class FundacionFacade {
    * @param nit
    * @param correo
    * @param nombrepropietario
+   * @param usuario_idUsuario
    */
-  public static function update($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario){
+  public static function update($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario_idUsuario){
       $fundacion = self::select($idFundacion);
       $fundacion->setNombreFundacion($nombreFundacion); 
       $fundacion->setDireccionFundacion($direccionFundacion); 
@@ -92,6 +96,7 @@ class FundacionFacade {
       $fundacion->setNit($nit); 
       $fundacion->setCorreo($correo); 
       $fundacion->setNombrepropietario($nombrepropietario); 
+      $fundacion->setUsuario_idUsuario($usuario_idUsuario); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $fundacionDao =$FactoryDao->getfundacionDao(self::getDataBaseDefault());
