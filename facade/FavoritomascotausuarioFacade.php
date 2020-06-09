@@ -148,15 +148,6 @@ class FavoritomascotausuarioFacade
         return $result;
     }
 
-  /**
-   * Lista todos los objetos Favoritomascotausuario de la base de datos a partir de Mascota_idMascota.
-   * Puede recibir NullPointerException desde los métodos del Dao
-   * @param mascota_idMascota
-   * @return $result Array con los objetos en base de datos o Null
-   */
-  public static function listByMascota_idMascota($mascota_idMascota){
-      $favoritomascotausuario = new Favoritomascotausuario();
-      $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());

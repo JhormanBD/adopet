@@ -13,7 +13,7 @@ include_once realpath('../dto/Mascota.php');
 include_once realpath('../dto/Especie.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Vinculacion.php');
-include_once realpath('../dao/entities/conexion.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class MascotaDao implements IMascotaDao {
 
