@@ -40,9 +40,8 @@ class ConvenioFacade {
    * @param nombreConvenio
    * @param duracionConvenio
    */
-  public static function insert( $idConvenio,  $veterinaria_idVeterinaria,  $fundacion_idFundacion,  $fechaConvenio,  $nombreConvenio,  $duracionConvenio){
+  public static function insert( $veterinaria_idVeterinaria,  $fundacion_idFundacion,  $fechaConvenio,  $nombreConvenio,  $duracionConvenio){
       $convenio = new Convenio();
-      $convenio->setIdConvenio($idConvenio); 
       $convenio->setVeterinaria_idVeterinaria($veterinaria_idVeterinaria); 
       $convenio->setFundacion_idFundacion($fundacion_idFundacion); 
       $convenio->setFechaConvenio($fechaConvenio); 
@@ -96,6 +95,15 @@ class ConvenioFacade {
      $convenioDao->update($convenio);
      $convenioDao->close();
   }
+  
+  public static function updateEliminar($idConvenio){
+      $convenio = self::select($idConvenio);
+      
+      $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $convenioDao =$FactoryDao->getconvenioDao(self::getDataBaseDefault());
+     $convenioDao->updateEliminar($convenio);
+     $convenioDao->close();
+  } 
 
   /**
    * Elimina un objeto Convenio de la base de datos a partir de su(s) llave(s) primaria(s).

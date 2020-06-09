@@ -30,7 +30,7 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($convenio){
-      $idConvenio=$convenio->getIdConvenio();
+      
 $veterinaria_idVeterinaria=$convenio->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 $fundacion_idFundacion=$convenio->getFundacion_idFundacion()->getIdFundacion();
 $fechaConvenio=$convenio->getFechaConvenio();
@@ -38,8 +38,8 @@ $nombreConvenio=$convenio->getNombreConvenio();
 $duracionConvenio=$convenio->getDuracionConvenio();
 
       try {
-          $sql= "INSERT INTO `convenio`( `idConvenio`, `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`)"
-          ."VALUES ('$idConvenio','$veterinaria_idVeterinaria','$fundacion_idFundacion','$fechaConvenio','$nombreConvenio','$duracionConvenio')";
+          $sql= "INSERT INTO `convenio`(  `Veterinaria_idVeterinaria`, `Fundacion_idFundacion`, `fechaConvenio`, `nombreConvenio`, `duracionConvenio`)"
+          ."VALUES ('$veterinaria_idVeterinaria','$fundacion_idFundacion','$fechaConvenio','$nombreConvenio','$duracionConvenio')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -95,6 +95,19 @@ $duracionConvenio=$convenio->getDuracionConvenio();
 
       try {
           $sql= "UPDATE `convenio` SET`idConvenio`='$idConvenio' ,`Veterinaria_idVeterinaria`='$veterinaria_idVeterinaria' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`fechaConvenio`='$fechaConvenio' ,`nombreConvenio`='$nombreConvenio' ,`duracionConvenio`='$duracionConvenio' WHERE `idConvenio`='$idConvenio' ";
+         return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
+      
+  
+   public function updateEliminar($convenio){
+      $idConvenio=$convenio->getIdConvenio();
+
+
+      try {
+          $sql= "UPDATE `convenio` SET `estado`='0' WHERE `idConvenio`='$idConvenio'";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
