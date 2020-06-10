@@ -254,14 +254,24 @@ private $cn;
           $sentencia = null;
           return $this->cn->lastInsertId();
     }
-      public function ejecutarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $data = $sentencia->fetchAll();
-          $sentencia = null;
-          return $data;
+
+    public function insertarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $sentencia = null;
+        return $this->cn->lastInsertId();
     }
+
+    public function ejecutarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $data = $sentencia->fetchAll();
+        $sentencia = null;
+        return $data;
+    }
+
     /**
      * Cierra la conexión actual a la base de datos
      */
