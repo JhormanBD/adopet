@@ -18,4 +18,4 @@ back\dao\properties\Properties.ini
 [mascotas]
 host=localhost
 username=root
-password=Soporte
+password=

@@ -45,9 +45,8 @@ class MascotaFacade {
    * @param fechaSalida
    * @param veterinaria_idVeterinaria
    */
-  public static function insert( $idMascota,  $especie_idEspecie,  $nombreMascota,  $edadMascota,  $sexoMascota,  $disponibilidadMascota,  $fundacion_idFundacion,  $fechaIngreso,  $fechaSalida,  $veterinaria_idVeterinaria){
+  public static function insert($especie_idEspecie,  $nombreMascota,  $edadMascota,  $sexoMascota,  $disponibilidadMascota,  $fundacion_idFundacion,  $fechaIngreso,  $fechaSalida,  $veterinaria_idVeterinaria){
       $mascota = new Mascota();
-      $mascota->setIdMascota($idMascota); 
       $mascota->setEspecie_idEspecie($especie_idEspecie); 
       $mascota->setNombreMascota($nombreMascota); 
       $mascota->setEdadMascota($edadMascota); 
@@ -119,6 +118,17 @@ class MascotaFacade {
    * Puede recibir NullPointerException desde los métodos del Dao
    * @param idMascota
    */
+  
+  public static function updateEliminar($idMascota){
+      
+        $mascota = self::select($idMascota);
+
+        $FactoryDao = new FactoryDao(self::getGestorDefault());
+        $mascotaDao = $FactoryDao->getmascotaDao(self::getDataBaseDefault());
+        $mascotaDao->updateEliminar($mascota);
+        $mascotaDao->close();
+  }
+  
   public static function delete($idMascota){
       $mascota = new Mascota();
       $mascota->setIdMascota($idMascota); 
@@ -140,6 +150,15 @@ class MascotaFacade {
      $result = $mascotaDao->listAll();
      $mascotaDao->close();
      return $result;
+  }
+  
+  public static function ListByType($tipoMascota){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->ListByType($tipoMascota);
+     $mascotaDao->close();
+     return $result;
+      
   }
 
 
