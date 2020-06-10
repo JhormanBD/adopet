@@ -32,14 +32,12 @@ class DocumentoFacade {
   /**
    * Crea un objeto Documento a partir de sus parámetros y lo guarda en base de datos.
    * Puede recibir NullPointerException desde los métodos del Dao
-   * @param idDocumento
    * @param nombreDocumento
    * @param rutaDocumento
    * @param usuario_idUsuario
    */
-  public static function insert( $idDocumento,  $nombreDocumento,  $rutaDocumento,  $usuario_idUsuario){
+  public static function insert($nombreDocumento,  $rutaDocumento,  $usuario_idUsuario){
       $documento = new Documento();
-      $documento->setIdDocumento($idDocumento); 
       $documento->setNombreDocumento($nombreDocumento); 
       $documento->setRutaDocumento($rutaDocumento); 
       $documento->setUsuario_idUsuario($usuario_idUsuario); 
@@ -114,6 +112,15 @@ class DocumentoFacade {
      $result = $documentoDao->listAll();
      $documentoDao->close();
      return $result;
+  }
+
+    public static function ListById($idDocumento){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $DocumentoDao =$FactoryDao->getDocumentoDao(self::getDataBaseDefault());
+     $result = $DocumentoDao->ListById($idDocumento);
+     $DocumentoDao->close();
+     return $result;
+      
   }
 
 
