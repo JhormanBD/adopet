@@ -129,6 +129,15 @@ class DocumentoFacade {
       
   }
 
+    public static function ListById($idDocumento){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $DocumentoDao =$FactoryDao->getDocumentoDao(self::getDataBaseDefault());
+     $result = $DocumentoDao->ListById($idDocumento);
+     $DocumentoDao->close();
+     return $result;
+      
+  }
+
 
 }
 //That`s all folks!
