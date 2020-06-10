@@ -9,15 +9,15 @@
 include_once realpath('../facade/MascotaFacade.php');
 
 $idMascota = strip_tags($_POST['idMascota']);
-$Especie_idEspecie = strip_tags($_POST['Especie_idEspecie']);
+$Especie_idEspecie = strip_tags($_POST['idEspecie']);
 $nombreMascota = strip_tags($_POST['nombreMascota']);
 $edadMascota = strip_tags($_POST['edadMascota']);
 $sexoMascota = strip_tags($_POST['sexoMascota']);
 $disponibilidadMascota = strip_tags($_POST['disponibilidadMascota']);
-$Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+$Fundacion_idFundacion = strip_tags($_POST['idFundacion']);
 $fechaIngreso = strip_tags($_POST['fechaIngreso']);
 $fechaSalida = strip_tags($_POST['fechaSalida']);
-$Vinculacion_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
+$Vinculacion_idVeterinaria = strip_tags($_POST['idVeterinaria']);
 
 //guiarse por los datos que recibe el insert
 if ($idMascota === '' || $Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' || $sexoMascota === '' || $disponibilidadMascota === '' || $Fundacion_idFundacion === '' || $fechaIngreso === '' || $fechaSalida === '' || $Vinculacion_idVeterinaria === '') {

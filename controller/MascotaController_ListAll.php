@@ -14,15 +14,15 @@ $rta = "";
 foreach ($list as $obj => $Mascota) {
     $rta .= "{
 	    \"idMascota\":\"{$Mascota->getidMascota()}\",
-	    \"Especie_idEspecie_idEspecie\":\"{$Mascota->getEspecie_idEspecie()->getidEspecie()}\",
+	    \"idEspecie\":\"{$Mascota->getEspecie_idEspecie()->getidEspecie()}\",
 	    \"nombreMascota\":\"{$Mascota->getnombreMascota()}\",
 	    \"edadMascota\":\"{$Mascota->getedadMascota()}\",
 	    \"sexoMascota\":\"{$Mascota->getsexoMascota()}\",
 	    \"disponibilidadMascota\":\"{$Mascota->getdisponibilidadMascota()}\",
-	    \"Fundacion_idFundacion_idFundacion\":\"{$Mascota->getFundacion_idFundacion()->getidFundacion()}\",
+	    \"idFundacion\":\"{$Mascota->getFundacion_idFundacion()->getidFundacion()}\",
 	    \"fechaIngreso\":\"{$Mascota->getfechaIngreso()}\",
 	    \"fechaSalida\":\"{$Mascota->getfechaSalida()}\",
-	    \"Veterinaria_idVeterinaria_idVeterinaria\":\"{$Mascota->getVeterinaria_idVeterinaria()->getidVeterinaria()}\"
+	    \"idVeterinaria\":\"{$Mascota->getVeterinaria_idVeterinaria()->getidVeterinaria()}\"
 	       },";
 }
 

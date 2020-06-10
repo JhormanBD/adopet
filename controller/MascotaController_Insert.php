@@ -8,19 +8,19 @@
 
 include_once realpath('../facade/MascotaFacade.php');
 
-$Especie_idEspecie = strip_tags($_POST['Especie_idEspecie']);
+$Especie_idEspecie = strip_tags($_POST['idEspecie']);
 $especie = new Especie();
 $especie->setIdEspecie($Especie_idEspecie);
 $nombreMascota = strip_tags($_POST['nombreMascota']);
 $edadMascota = strip_tags($_POST['edadMascota']);
 $sexoMascota = strip_tags($_POST['sexoMascota']);
 $disponibilidadMascota = strip_tags($_POST['disponibilidadMascota']);
-$Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+$Fundacion_idFundacion = strip_tags($_POST['idFundacion']);
 $fundacion = new Fundacion();
 $fundacion->setIdFundacion($Fundacion_idFundacion);
 $fechaIngreso = strip_tags($_POST['fechaIngreso']);
 $fechaSalida = strip_tags($_POST['fechaSalida']);
-$Vinculacion_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
+$Vinculacion_idVeterinaria = strip_tags($_POST['idVeterinaria']);
 $vinculacion = new Vinculacion();
 $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
 $respuesta = false;
