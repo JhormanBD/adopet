@@ -37,12 +37,11 @@ class FavoritomascotausuarioFacade {
    * @param usuario_idUsuario
    * @param idFavoritoMascotaUsuario
    */
-  public static function insert( $mascota_idMascota,  $usuario_idUsuario,  $idFavoritoMascotaUsuario){
+  public static function insert( $mascota_idMascota,  $usuario_idUsuario){
       $favoritomascotausuario = new Favoritomascotausuario();
       $favoritomascotausuario->setMascota_idMascota($mascota_idMascota); 
-      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario); 
-      $favoritomascotausuario->setIdFavoritoMascotaUsuario($idFavoritoMascotaUsuario); 
-
+      $favoritomascotausuario->setUsuario_idUsuario($usuario_idUsuario);
+      
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $favoritomascotausuarioDao =$FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
      $rtn = $favoritomascotausuarioDao->insert($favoritomascotausuario);

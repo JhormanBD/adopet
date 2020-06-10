@@ -32,11 +32,9 @@ private $cn;
   public function insert($favoritomascotausuario){
       $mascota_idMascota=$favoritomascotausuario->getMascota_idMascota()->getIdMascota();
 $usuario_idUsuario=$favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario();
-$idFavoritoMascotaUsuario=$favoritomascotausuario->getIdFavoritoMascotaUsuario();
-
       try {
-          $sql= "INSERT INTO `favoritomascotausuario`( `Mascota_idMascota`, `Usuario_idUsuario`, `idFavoritoMascotaUsuario`)"
-          ."VALUES ('$mascota_idMascota','$usuario_idUsuario','$idFavoritoMascotaUsuario')";
+          $sql= "INSERT INTO `favoritomascotausuario`( `Mascota_idMascota`, `Usuario_idUsuario`)"
+          ."VALUES ('$mascota_idMascota','$usuario_idUsuario')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
