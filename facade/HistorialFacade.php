@@ -38,9 +38,8 @@ class HistorialFacade {
    * @param tipo
    * @param usuario_idUsuario
    */
-  public static function insert( $idHistorial,  $fechaHistorial,  $descripcion,  $tipo,  $usuario_idUsuario){
+  public static function insert($fechaHistorial,  $descripcion,  $tipo,  $usuario_idUsuario){
       $historial = new Historial();
-      $historial->setIdHistorial($idHistorial); 
       $historial->setFechaHistorial($fechaHistorial); 
       $historial->setDescripcion($descripcion); 
       $historial->setTipo($tipo); 

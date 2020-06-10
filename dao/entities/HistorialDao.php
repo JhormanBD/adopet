@@ -1,8 +1,9 @@
 <?php
+
 /*
-              -------Creado por-------
-             \(x.x )/ Anarchy \( x.x)/
-              ------------------------
+  -------Creado por-------
+  \(x.x )/ Anarchy \( x.x)/
+  ------------------------
  */
 
 //    Antes que me hubiera apasionado por mujer alguna, jugué mi corazón al azar y me lo ganó la Violencia.  \\
@@ -11,15 +12,15 @@ include_once realpath('../dao/interfaz/IHistorialDao.php');
 include_once realpath('../dto/Historial.php');
 include_once realpath('../dto/Usuario.php');
 
-class HistorialDao implements IHistorialDao{
+class HistorialDao implements IHistorialDao {
 
-private $cn;
+    private $cn;
 
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
     function __construct($conexion) {
-            $this->cn =$conexion;
+        $this->cn = $conexion;
     }
 
     /**
@@ -28,21 +29,21 @@ private $cn;
      * @return  Valor asignado a la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function insert($historial){
-      $idHistorial=$historial->getIdHistorial();
-$fechaHistorial=$historial->getFechaHistorial();
-$descripcion=$historial->getDescripcion();
-$tipo=$historial->getTipo();
-$usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
+    public function insert($historial) {
+        $idHistorial = $historial->getIdHistorial();
+        $fechaHistorial = $historial->getFechaHistorial();
+        $descripcion = $historial->getDescripcion();
+        $tipo = $historial->getTipo();
+        $usuario_idUsuario = $historial->getUsuario_idUsuario()->getIdUsuario();
 
-      try {
-          $sql= "INSERT INTO `historial`( `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`)"
-          ."VALUES ('$idHistorial','$fechaHistorial','$descripcion','$tipo','$usuario_idUsuario')";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "INSERT INTO `historial`(`fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`)"
+                    . "VALUES ('$fechaHistorial','$descripcion','$tipo','$usuario_idUsuario')";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Historial en la base de datos.
@@ -50,29 +51,29 @@ $usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function select($historial){
-      $idHistorial=$historial->getIdHistorial();
+    public function select($historial) {
+        $idHistorial = $historial->getIdHistorial();
 
-      try {
-          $sql= "SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
-          ."FROM `historial`"
-          ."WHERE `idHistorial`='$idHistorial'";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-          $historial->setIdHistorial($data[$i]['idHistorial']);
-          $historial->setFechaHistorial($data[$i]['fechaHistorial']);
-          $historial->setDescripcion($data[$i]['Descripcion']);
-          $historial->setTipo($data[$i]['tipo']);
-           $usuario = new Usuario();
-           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $historial->setUsuario_idUsuario($usuario);
-
-          }
-      return $historial;      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+        try {
+            $sql = "SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
+                    . "FROM `historial`"
+                    . "WHERE `idHistorial`='$idHistorial'";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $historial->setIdHistorial($data[$i]['idHistorial']);
+                $historial->setFechaHistorial($data[$i]['fechaHistorial']);
+                $historial->setDescripcion($data[$i]['Descripcion']);
+                $historial->setTipo($data[$i]['tipo']);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+                $historial->setUsuario_idUsuario($usuario);
+            }
+            return $historial;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
     /**
      * Modifica un objeto Historial en la base de datos.
@@ -80,20 +81,20 @@ $usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
      * @return  Valor de la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function update($historial){
-      $idHistorial=$historial->getIdHistorial();
-$fechaHistorial=$historial->getFechaHistorial();
-$descripcion=$historial->getDescripcion();
-$tipo=$historial->getTipo();
-$usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
+    public function update($historial) {
+        $idHistorial = $historial->getIdHistorial();
+        $fechaHistorial = $historial->getFechaHistorial();
+        $descripcion = $historial->getDescripcion();
+        $tipo = $historial->getTipo();
+        $usuario_idUsuario = $historial->getUsuario_idUsuario()->getIdUsuario();
 
-      try {
-          $sql= "UPDATE `historial` SET`idHistorial`='$idHistorial' ,`fechaHistorial`='$fechaHistorial' ,`Descripcion`='$descripcion' ,`tipo`='$tipo' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idHistorial`='$idHistorial' ";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "UPDATE `historial` SET`idHistorial`='$idHistorial' ,`fechaHistorial`='$fechaHistorial' ,`Descripcion`='$descripcion' ,`tipo`='$tipo' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idHistorial`='$idHistorial' ";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Elimina un objeto Historial en la base de datos.
@@ -101,68 +102,72 @@ $usuario_idUsuario=$historial->getUsuario_idUsuario()->getIdUsuario();
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function delete($historial){
-      $idHistorial=$historial->getIdHistorial();
+    public function delete($historial) {
+        $idHistorial = $historial->getIdHistorial();
 
-      try {
-          $sql ="DELETE FROM `historial` WHERE `idHistorial`='$idHistorial'";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "DELETE FROM `historial` WHERE `idHistorial`='$idHistorial'";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Historial en la base de datos.
      * @return ArrayList<Historial> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function listAll(){
-      $lista = array();
-      try {
-          $sql ="SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
-          ."FROM `historial`"
-          ."WHERE 1";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-              $historial= new Historial();
-          $historial->setIdHistorial($data[$i]['idHistorial']);
-          $historial->setFechaHistorial($data[$i]['fechaHistorial']);
-          $historial->setDescripcion($data[$i]['Descripcion']);
-          $historial->setTipo($data[$i]['tipo']);
-           $usuario = new Usuario();
-           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $historial->setUsuario_idUsuario($usuario);
+    public function listAll() {
+        $lista = array();
+        try {
+            $sql = "SELECT `idHistorial`, `fechaHistorial`, `Descripcion`, `tipo`, `Usuario_idUsuario`"
+                    . "FROM `historial`"
+                    . "WHERE 1";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $historial = new Historial();
+                $historial->setIdHistorial($data[$i]['idHistorial']);
+                $historial->setFechaHistorial($data[$i]['fechaHistorial']);
+                $historial->setDescripcion($data[$i]['Descripcion']);
+                $historial->setTipo($data[$i]['tipo']);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+                $historial->setUsuario_idUsuario($usuario);
 
-          array_push($lista,$historial);
-          }
-      return $lista;
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+                array_push($lista, $historial);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
-      public function insertarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $sentencia = null;
-          return $this->cn->lastInsertId();
+    public function insertarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $sentencia = null;
+        return $this->cn->lastInsertId();
     }
-      public function ejecutarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $data = $sentencia->fetchAll();
-          $sentencia = null;
-          return $data;
+
+    public function ejecutarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $data = $sentencia->fetchAll();
+        $sentencia = null;
+        return $data;
     }
+
     /**
      * Cierra la conexión actual a la base de datos
      */
-  public function close(){
-      $cn=null;
-  }
+    public function close() {
+        $cn = null;
+    }
+
 }
+
 //That`s all folks!
