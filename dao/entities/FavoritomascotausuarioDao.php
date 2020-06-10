@@ -1,8 +1,8 @@
 <?php
 /*
-              -------Creado por-------
-             \(x.x )/ Anarchy \( x.x)/
-              ------------------------
+-------Creado por-------
+\(x.x )/ Anarchy \( x.x)/
+------------------------
  */
 
 //    Nada mejor que el código hecho a mano.  \\
@@ -12,34 +12,37 @@ include_once realpath('../dto/Favoritomascotausuario.php');
 include_once realpath('../dto/Mascota.php');
 include_once realpath('../dto/Usuario.php');
 
-class FavoritomascotausuarioDao implements IFavoritomascotausuarioDao{
+class FavoritomascotausuarioDao implements IFavoritomascotausuarioDao
+{
 
-private $cn;
+    private $cn;
 
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
-    function __construct($conexion) {
-            $this->cn =$conexion;
+    public function __construct($conexion)
+    {
+        $this->cn = $conexion;
     }
 
     /**
      * Guarda un objeto Favoritomascotausuario en la base de datos.
      * @param favoritomascotausuario objeto a guardar
-     * @return  Valor asignado a la llave primaria 
+     * @return  Valor asignado a la llave primaria
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function insert($favoritomascotausuario){
-      $mascota_idMascota=$favoritomascotausuario->getMascota_idMascota()->getIdMascota();
-$usuario_idUsuario=$favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario();
-      try {
-          $sql= "INSERT INTO `favoritomascotausuario`( `Mascota_idMascota`, `Usuario_idUsuario`)"
-          ."VALUES ('$mascota_idMascota','$usuario_idUsuario')";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+    public function insert($favoritomascotausuario)
+    {
+        $mascota_idMascota = $favoritomascotausuario->getMascota_idMascota()->getIdMascota();
+        $usuario_idUsuario = $favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario();
+        try {
+            $sql = "INSERT INTO `favoritomascotausuario`( `idMascota`, `idUsuario`)"
+                . "VALUES ('$mascota_idMascota','$usuario_idUsuario')";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Favoritomascotausuario en la base de datos.
@@ -47,48 +50,50 @@ $usuario_idUsuario=$favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function select($favoritomascotausuario){
-      $idFavoritoMascotaUsuario=$favoritomascotausuario->getIdFavoritoMascotaUsuario();
+    public function select($favoritomascotausuario)
+    {
+        $idFavoritoMascotaUsuario = $favoritomascotausuario->getIdFavoritoMascotaUsuario();
 
-      try {
-          $sql= "SELECT `Mascota_idMascota`, `Usuario_idUsuario`, `idFavoritoMascotaUsuario`"
-          ."FROM `favoritomascotausuario`"
-          ."WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario'";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-           $mascota = new Mascota();
-           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
-           $favoritomascotausuario->setMascota_idMascota($mascota);
-           $usuario = new Usuario();
-           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $favoritomascotausuario->setUsuario_idUsuario($usuario);
-          $favoritomascotausuario->setIdFavoritoMascotaUsuario($data[$i]['idFavoritoMascotaUsuario']);
+        try {
+            $sql = "SELECT `Mascota_idMascota`, `Usuario_idUsuario`, `idFavoritoMascotaUsuario`"
+                . "FROM `favoritomascotausuario`"
+                . "WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario'";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $mascota = new Mascota();
+                $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+                $favoritomascotausuario->setMascota_idMascota($mascota);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+                $favoritomascotausuario->setUsuario_idUsuario($usuario);
+                $favoritomascotausuario->setIdFavoritoMascotaUsuario($data[$i]['idFavoritoMascotaUsuario']);
 
-          }
-      return $favoritomascotausuario;      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+            }
+            return $favoritomascotausuario;} catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
     /**
      * Modifica un objeto Favoritomascotausuario en la base de datos.
      * @param favoritomascotausuario objeto con la información a modificar
-     * @return  Valor de la llave primaria 
+     * @return  Valor de la llave primaria
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function update($favoritomascotausuario){
-      $mascota_idMascota=$favoritomascotausuario->getMascota_idMascota()->getIdMascota();
-$usuario_idUsuario=$favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario();
-$idFavoritoMascotaUsuario=$favoritomascotausuario->getIdFavoritoMascotaUsuario();
+    public function update($favoritomascotausuario)
+    {
+        $idMascota                = $favoritomascotausuario->getMascota_idMascota()->getIdMascota();
+        $idUsuario                = $favoritomascotausuario->getUsuario_idUsuario()->getIdUsuario();
+        $idFavoritoMascotaUsuario = $favoritomascotausuario->getIdFavoritoMascotaUsuario();
 
-      try {
-          $sql= "UPDATE `favoritomascotausuario` SET`Mascota_idMascota`='$mascota_idMascota' ,`Usuario_idUsuario`='$usuario_idUsuario' ,`idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario' WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario' ";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "UPDATE `favoritomascotausuario` SET`idMascota`='$idMascota' ,`idUsuario`='$idUsuario' ,`idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario' WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario' ";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Elimina un objeto Favoritomascotausuario en la base de datos.
@@ -96,68 +101,95 @@ $idFavoritoMascotaUsuario=$favoritomascotausuario->getIdFavoritoMascotaUsuario()
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function delete($favoritomascotausuario){
-      $idFavoritoMascotaUsuario=$favoritomascotausuario->getIdFavoritoMascotaUsuario();
+    public function delete($favoritomascotausuario)
+    {
+        $idFavoritoMascotaUsuario = $favoritomascotausuario->getIdFavoritoMascotaUsuario();
 
-      try {
-          $sql ="DELETE FROM `favoritomascotausuario` WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario'";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "DELETE FROM `favoritomascotausuario` WHERE `idFavoritoMascotaUsuario`='$idFavoritoMascotaUsuario'";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Favoritomascotausuario en la base de datos.
      * @return ArrayList<Favoritomascotausuario> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function listAll(){
-      $lista = array();
-      try {
-          $sql ="SELECT `Mascota_idMascota`, `Usuario_idUsuario`, `idFavoritoMascotaUsuario`"
-          ."FROM `favoritomascotausuario`"
-          ."WHERE 1";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-              $favoritomascotausuario= new Favoritomascotausuario();
-           $mascota = new Mascota();
-           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
-           $favoritomascotausuario->setMascota_idMascota($mascota);
-           $usuario = new Usuario();
-           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
-           $favoritomascotausuario->setUsuario_idUsuario($usuario);
-          $favoritomascotausuario->setIdFavoritoMascotaUsuario($data[$i]['idFavoritoMascotaUsuario']);
+    public function listAll()
+    {
+        $lista = array();
+        try {
+            $sql = "SELECT `idMascota`, `idUsuario`, `idFavoritoMascotaUsuario`"
+                . "FROM `favoritomascotausuario`"
+                . "WHERE 1";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $favoritomascotausuario = new Favoritomascotausuario();
+                $mascota                = new Mascota();
+                $mascota->setIdMascota($data[$i]['idMascota']);
+                $favoritomascotausuario->setMascota_idMascota($mascota);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['idUsuario']);
+                $favoritomascotausuario->setUsuario_idUsuario($usuario);
+                $favoritomascotausuario->setIdFavoritoMascotaUsuario($data[$i]['idFavoritoMascotaUsuario']);
 
-          array_push($lista,$favoritomascotausuario);
-          }
-      return $lista;
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+                array_push($lista, $favoritomascotausuario);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
-      public function insertarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $sentencia = null;
-          return $this->cn->lastInsertId();
+    public function listMostFavorite()
+    {
+        # code...
+        $lista = array();
+        try {
+            $sql = "SELECT `idMascota`, `COUNT(idMascota)` AS TopMascotas"
+                . "FROM `favoritomascotausuario`"
+                . "GROUP BY id_mascota ORDER BY `COUNT(id_mascota)`  DESC";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $array = array(
+                    "idMascota"     => $data[$i]['idMascota'],
+                    "TopMascotas" => $data[$i]['TopMascotas'],
+                );
+                array_push($lista, $array);
+
+            } catch (Exception $e) {
+                throw new Exception('Primary key is null');
+                return null;
+            }
+        }
+
+        public function insertarConsulta($sql)
+        {
+            $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sentencia = $this->cn->prepare($sql);
+            $sentencia->execute();
+            $sentencia = null;
+            return $this->cn->lastInsertId();
+        }
+        public function ejecutarConsulta($sql)
+        {
+            $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sentencia = $this->cn->prepare($sql);
+            $sentencia->execute();
+            $data      = $sentencia->fetchAll();
+            $sentencia = null;
+            return $data;
+        }
+        /**
+         * Cierra la conexión actual a la base de datos
+         */
+        public function close()
+        {
+            $cn = null;
+        }
     }
-      public function ejecutarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $data = $sentencia->fetchAll();
-          $sentencia = null;
-          return $data;
-    }
-    /**
-     * Cierra la conexión actual a la base de datos
-     */
-  public function close(){
-      $cn=null;
-  }
-}
 //That`s all folks!
