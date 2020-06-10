@@ -7,11 +7,11 @@
  */
 include_once realpath('../facade/ConvenioFacade.php');
 
-$Vinculacion_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
+$Vinculacion_idVeterinaria = strip_tags($_POST['idVeterinaria']);
 $vinculacion = new Vinculacion();
 
 $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
-$Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+$Fundacion_idFundacion = strip_tags($_POST['idFundacion']);
 $fundacion = new Fundacion();
 $fundacion->setIdFundacion($Fundacion_idFundacion);
 $fechaConvenio = strip_tags($_POST['fechaConvenio']);
