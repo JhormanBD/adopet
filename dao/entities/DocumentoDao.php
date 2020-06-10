@@ -113,6 +113,29 @@ class DocumentoDao implements IDocumentoDao
         }
     }
 
+    public function ListById($documento)
+    {
+        $idDocumento = $documento->getIdDocumento();
+        try {
+            $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `idUsuario`"
+                . "FROM `documento`"
+                . "WHERE `idDocumento`='$idDocumento'";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $documento->setIdDocumento($data[$i]['idDocumento']);
+                $documento->setNombreDocumento($data[$i]['nombreDocumento']);
+                $documento->setRutaDocumento($data[$i]['rutaDocumento']);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['idUsuario']);
+                $documento->setUsuario_idUsuario($usuario);
+
+            }
+            return $documento;} catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
+
 
     /**
      * Busca un objeto Documento en la base de datos.
