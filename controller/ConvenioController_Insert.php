@@ -20,15 +20,15 @@ $respuesta = false;
 
 //guiarse por los datos que recibe el insert
 if ($vinculacion === '' || $fundacion === '' || $fechaConvenio === '' || $nombreConvenio === '' || $duracionConvenio === '') {
-    return $respuesta;
+    echo $respuesta;
 } else {
 
     //insert devuelve es un numero si incerto   
     $respuesta = ConvenioFacade::insert($vinculacion, $fundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio);
 
     if ($respuesta > 0) {
-        return $respuesta = true;
+        echo $respuesta = true;
     } else {
-        return $respuesta;
+        echo $respuesta;
     }
 }       

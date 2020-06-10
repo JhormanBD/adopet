@@ -30,4 +30,4 @@ if ($rta != "") {
     $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
     $rta = "{\"result\":\"No se encontraron registros.\"}";
 }
-return "[{$msg},{$rta}]";
+echo "[{$msg},{$rta}]";
