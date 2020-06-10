@@ -8,14 +8,4 @@
 
 include_once realpath('../facade/ConvenioFacade.php');
 $idHistorial = strip_tags($_POST['idHistorial']);
-if($idHistorial===""){
-    echo $respuesta;
-}else{
-    $respuesta = HistorialFacade::delete($idHistorial);
-}
-if ($respuesta > 0) {
-    echo $respuesta = true;
-} else {
-    echo $respuesta;
-}
-echo true;
+HistorialFacade::delete($idHistorial);
