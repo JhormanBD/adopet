@@ -138,7 +138,7 @@ class MascotaDao implements IMascotaDao {
         $idMascota = $mascota->getIdMascota();
 
         try {
-            $sql = "UPDATE `mascota` SET `estado`=0 WHERE `idMascota`='$idMascota'";
+            $sql = "UPDATE `mascota` SET `disponibilidadMascota`=0 WHERE `idMascota`='$idMascota'";
             return $this->insertarConsulta($sql);
         } catch (SQLException $e) {
             throw new Exception('Primary key is null');
@@ -155,7 +155,7 @@ class MascotaDao implements IMascotaDao {
         try {
             $sql = "SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`"
                     . "FROM `mascota`"
-                    . "WHERE estado = 1";
+                    . "WHERE disponibilidadMascota = 1";
             $data = $this->ejecutarConsulta($sql);
             for ($i = 0; $i < count($data); $i++) {
                 $mascota = new Mascota();
@@ -190,7 +190,7 @@ class MascotaDao implements IMascotaDao {
         try {
             $sql = "SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`"
                     . "FROM `mascota`"
-                    . "WHERE estado = 1 AND Especie_idEspecie = '$tipoMascota'";
+                    . "WHERE disponibilidadMascota = 1 AND Especie_idEspecie = '$tipoMascota'";
             $data = $this->ejecutarConsulta($sql);
             for ($i = 0; $i < count($data); $i++) {
                 $mascota = new Mascota();
