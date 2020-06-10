@@ -15,6 +15,7 @@
   /**
    * Para su comodidad, defina aquÃ­ el nombre de base de datos predilecto para su proyecto
    */    
-	define("DEFAULT_DBNAME", "mascotas");
+	//define("DEFAULT_DBNAME", "mascotas");
+        define("DEFAULT_DBNAME", "epiz_25970525_mascota");
 
 //That`s all folks!
