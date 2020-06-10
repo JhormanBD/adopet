@@ -17,15 +17,15 @@ $respuesta = false;
 //guiarse por los datos que recibe el insert
 if ($idConvenio === '' || $Vinculacion_idVeterinaria === '' || $Fundacion_idFundacion === '' || $fechaConvenio === '' || $nombreConvenio === '' || $duracionConvenio === '') {
 
-    return $respuesta;
+    echo $respuesta;
 } else {
 
     //insert devuelve es un numero si incerto   
     $respuesta = ConvenioFacade::update($idConvenio, $Vinculacion_idVeterinaria, $fundacion_idFundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio);
     if ($respuesta > 0) {
-        return $respuesta = true;
+        echo $respuesta = true;
     } else {
-        return $respuesta;
+        echo $respuesta;
     }
 }
     
