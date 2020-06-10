@@ -1,4 +1,3 @@
-        if ($idConvenio===''||$Veterinaria_idVeterinaria===''||$Fundacion_idFundacion===''||$fechaConvenio===''||$nombreConvenio===''||$duracionConvenio===''){
 <?php
 
 /*
@@ -8,24 +7,25 @@
  */
 
 include_once realpath('../facade/ConvenioFacade.php');
-$idConvenio                = strip_tags($_POST['idConvenio']);
+$idConvenio = strip_tags($_POST['idConvenio']);
 $Vinculacion_idVeterinaria = strip_tags($_POST['Veterinaria_idVeterinaria']);
-$Fundacion_idFundacion     = strip_tags($_POST['Fundacion_idFundacion']);
-$fechaConvenio             = strip_tags($_POST['fechaConvenio']);
-$nombreConvenio            = strip_tags($_POST['nombreConvenio']);
-$duracionConvenio          = strip_tags($_POST['duracionConvenio']);
-$respuesta                 = false;
+$Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+$fechaConvenio = strip_tags($_POST['fechaConvenio']);
+$nombreConvenio = strip_tags($_POST['nombreConvenio']);
+$duracionConvenio = strip_tags($_POST['duracionConvenio']);
+$respuesta = false;
 //guiarse por los datos que recibe el insert
 if ($idConvenio === '' || $Vinculacion_idVeterinaria === '' || $Fundacion_idFundacion === '' || $fechaConvenio === '' || $nombreConvenio === '' || $duracionConvenio === '') {
 
-    echo $respuesta;
+    return $respuesta;
 } else {
 
-    //insert devuelve es un numero si incerto
+    //insert devuelve es un numero si incerto   
     $respuesta = ConvenioFacade::update($idConvenio, $Vinculacion_idVeterinaria, $fundacion_idFundacion, $fechaConvenio, $nombreConvenio, $duracionConvenio);
     if ($respuesta > 0) {
-        echo $respuesta = true;
+        return $respuesta = true;
     } else {
-        echo $respuesta;
+        return $respuesta;
     }
 }
+    
