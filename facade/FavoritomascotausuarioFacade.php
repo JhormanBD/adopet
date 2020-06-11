@@ -148,15 +148,5 @@ class FavoritomascotausuarioFacade
         return $result;
     }
 
-    public static function listMostFavorite()
-    {
-        # code...
-        $FactoryDao                = new FactoryDao(self::getGestorDefault());
-        $favoritomascotausuarioDao = $FactoryDao->getfavoritomascotausuarioDao(self::getDataBaseDefault());
-        $result                    = $favoritomascotausuarioDao->listMostFavorite();
-        $favoritomascotausuarioDao->close();
-        return $result;
-    }
-
 }
 //That`s all folks!
