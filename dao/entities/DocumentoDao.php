@@ -86,10 +86,9 @@ class DocumentoDao implements IDocumentoDao
         $idDocumento       = $documento->getIdDocumento();
         $nombreDocumento   = $documento->getNombreDocumento();
         $rutaDocumento     = $documento->getRutaDocumento();
-        $usuario_idUsuario = $documento->getUsuario_idUsuario()->getIdUsuario();
-
+        
         try {
-            $sql = "UPDATE `documento` SET`idDocumento`='$idDocumento' ,`nombreDocumento`='$nombreDocumento' ,`rutaDocumento`='$rutaDocumento' ,`Usuario_idUsuario`='$usuario_idUsuario' WHERE `idDocumento`='$idDocumento' ";
+            $sql = "UPDATE `documento` SET`idDocumento`='$idDocumento' ,`nombreDocumento`='$nombreDocumento' ,`rutaDocumento`='$rutaDocumento' WHERE `idDocumento`='$idDocumento' ";
             return $this->insertarConsulta($sql);
         } catch (SQLException $e) {
             throw new Exception('Primary key is null');
@@ -153,13 +152,13 @@ class DocumentoDao implements IDocumentoDao
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
     
-    public function ListById($id_documento)
+    public function ListByIdUser($id_user)
     {
         $lista = array();
         try {
             $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
                 . "FROM `documento`"
-                . "WHERE `idDocumento`=$id_documento";
+                . "WHERE `Usuario_idUsuario`=$id_user";
             $data = $this->ejecutarConsulta($sql);
             for ($i = 0; $i < count($data); $i++) {
                 $documento = new Documento();

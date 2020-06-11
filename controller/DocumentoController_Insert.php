@@ -3,16 +3,15 @@
 include_once realpath('../facade/DocumentoFacade.php');
 
 $nombreDocumento   = strip_tags($_POST['nombreDocumento']);
-$rutaDocumento     = strip_tags($_POST['rutaDocumento']);
 $idUsuario = strip_tags($_POST['idUsuario']);
 $usuario           = new Usuario();
 $usuario->setIdUsuario($idUsuario);
 $respuesta = false;
-$nombre=saveDocument();
-if ($nombre === '' || $rutaDocumento === '' || $idUsuario === '') {
+$nombre_ruta=saveDocument();
+if ($nombreDocumento === '' || $nombre_ruta === '' || $idUsuario === '') {
     echo $respuesta;
 } else {
-    $respuesta = DocumentoFacade::insert($nombre, $rutaDocumento, $usuario);
+    $respuesta = DocumentoFacade::insert($nombreDocumento, $nombre_ruta, $usuario);
     if ($respuesta > 0) {
         echo $respuesta = true;
     } else {

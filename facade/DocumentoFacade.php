@@ -74,11 +74,11 @@ class DocumentoFacade {
    * @param rutaDocumento
    * @param usuario_idUsuario
    */
-  public static function update($idDocumento, $nombreDocumento, $rutaDocumento, $usuario_idUsuario){
+  public static function update($idDocumento, $nombreDocumento, $rutaDocumento ){
       $documento = self::select($idDocumento);
       $documento->setNombreDocumento($nombreDocumento); 
       $documento->setRutaDocumento($rutaDocumento); 
-      $documento->setUsuario_idUsuario($usuario_idUsuario); 
+      
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $documentoDao =$FactoryDao->getdocumentoDao(self::getDataBaseDefault());
@@ -120,10 +120,10 @@ class DocumentoFacade {
    * @param idDocumento
    * @return $result Array con los objetos Documento en base de datos o Null
    */
-    public static function ListById($idDocumento){
+    public static function ListByIdUser($idDocumento){
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $DocumentoDao =$FactoryDao->getDocumentoDao(self::getDataBaseDefault());
-     $result = $DocumentoDao->ListById($idDocumento);
+     $result = $DocumentoDao->ListByIdUser($idDocumento);
      $DocumentoDao->close();
      return $result;
       
