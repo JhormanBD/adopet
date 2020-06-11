@@ -114,28 +114,6 @@ class DocumentoDao implements IDocumentoDao
         }
     }
 
-    public function ListById($documento)
-    {
-        $idDocumento = $documento->getIdDocumento();
-        try {
-            $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `idUsuario`"
-                . "FROM `documento`"
-                . "WHERE `idDocumento`='$idDocumento'";
-            $data = $this->ejecutarConsulta($sql);
-            for ($i = 0; $i < count($data); $i++) {
-                $documento->setIdDocumento($data[$i]['idDocumento']);
-                $documento->setNombreDocumento($data[$i]['nombreDocumento']);
-                $documento->setRutaDocumento($data[$i]['rutaDocumento']);
-                $usuario = new Usuario();
-                $usuario->setIdUsuario($data[$i]['idUsuario']);
-                $documento->setUsuario_idUsuario($usuario);
-
-            }
-            return $documento;} catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-            return null;
-        }
-    }
 
     /**
      * Busca un objeto Documento en la base de datos.
@@ -149,6 +127,39 @@ class DocumentoDao implements IDocumentoDao
             $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
                 . "FROM `documento`"
                 . "WHERE 1";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $documento = new Documento();
+                $documento->setIdDocumento($data[$i]['idDocumento']);
+                $documento->setNombreDocumento($data[$i]['nombreDocumento']);
+                $documento->setRutaDocumento($data[$i]['rutaDocumento']);
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+                $documento->setUsuario_idUsuario($usuario);
+
+                array_push($lista, $documento);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
+    
+    /**
+     * Busca un objeto Documento en la base de datos segun su ID.
+     * @param Entero que corresponde al ID del documento
+     * @return ArrayList<Documento> Puede contener los objetos consultados o estar vacío
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
+    
+    public function ListById($id_documento)
+    {
+        $lista = array();
+        try {
+            $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
+                . "FROM `documento`"
+                . "WHERE `idDocumento`=$id_documento";
             $data = $this->ejecutarConsulta($sql);
             for ($i = 0; $i < count($data); $i++) {
                 $documento = new Documento();

@@ -5,8 +5,9 @@ $list = FavoritomascotausuarioFacade::listMostFavorite();
 $rta  = "";
 foreach ($list as $obj => $Favoritomascotausuario) {
     $rta .= "{
-	    \"idMascota\":\"{$Favoritomascotausuario->idMascota}\",
-	    \"TopMascotas\":\"{$Favoritomascotausuario->TopMascotas}\"
+	    \"idMascota\":\"{$Favoritomascotausuario->getMascota_idMascota()->getidMascota()}\",
+                
+	    \"TopMascotas\":\"{$Favoritomascotausuario->getUsuario_idUsuario()->getidUsuario()}\"
 	       },";
 }
 
