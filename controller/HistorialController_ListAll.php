@@ -14,7 +14,7 @@ foreach ($list as $obj => $Historial) {
 	    \"fechaHistorial\":\"{$Historial->getfechaHistorial()}\",
 	    \"Descripcion\":\"{$Historial->getDescripcion()}\",
 	    \"tipo\":\"{$Historial->gettipo()}\",
-	    \"Usuario_idUsuario_idUsuario\":\"{$Historial->getUsuario_idUsuario()->getidUsuario()}\"
+	    \"idUsuario\":\"{$Historial->getUsuario_idUsuario()->getidUsuario()}\"
 	       },";
 }
 
