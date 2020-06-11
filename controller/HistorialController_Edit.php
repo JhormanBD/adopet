@@ -12,11 +12,12 @@ $fechaHistorial = strip_tags($_POST['fechaHistorial']);
 $Descripcion = strip_tags($_POST['Descripcion']);
 $tipo = strip_tags($_POST['tipo']);
 $Usuario_idUsuario = strip_tags($_POST['Usuario_idUsuario']);
-
+$usuario = new Usuario();
+$usuario->setIdUsuario($Usuario_idUsuario);
 if ($idHistorial==="" || $fechaHistorial === "" || $Descripcion === "" || $tipo === "" || $Usuario_idUsuario === "") {
     echo $respuesta;
 } else {
-    $respuesta = HistorialFacade::update($idHistorial, $fechaHistorial, $Descripcion, $tipo, $Usuario_idUsuario);
+    $respuesta = HistorialFacade::update($idHistorial, $fechaHistorial, $Descripcion, $tipo, $usuario);
 }
 if ($respuesta > 0) {
     echo $respuesta = true;

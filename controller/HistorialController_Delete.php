@@ -6,6 +6,6 @@
  * and open the template in the editor.
  */
 
-include_once realpath('../facade/ConvenioFacade.php');
+include_once realpath('../facade/HistorialFacade.php');
 $idHistorial = strip_tags($_POST['idHistorial']);
 HistorialFacade::delete($idHistorial);
