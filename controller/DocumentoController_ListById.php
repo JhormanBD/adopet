@@ -2,8 +2,8 @@
 
 include_once realpath('../facade/DocumentoFacade.php');
 
-$idDocumento     = strip_tags($_POST['idDocumento']);
-$list = DocumentoFacade::ListById($idDocumento);
+//$idDocumento     = strip_tags($_POST['idDocumento']);
+$list = DocumentoFacade::ListById(1);
 $rta="";
 
 foreach ($list as $obj => $Documento) {
