@@ -9,7 +9,7 @@
 include_once realpath('../facade/UsuarioFacade.php');
 
         $idUsuario = strip_tags($_POST['idUsuario']);
-        $Tipousuario_idTipoUsuario = strip_tags($_POST['TipoUsuario_idTipoUsuario']);
+        $Tipousuario_idTipoUsuario = strip_tags($_POST['idTipoUsuario']);
         $tipousuario= new Tipousuario();
         $tipousuario->setIdTipoUsuario($Tipousuario_idTipoUsuario);
         $nombreUsuario = strip_tags($_POST['nombreUsuario']);
@@ -28,15 +28,15 @@ include_once realpath('../facade/UsuarioFacade.php');
 
 //guiarse por los datos que recibe el insert
 if ($tipousuario === '' || $nombreUsuario === '' || $apellidoUsuario === '' || $cedula === '' || $direccion === '' || $correo === '' || $password === ''|| $estado === ''|| $fechaNacimiento === ''|| $fechaIngreso === ''|| $foto === '') {
-    return $respuesta;
+    echo $respuesta;
 } else {
 
     //insert devuelve es un numero si incerto   
     $respuesta =  UsuarioFacade::update($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto);
 
     if ($respuesta > 0) {
-        return $respuesta = true;
+        echo $respuesta = true;
     } else {
-        return $respuesta;
+        echo $respuesta;
     }
 }    

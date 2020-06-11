@@ -16,16 +16,16 @@ include_once realpath('../facade/UsuarioFacade.php');
         $respuesta = false;
 
 //guiarse por los datos que recibe el insert
-if ($tipousuario === '') {
-    return $respuesta;
+if ($idUsuario === '') {
+    echo  $respuesta;
 } else {
 
     //Delete devuelve es un numero si incerto   
     $respuesta =  UsuarioFacade::DeleteById($idUsuario,$estado);
 
     if ($respuesta > 0) {
-        return $respuesta = true;
+        echo $respuesta = true;
     } else {
-        return $respuesta;
+        echo $respuesta;
     }
 }    

@@ -18,7 +18,7 @@ $idUsuario = strip_tags($_POST['idUsuario']);
         foreach ($list as $obj => $Usuario) {	
 	       $rta.="{
 	    \"idUsuario\":\"{$Usuario->getidUsuario()}\",
-	    \"TipoUsuario_idTipoUsuario_idTipoUsuario\":\"{$Usuario->getTipoUsuario_idTipoUsuario()->getidTipoUsuario()}\",
+	    \"idTipoUsuario\":\"{$Usuario->getTipoUsuario_idTipoUsuario()->getidTipoUsuario()}\",
 	    \"nombreUsuario\":\"{$Usuario->getnombreUsuario()}\",
 	    \"apellidoUsuario\":\"{$Usuario->getapellidoUsuario()}\",
 	    \"cedula\":\"{$Usuario->getcedula()}\",
