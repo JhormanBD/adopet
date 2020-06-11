@@ -119,6 +119,22 @@ class UsuarioFacade {
      $usuarioDao->update($usuario);
      $usuarioDao->close();
   }
+  /**
+   * Modifica los atributos de un objeto Usuario  ya existente en base de datos.
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @param idUsuario
+   
+   */
+  public static function DeleteById($idUsuario,$estado){
+      $usuario = self::select($idUsuario);
+      $usuario->setEstado($estado); 
+     
+
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
+     $usuarioDao->DeleteById($usuario);
+     $usuarioDao->close();
+  }
 
   /**
    * Elimina un objeto Usuario de la base de datos a partir de su(s) llave(s) primaria(s).
@@ -144,6 +160,20 @@ class UsuarioFacade {
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
      $result = $usuarioDao->listAll();
+     $usuarioDao->close();
+     return $result;
+  }
+
+  /**
+   * Lista todos los objetos Usuario de la base de datos por  idUsuario.
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @return $result Array con los objetos Usuario en base de datos o Null
+   * @param idUsuario
+   */
+  public static function listAllById($idUsuario){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
+     $result = $usuarioDao->listAllById($idUsuario);
      $usuarioDao->close();
      return $result;
   }

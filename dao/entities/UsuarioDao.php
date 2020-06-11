@@ -115,6 +115,26 @@ $foto=$usuario->getFoto();
           throw new Exception('Primary key is null');
       }
   }
+  
+  
+    /**
+     * Modifica un objeto Usuario en la base de datos.
+     * @param usuario objeto con la información a modificar
+     * @return  Valor de la llave primaria 
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
+  public function DeleteById($usuario){
+      $idUsuario=$usuario->getIdUsuario();
+      $estado=$usuario->getEstado();
+
+
+      try {
+          $sql= "UPDATE `usuario` SET `estado`='$estado'  WHERE `idUsuario`='$idUsuario' ";
+         return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
 
     /**
      * Elimina un objeto Usuario en la base de datos.
@@ -144,6 +164,44 @@ $foto=$usuario->getFoto();
           $sql ="SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
           ."FROM `usuario`"
           ."WHERE 1";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $usuario= new Usuario();
+          $usuario->setIdUsuario($data[$i]['idUsuario']);
+           $tipousuario = new Tipousuario();
+           $tipousuario->setIdTipoUsuario($data[$i]['TipoUsuario_idTipoUsuario']);
+           $usuario->setTipoUsuario_idTipoUsuario($tipousuario);
+          $usuario->setNombreUsuario($data[$i]['nombreUsuario']);
+          $usuario->setApellidoUsuario($data[$i]['apellidoUsuario']);
+          $usuario->setCedula($data[$i]['cedula']);
+          $usuario->setDireccion($data[$i]['direccion']);
+          $usuario->setCorreo($data[$i]['correo']);
+          $usuario->setPassword($data[$i]['password']);
+          $usuario->setEstado($data[$i]['estado']);
+          $usuario->setFechaNacimiento($data[$i]['fechaNacimiento']);
+          $usuario->setFechaIngreso($data[$i]['fechaIngreso']);
+          $usuario->setFoto($data[$i]['foto']);
+
+          array_push($lista,$usuario);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
+    /**
+     * Busca un objeto Usuario en la base de datos. por idUsuario
+     * @return ArrayList<Usuario> Puede contener los objetos consultados o estar vacío
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
+  public function listAllById($idUsuario){
+      $lista = array();
+      try {
+          $sql ="SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
+          ."FROM `usuario`"
+          ."WHERE `idUsuario` = $idUsuario";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $usuario= new Usuario();
