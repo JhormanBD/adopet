@@ -129,22 +129,6 @@ class DocumentoFacade {
       
   }
 
-  
-    /**
-   * Lista el objeto Documento de la base de datos segun el id.
-   * Puede recibir NullPointerException desde los métodos del Dao
-   * @param idDocumento
-   * @return $result Array con los objetos Documento en base de datos o Null
-   */
-    public static function ListById($idDocumento){
-     $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $DocumentoDao =$FactoryDao->getDocumentoDao(self::getDataBaseDefault());
-     $result = $DocumentoDao->ListById($idDocumento);
-     $DocumentoDao->close();
-     return $result;
-      
-  }
-
 
 }
 //That`s all folks!

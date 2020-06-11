@@ -152,13 +152,13 @@ class DocumentoDao implements IDocumentoDao
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
     
-    public function ListById($id_documento)
+    public function ListByIdUser($id_user)
     {
         $lista = array();
         try {
             $sql = "SELECT `idDocumento`, `nombreDocumento`, `rutaDocumento`, `Usuario_idUsuario`"
                 . "FROM `documento`"
-                . "WHERE `idDocumento`=$id_documento";
+                . "WHERE `Usuario_idUsuario`=$id_user";
             $data = $this->ejecutarConsulta($sql);
             for ($i = 0; $i < count($data); $i++) {
                 $documento = new Documento();
