@@ -1,3 +1,10 @@
+    $response = FundacionFacade::update($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario);
+if ($response > 0) {
+    echo $response= true;
+} else {
+    echo $response;
+    }
+}
 <?php
 
 /*
@@ -24,10 +31,9 @@ if ($idFundacion === '' || $nombreFundacion === '' || $direccionFundacion === ''
     echo $response;
 } else {
     $response = FundacionFacade::update($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario);
-}
-
 if ($response > 0) {
     echo $response= true;
 } else {
     echo $response;
+}
 }

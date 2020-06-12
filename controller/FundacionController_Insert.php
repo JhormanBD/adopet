@@ -24,12 +24,9 @@ if ($nombreFundacion === '' || $direccionFundacion === '' || $telefonoFundacion 
     echo $response;
 } else {
     $response = FundacionFacade::insert($nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario);
-}
-
 if ($response > 0) {
     echo $response = true;
 } else {
     echo $response;
 }
-    
-
+}
