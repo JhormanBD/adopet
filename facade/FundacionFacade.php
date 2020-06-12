@@ -41,9 +41,9 @@ class FundacionFacade {
    * @param nombrepropietario
    * @param usuario_idUsuario
    */
-  public static function insert( $idFundacion,  $nombreFundacion,  $direccionFundacion,  $telefonoFundacion,  $nit,  $correo,  $nombrepropietario,  $usuario_idUsuario){
+  public static function insert(  $nombreFundacion,  $direccionFundacion,  $telefonoFundacion,  $nit,  $correo,  $nombrepropietario,  $usuario_idUsuario){
       $fundacion = new Fundacion();
-      $fundacion->setIdFundacion($idFundacion); 
+      //$fundacion->setIdFundacion($idFundacion); 
       $fundacion->setNombreFundacion($nombreFundacion); 
       $fundacion->setDireccionFundacion($direccionFundacion); 
       $fundacion->setTelefonoFundacion($telefonoFundacion); 

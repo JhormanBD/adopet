@@ -29,7 +29,7 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($fundacion){
-      $idFundacion=$fundacion->getIdFundacion();
+      //$idFundacion=$fundacion->getIdFundacion();
 $nombreFundacion=$fundacion->getNombreFundacion();
 $direccionFundacion=$fundacion->getDireccionFundacion();
 $telefonoFundacion=$fundacion->getTelefonoFundacion();
@@ -39,8 +39,8 @@ $nombrepropietario=$fundacion->getNombrepropietario();
 $usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
 
       try {
-          $sql= "INSERT INTO `fundacion`( `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`)"
-          ."VALUES ('$idFundacion','$nombreFundacion','$direccionFundacion','$telefonoFundacion','$nit','$correo','$nombrepropietario','$usuario_idUsuario')";
+          $sql= "INSERT INTO `fundacion`( `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`)"
+          ."VALUES ('$nombreFundacion','$direccionFundacion','$telefonoFundacion','$nit','$correo','$nombrepropietario','$usuario_idUsuario')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
