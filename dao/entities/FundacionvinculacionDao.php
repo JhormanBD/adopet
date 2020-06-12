@@ -1,9 +1,8 @@
 <?php
-
 /*
-  -------Creado por-------
-  \(x.x )/ Anarchy \( x.x)/
-  ------------------------
+              -------Creado por-------
+             \(x.x )/ Anarchy \( x.x)/
+              ------------------------
  */
 
 //    No se fije en el corte de cabello, soy mucho muy rico  \\
@@ -13,15 +12,15 @@ include_once realpath('../dto/Fundacionvinculacion.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Vinculacion.php');
 
-class FundacionvinculacionDao implements IFundacionvinculacionDao {
+class FundacionvinculacionDao implements IFundacionvinculacionDao{
 
-    private $cn;
+private $cn;
 
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
     function __construct($conexion) {
-        $this->cn = $conexion;
+            $this->cn =$conexion;
     }
 
     /**
@@ -30,19 +29,19 @@ class FundacionvinculacionDao implements IFundacionvinculacionDao {
      * @return  Valor asignado a la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-    public function insert($fundacionvinculacion) {
-        $idFundacionVinculacion = $fundacionvinculacion->getIdFundacionVinculacion();
-        $fundacion_idFundacion = $fundacionvinculacion->getFundacion_idFundacion()->getIdFundacion();
-        $vinculaciones_idVeterinaria = $fundacionvinculacion->getVinculaciones_idVeterinaria()->getIdVeterinaria();
+  public function insert($fundacionvinculacion){
+      $idFundacionVinculacion=$fundacionvinculacion->getIdFundacionVinculacion();
+$fundacion_idFundacion=$fundacionvinculacion->getFundacion_idFundacion()->getIdFundacion();
+$vinculaciones_idVeterinaria=$fundacionvinculacion->getVinculaciones_idVeterinaria()->getIdVeterinaria();
 
-        try {
-            $sql = "INSERT INTO `fundacionvinculacion`( `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`)"
-                    . "VALUES ('$idFundacionVinculacion','$fundacion_idFundacion','$vinculaciones_idVeterinaria')";
-            return $this->insertarConsulta($sql);
-        } catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-        }
-    }
+      try {
+          $sql= "INSERT INTO `fundacionvinculacion`( `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`)"
+          ."VALUES ('$idFundacionVinculacion','$fundacion_idFundacion','$vinculaciones_idVeterinaria')";
+          return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
 
     /**
      * Busca un objeto Fundacionvinculacion en la base de datos.
@@ -50,29 +49,29 @@ class FundacionvinculacionDao implements IFundacionvinculacionDao {
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-    public function select($fundacionvinculacion) {
-        $idFundacionVinculacion = $fundacionvinculacion->getIdFundacionVinculacion();
+  public function select($fundacionvinculacion){
+      $idFundacionVinculacion=$fundacionvinculacion->getIdFundacionVinculacion();
 
-        try {
-            $sql = "SELECT `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`"
-                    . "FROM `fundacionvinculacion`"
-                    . "WHERE `idFundacionVinculacion`='$idFundacionVinculacion'";
-            $data = $this->ejecutarConsulta($sql);
-            for ($i = 0; $i < count($data); $i++) {
-                $fundacionvinculacion->setIdFundacionVinculacion($data[$i]['idFundacionVinculacion']);
-                $fundacion = new Fundacion();
-                $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
-                $fundacionvinculacion->setFundacion_idFundacion($fundacion);
-                $vinculacion = new Vinculacion();
-                $vinculacion->setIdVeterinaria($data[$i]['Vinculaciones_idVeterinaria']);
-                $fundacionvinculacion->setVinculaciones_idVeterinaria($vinculacion);
-            }
-            return $fundacionvinculacion;
-        } catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-            return null;
-        }
-    }
+      try {
+          $sql= "SELECT `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`"
+          ."FROM `fundacionvinculacion`"
+          ."WHERE `idFundacionVinculacion`='$idFundacionVinculacion'";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+          $fundacionvinculacion->setIdFundacionVinculacion($data[$i]['idFundacionVinculacion']);
+           $fundacion = new Fundacion();
+           $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
+           $fundacionvinculacion->setFundacion_idFundacion($fundacion);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Vinculaciones_idVeterinaria']);
+           $fundacionvinculacion->setVinculaciones_idVeterinaria($vinculacion);
+
+          }
+      return $fundacionvinculacion;      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
 
     /**
      * Modifica un objeto Fundacionvinculacion en la base de datos.
@@ -80,18 +79,18 @@ class FundacionvinculacionDao implements IFundacionvinculacionDao {
      * @return  Valor de la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-    public function update($fundacionvinculacion) {
-        $idFundacionVinculacion = $fundacionvinculacion->getIdFundacionVinculacion();
-        $fundacion_idFundacion = $fundacionvinculacion->getFundacion_idFundacion()->getIdFundacion();
-        $vinculaciones_idVeterinaria = $fundacionvinculacion->getVinculaciones_idVeterinaria()->getIdVeterinaria();
+  public function update($fundacionvinculacion){
+      $idFundacionVinculacion=$fundacionvinculacion->getIdFundacionVinculacion();
+$fundacion_idFundacion=$fundacionvinculacion->getFundacion_idFundacion()->getIdFundacion();
+$vinculaciones_idVeterinaria=$fundacionvinculacion->getVinculaciones_idVeterinaria()->getIdVeterinaria();
 
-        try {
-            $sql = "UPDATE `fundacionvinculacion` SET`idFundacionVinculacion`='$idFundacionVinculacion' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`Vinculaciones_idVeterinaria`='$vinculaciones_idVeterinaria' WHERE `idFundacionVinculacion`='$idFundacionVinculacion' ";
-            return $this->insertarConsulta($sql);
-        } catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-        }
-    }
+      try {
+          $sql= "UPDATE `fundacionvinculacion` SET`idFundacionVinculacion`='$idFundacionVinculacion' ,`Fundacion_idFundacion`='$fundacion_idFundacion' ,`Vinculaciones_idVeterinaria`='$vinculaciones_idVeterinaria' WHERE `idFundacionVinculacion`='$idFundacionVinculacion' ";
+         return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
 
     /**
      * Elimina un objeto Fundacionvinculacion en la base de datos.
@@ -99,72 +98,70 @@ class FundacionvinculacionDao implements IFundacionvinculacionDao {
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-    public function delete($fundacionvinculacion) {
-        $idFundacionVinculacion = $fundacionvinculacion->getIdFundacionVinculacion();
+  public function delete($fundacionvinculacion){
+      $idFundacionVinculacion=$fundacionvinculacion->getIdFundacionVinculacion();
 
-        try {
-            $sql = "DELETE FROM `fundacionvinculacion` WHERE `idFundacionVinculacion`='$idFundacionVinculacion'";
-            return $this->insertarConsulta($sql);
-        } catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-        }
-    }
+      try {
+          $sql ="DELETE FROM `fundacionvinculacion` WHERE `idFundacionVinculacion`='$idFundacionVinculacion'";
+          return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
 
     /**
      * Busca un objeto Fundacionvinculacion en la base de datos.
      * @return ArrayList<Fundacionvinculacion> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-    public function listAll() {
-        $lista = array();
-        try {
-            $sql = "SELECT `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`"
-                    . "FROM `fundacionvinculacion`"
-                    . "WHERE 1";
-            $data = $this->ejecutarConsulta($sql);
-            for ($i = 0; $i < count($data); $i++) {
-                $fundacionvinculacion = new Fundacionvinculacion();
-                $fundacionvinculacion->setIdFundacionVinculacion($data[$i]['idFundacionVinculacion']);
-                $fundacion = new Fundacion();
-                $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
-                $fundacionvinculacion->setFundacion_idFundacion($fundacion);
-                $vinculacion = new Vinculacion();
-                $vinculacion->setIdVeterinaria($data[$i]['Vinculaciones_idVeterinaria']);
-                $fundacionvinculacion->setVinculaciones_idVeterinaria($vinculacion);
+  public function listAll(){
+      $lista = array();
+      try {
+          $sql ="SELECT `idFundacionVinculacion`, `Fundacion_idFundacion`, `Vinculaciones_idVeterinaria`"
+          ."FROM `fundacionvinculacion`"
+          ."WHERE 1";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $fundacionvinculacion= new Fundacionvinculacion();
+          $fundacionvinculacion->setIdFundacionVinculacion($data[$i]['idFundacionVinculacion']);
+           $fundacion = new Fundacion();
+           $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
+           $fundacionvinculacion->setFundacion_idFundacion($fundacion);
+           $vinculacion = new Vinculacion();
+           $vinculacion->setIdVeterinaria($data[$i]['Vinculaciones_idVeterinaria']);
+           $fundacionvinculacion->setVinculaciones_idVeterinaria($vinculacion);
 
-                array_push($lista, $fundacionvinculacion);
-            }
-            return $lista;
-        } catch (SQLException $e) {
-            throw new Exception('Primary key is null');
-            return null;
-        }
+          array_push($lista,$fundacionvinculacion);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
+      public function insertarConsulta($sql){
+          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sentencia=$this->cn->prepare($sql);
+          $sentencia->execute(); 
+          $sentencia = null;
+          return $this->cn->lastInsertId();
     }
-
-    public function insertarConsulta($sql) {
-        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sentencia = $this->cn->prepare($sql);
-        $sentencia->execute();
-        $sentencia = null;
-        return $this->cn->lastInsertId();
+      public function ejecutarConsulta($sql){
+          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sentencia=$this->cn->prepare($sql);
+          $sentencia->execute(); 
+          $data = $sentencia->fetchAll();
+          $sentencia = null;
+          return $data;
     }
-
-    public function ejecutarConsulta($sql) {
-        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sentencia = $this->cn->prepare($sql);
-        $sentencia->execute();
-        $data = $sentencia->fetchAll();
-        $sentencia = null;
-        return $data;
-    }
-
     /**
      * Cierra la conexión actual a la base de datos
      */
-    public function close() {
-        $cn = null;
-    }
-
+  public function close(){
+      $cn=null;
+  }
+  
     /**
      * Busca un objeto vinculacion en la base de datos.
      * @return ArrayList<vinculacion> Puede contener los objetos consultados o estar vacío
@@ -191,7 +188,5 @@ class FundacionvinculacionDao implements IFundacionvinculacionDao {
             return null;
         }
     }
-
 }
-
 //That`s all folks!
