@@ -14,7 +14,7 @@ $telefonoFundacion = strip_tags($_POST['telefonoFundacion']);
 $nit = strip_tags($_POST['nit']);
 $correo = strip_tags($_POST['correo']);
 $nombrepropietario = strip_tags($_POST['nombrepropietario']);
-$Usuario_idUsuario = strip_tags($_POST['Usuario_idUsuario']);
+$Usuario_idUsuario = strip_tags($_POST['idUsuario']);
 $usuario = new Usuario();
 $usuario->setIdUsuario($Usuario_idUsuario);
 
@@ -27,8 +27,7 @@ if ($nombreFundacion === '' || $direccionFundacion === '' || $telefonoFundacion 
 }
 
 if ($response > 0) {
-    $respons = true;
-    echo $response;
+    echo $response = true;
 } else {
     echo $response;
 }

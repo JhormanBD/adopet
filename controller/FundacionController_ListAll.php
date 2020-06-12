@@ -20,7 +20,7 @@ foreach ($list as $obj => $Fundacion) {
 	    \"nit\":\"{$Fundacion->getnit()}\",
 	    \"correo\":\"{$Fundacion->getcorreo()}\",
 	    \"nombrepropietario\":\"{$Fundacion->getnombrepropietario()}\",
-	    \"Usuario_idUsuario_idUsuario\":\"{$Fundacion->getUsuario_idUsuario()->getidUsuario()}\"
+	    \"idUsuario\":\"{$Fundacion->getUsuario_idUsuario()->getidUsuario()}\"
 	       },";
 }
 
