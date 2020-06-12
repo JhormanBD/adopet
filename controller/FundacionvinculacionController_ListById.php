@@ -8,7 +8,7 @@
 
 include_once realpath('../facade/FundacionvinculacionFacade.php');
 
-$Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+$Fundacion_idFundacion = strip_tags($_POST['idFundacion']);
 
 $list = FundacionvinculacionFacade::ListByID($Fundacion_idFundacion);
 
