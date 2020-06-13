@@ -1,12 +1,7 @@
-    $response = FundacionFacade::update($idFundacion, $nombreFundacion, $direccionFundacion, $telefonoFundacion, $nit, $correo, $nombrepropietario, $usuario);
-if ($response > 0) {
-    echo $response= true;
-} else {
-    echo $response;
-    }
-}
 <?php
-
+header("Access-Control-Allow-Origin: *");  
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");  
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
