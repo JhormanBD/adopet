@@ -45,9 +45,9 @@ class UsuarioFacade {
    * @param fechaIngreso
    * @param foto
    */
-  public static function insert( $idUsuario,  $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,  $correo,  $password,  $estado,  $fechaNacimiento,  $fechaIngreso,  $foto){
+  public static function insert( $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,  $correo,  $password,  $estado,  $fechaNacimiento,  $foto){
       $usuario = new Usuario();
-      $usuario->setIdUsuario($idUsuario); 
+//      $usuario->setIdUsuario($idUsuario); 
       $usuario->setTipoUsuario_idTipoUsuario($tipoUsuario_idTipoUsuario); 
       $usuario->setNombreUsuario($nombreUsuario); 
       $usuario->setApellidoUsuario($apellidoUsuario); 
@@ -57,12 +57,22 @@ class UsuarioFacade {
       $usuario->setPassword($password); 
       $usuario->setEstado($estado); 
       $usuario->setFechaNacimiento($fechaNacimiento); 
-      $usuario->setFechaIngreso($fechaIngreso); 
+//      $usuario->setFechaIngreso($fechaIngreso); 
       $usuario->setFoto($foto); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
      $rtn = $usuarioDao->insert($usuario);
+     $usuarioDao->close();
+     return $rtn;
+  }
+  
+  public static function buscarCc($cedula){
+      $usuario = new Usuario();
+      $usuario->setCedula($cedula); 
+      $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
+     $rtn = $usuarioDao->buscarCc($usuario);
      $usuarioDao->close();
      return $rtn;
   }

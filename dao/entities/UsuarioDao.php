@@ -29,7 +29,7 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($usuario){
-      $idUsuario=$usuario->getIdUsuario();
+//      $idUsuario=$usuario->getIdUsuario();
 $tipoUsuario_idTipoUsuario=$usuario->getTipoUsuario_idTipoUsuario()->getIdTipoUsuario();
 $nombreUsuario=$usuario->getNombreUsuario();
 $apellidoUsuario=$usuario->getApellidoUsuario();
@@ -39,12 +39,12 @@ $correo=$usuario->getCorreo();
 $password=$usuario->getPassword();
 $estado=$usuario->getEstado();
 $fechaNacimiento=$usuario->getFechaNacimiento();
-$fechaIngreso=$usuario->getFechaIngreso();
+//$fechaIngreso=$usuario->getFechaIngreso();
 $foto=$usuario->getFoto();
 
       try {
-          $sql= "INSERT INTO `usuario`( `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`)"
-          ."VALUES ('$idUsuario','$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$password','$estado','$fechaNacimiento','$fechaIngreso','$foto')";
+          $sql= "INSERT INTO `usuario`( `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `foto`)"
+          ."VALUES ('$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$password','$estado','$fechaNacimiento','$foto')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -190,6 +190,50 @@ $foto=$usuario->getFoto();
       return null;
       }
   }
+  
+  
+  public function buscarCc($usuario){
+      
+     $cedula=$usuario->getCedula();
+          
+      try {
+          $sql ="SELECT `idUsuario` "
+          ."FROM `usuario`"
+          ."WHERE `cedula`=$cedula";
+          $data = $this->ejecutarConsulta($sql);
+          if (!empty($data)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return false;
+        }
+      }
+  
+  
+    public function validar_cc($persona) {
+
+        $cedula = $persona->getCedula();
+        $nacionalidad = $persona->getNacionalidad();
+
+        try {
+            $sql = "SELECT `id`"
+                    . "FROM `persona`"
+                    . "WHERE `cedula`='$cedula' AND `nacionalidad`='$nacionalidad'";
+            $data = $this->ejecutarConsulta($sql);
+
+            if (!empty($data)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return false;
+        }
+    }
 
     /**
      * Busca un objeto Usuario en la base de datos. por idUsuario

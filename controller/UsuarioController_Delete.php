@@ -28,4 +28,4 @@ if ($idUsuario === '') {
     } else {
         echo $respuesta;
     }
-}    
+} 
