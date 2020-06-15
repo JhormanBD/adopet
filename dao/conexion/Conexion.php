@@ -1,4 +1,14 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+//header("Access-Control-Allow-Headers: X-Requested-With");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");  
+header('Content-Type: text/html; charset=utf-8');
+header("content-type: application/json; charset=utf-8");
+header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"'); 
+
 /*
               -------Creado por-------
              \(x.x )/ Anarchy \( x.x)/
@@ -42,9 +52,10 @@ class Conexion implements IConexion{
       if ($this->cnx == null) {
          try {
              $ini_array = parse_ini_file(realpath('../dao/properties/Properties.ini'),true);
-             $host = $ini_array[$dbName]['host'];
-             $username = $ini_array[$dbName]['username'];
-             $password = $ini_array[$dbName]['password'];
+              $dbName=  'mascotas';
+             $host ='3.19.155.48';
+             $username = 'mascota';
+             $password = 'Soporte';
              $this->cnx = new PDO($this->gestor.":host=$host;dbname=$dbName;charset=utf8",$username,$password);
          }catch(Exception $e){
             die('Error : '.$e->getMessage());

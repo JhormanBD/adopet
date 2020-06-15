@@ -13,16 +13,18 @@ include_once realpath('../dto/Mascota.php');
 include_once realpath('../dto/Especie.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Vinculacion.php');
+include_once realpath('../dao/entities/conexion.php');
 
 class MascotaDao implements IMascotaDao {
 
-    private $cn;
+    private $bd;//linea modificada poncho
 
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
-    function __construct($conexion) {
-        $this->cn = $conexion;
+    function __construct() {
+       // $this->cn = $conexion;
+        $this->bd = new conexion2();//linea modificada poncho
     }
 
     /**
@@ -40,13 +42,34 @@ class MascotaDao implements IMascotaDao {
         $disponibilidadMascota = $mascota->getDisponibilidadMascota();
         $fundacion_idFundacion = $mascota->getFundacion_idFundacion()->getIdFundacion();
         $fechaIngreso = $mascota->getFechaIngreso();
-        $fechaSalida = $mascota->getFechaSalida();
+//        $fechaSalida = $mascota->getFechaSalida();
         $veterinaria_idVeterinaria = $mascota->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 
         try {
-            $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`, `fechaSalida`, `Veterinaria_idVeterinaria`)"
-                    . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$fechaSalida','$veterinaria_idVeterinaria')";
+            $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`,  `Veterinaria_idVeterinaria`)"
+                    . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$veterinaria_idVeterinaria')";
             return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
+    
+    public function insert_1($mascota) {
+
+        $especie_idEspecie = $mascota->getEspecie_idEspecie()->getIdEspecie();
+        $nombreMascota = $mascota->getNombreMascota();
+        $edadMascota = $mascota->getEdadMascota();
+        $sexoMascota = $mascota->getSexoMascota();
+        $disponibilidadMascota = $mascota->getDisponibilidadMascota();
+        $fundacion_idFundacion = $mascota->getFundacion_idFundacion()->getIdFundacion();
+        $fechaIngreso = $mascota->getFechaIngreso();
+        $veterinaria_idVeterinaria = $mascota->getVeterinaria_idVeterinaria()->getIdVeterinaria();
+
+        try {
+            $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`,`sexoMascota`,`disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`,`Veterinaria_idVeterinaria`)"
+                    . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$veterinaria_idVeterinaria')";
+             $rpta= $this->insertarConsulta($sql);
+             return $rpta;
         } catch (SQLException $e) {
             throw new Exception('Primary key is null');
         }
@@ -221,20 +244,18 @@ class MascotaDao implements IMascotaDao {
     }
 
     public function insertarConsulta($sql) {
-        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sentencia = $this->cn->prepare($sql);
-        $sentencia->execute();
-        $sentencia = null;
-        return $this->cn->lastInsertId();
+        $this->bd->conection();
+        $rpta = $this->bd->ejecutarConsultaSQL($sql);
+     //   $this->bd->conection();
+        return $rpta;
+        
     }
 
     public function ejecutarConsulta($sql) {
-        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sentencia = $this->cn->prepare($sql);
-        $sentencia->execute();
-        $data = $sentencia->fetchAll();
-        $sentencia = null;
-        return $data;
+        $this->bd->conection();
+        $rpta = $this->bd->getArray($this->bd->ejecutarConsultaSQL($sql));
+        $this->bd->conection();
+        return $rpta;
     }
 
     /**
