@@ -10,6 +10,7 @@
 include_once realpath('../dao/interfaz/IDocumentoDao.php');
 include_once realpath('../dto/Documento.php');
 include_once realpath('../dto/Usuario.php');
+include_once ('../dao/entities/conexion3.php');
 
 class DocumentoDao implements IDocumentoDao
 {
