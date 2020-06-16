@@ -122,7 +122,7 @@ class MascotaFacade {
    * @param fechaSalida
    * @param veterinaria_idVeterinaria
    */
-  public static function update($idMascota, $especie_idEspecie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion_idFundacion, $fechaIngreso, $fechaSalida, $veterinaria_idVeterinaria){
+  public static function update($idMascota, $especie_idEspecie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion_idFundacion, $fechaIngreso, $veterinaria_idVeterinaria){
       $mascota = self::select($idMascota);
       $mascota->setEspecie_idEspecie($especie_idEspecie); 
       $mascota->setNombreMascota($nombreMascota); 
@@ -131,7 +131,7 @@ class MascotaFacade {
       $mascota->setDisponibilidadMascota($disponibilidadMascota); 
       $mascota->setFundacion_idFundacion($fundacion_idFundacion); 
       $mascota->setFechaIngreso($fechaIngreso); 
-      $mascota->setFechaSalida($fechaSalida); 
+      //$mascota->setFechaSalida($fechaSalida); 
       $mascota->setVeterinaria_idVeterinaria($veterinaria_idVeterinaria); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
