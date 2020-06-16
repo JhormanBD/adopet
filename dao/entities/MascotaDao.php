@@ -246,20 +246,7 @@ private $cn;
         }
     }
 
-   // public function insertarConsulta($sql) {
-     //   $this->bd->conection();
-  //      $rpta = $this->bd->ejecutarConsultaSQL($sql);
-     //   $this->bd->conection();
- //       return $rpta;
-        
- //   }
 
- //  public function ejecutarConsulta($sql) {
- //       $this->bd->conection();
-  //      $rpta = $this->bd->getArray($this->bd->ejecutarConsultaSQL($sql));
-  //      $this->bd->conection();
-  //      return $rpta;
-  //  }
      public function insertarConsulta($sql){
           $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $sentencia=$this->cn->prepare($sql);
@@ -278,10 +265,14 @@ private $cn;
     /**
      * Cierra la conexión actual a la base de datos
      */
-    public function close() {
-        $cn = null;
-    }
-
+  public function close(){
+      $cn=null;
+  }
+ 
+    /**
+     * Cierra la conexión actual a la base de datos
+     */
+   
 }
 
 //That`s all folks!

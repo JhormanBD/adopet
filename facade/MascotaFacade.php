@@ -68,6 +68,17 @@ class MascotaFacade {
      $mascotaDao->close();
      return $rtn;
   }
+  
+  public static function insert_1($especie_idEspecie){
+      $mascota = new Mascota();
+      $mascota->setEspecie_idEspecie($especie_idEspecie); 
+     
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $rtn = $mascotaDao->insert_1($mascota);
+     $mascotaDao->close();
+     return $rtn;
+  }
 
   public static function insert_1($especie_idEspecie, $nombreMascota,$edadMascota,$sexoMascota,$disponibilidadMascota,$fundacion_idFundacion,$fechaIngreso,$veterinaria_idVeterinaria){
       $mascota = new Mascota();

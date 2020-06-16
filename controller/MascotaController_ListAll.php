@@ -33,7 +33,7 @@ foreach ($list as $obj => $Mascota) {
 	    \"idVeterinaria\":\"{$Mascota->getVeterinaria_idVeterinaria()->getidVeterinaria()}\"
 	       },";
 }
-
+//
 if ($rta != "") {
     $rta = substr($rta, 0, -1);
     echo $rta = "[{$rta}]";

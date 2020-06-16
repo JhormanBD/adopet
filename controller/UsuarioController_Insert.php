@@ -59,6 +59,9 @@ if ($tipousuario === '' || $nombreUsuario === '' || $apellidoUsuario === '' || $
 
     if ($respuesta > 0) {
         echo $respuesta = true;
+        
+        
+        
     } else {
         echo $respuesta;
     }

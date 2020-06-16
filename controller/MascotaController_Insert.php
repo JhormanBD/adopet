@@ -16,6 +16,7 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 
 include_once realpath('../facade/MascotaFacade.php');
+//include_once realpath('../correo/enviarMail.php');
 
  
 $JSONData = file_get_contents("php://input");
@@ -43,9 +44,6 @@ $vinculacion= new Vinculacion();
 $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
 $respuesta = 0;
 
-$nombreimg= savePicture();
-var_dump($nombreimg);
-
 //guiarse por los datos que recibe el insert
 if ($Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' || $sexoMascota === '' || $disponibilidadMascota === '' || $fundacion === '' || $fechaIngreso === ''  || $vinculacion === '') {
     echo $respuesta;
@@ -54,6 +52,7 @@ if ($Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' ||
     //insert devuelve es un numero si incerto   
     $respuesta = MascotaFacade::insert($especie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion, $fechaIngreso, $vinculacion);
 
+    
     if ($respuesta > 0) {
    
     $rta ="{\"result\":\"ok\"}";
@@ -66,53 +65,5 @@ if ($Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' ||
     echo "[{$rta}]";
 }
 }
-
-function savePicture(){
-
-	$name = "";
-	$directorio = "../../fotos/mascotas/";
-
-	if(basename($_FILES["file"]["name"]) == NULL || basename($_FILES["file"]["name"])==""){
-		return "";
-	}
-	$archivo = $directorio . basename($_FILES["file"]["name"]);
-
-	$tipoArchivo = strtolower(pathinfo($archivo, PATHINFO_EXTENSION));
-
-	// valida que es imagen
-	$checarSiImagen = getimagesize($_FILES["file"]["tmp_name"]);
-
-	if ($checarSiImagen != false) {
-
-		//validando tamaño del archivo
-		$size = $_FILES["file"]["size"];
-
-		if ($size > 500000) {
-		echo "El archivo tiene que ser menor a 500kb";
-		} else {
-
-			//validar tipo de imagen
-			if ($tipoArchivo == "jpg" || $tipoArchivo == "jpeg" || $tipoArchivo == "gif" || $tipoArchivo == "png") {
-				// se validó el archivo correctamente
-				if (move_uploaded_file($_FILES["file"]["tmp_name"], $archivo)) {
-
-				$name = basename($_FILES["file"]["name"]);
-				return $name;
-
-				echo "El archivo se subió correctamente";
-				} else {
-				echo "Hubo un error en la subida del archivo";
-				}
-			} else {
-			echo "Solo se admiten archivos jpg/jpeg/png/gif";
-			}
-		}
-	} else {
-	echo "El documento no es una imagen";
-	}
-}
-
-
-
 
     
