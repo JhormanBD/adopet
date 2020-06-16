@@ -12,7 +12,7 @@ include_once realpath('../dao/interfaz/IFavoritomascotausuarioDao.php');
 include_once realpath('../dto/Favoritomascotausuario.php');
 include_once realpath('../dto/Mascota.php');
 include_once realpath('../dto/Usuario.php');
-include_once ('../dao/entities/conexion3.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class FavoritomascotausuarioDao implements IFavoritomascotausuarioDao {
 
