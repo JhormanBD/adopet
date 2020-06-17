@@ -20,12 +20,7 @@ include_once realpath('../facade/Foto_mascotaFacade.php');
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
-print_r($dataObject);
-
 $Especie_idEspecie = strip_tags($dataObject->idEspecie);
-
-print_r($Especie_idEspecie);
-print_r($dataObject->foto_mascota_ruta);
 
   // $idfoto_mascota = strip_tags($_POST['idfoto_mascota']);
         $foto_mascota_nombre = 'foto';
@@ -33,7 +28,7 @@ print_r($dataObject->foto_mascota_ruta);
         $Mascota_idMascota = strip_tags($dataObject->idMascota);
         $mascota= new Mascota();
         $mascota->setIdMascota($Mascota_idMascota);
-   $respuesta =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
+     $respuesta =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
 //return true;
 
    if ($respuesta > 0) {
