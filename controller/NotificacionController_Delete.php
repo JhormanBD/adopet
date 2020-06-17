@@ -19,6 +19,6 @@ include_once realpath('../facade/NotificacionFacade.php');
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
-$idEspecie = strip_tags($dataObject->idEspecie);
+$idNotificacion = strip_tags($dataObject->idNotificacion);
 
-EspecieFacade::delete($idEspecie);
+NotificacionFacade::delete($idNotificacion);
