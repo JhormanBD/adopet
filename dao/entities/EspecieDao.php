@@ -9,6 +9,7 @@
 
 include_once realpath('../dao/interfaz/IEspecieDao.php');
 include_once realpath('../dto/Especie.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class EspecieDao implements IEspecieDao{
 
@@ -28,12 +29,11 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($especie){
-      $idEspecie=$especie->getIdEspecie();
 $nombreEspecie=$especie->getNombreEspecie();
 
       try {
-          $sql= "INSERT INTO `especie`( `idEspecie`, `nombreEspecie`)"
-          ."VALUES ('$idEspecie','$nombreEspecie')";
+          $sql= "INSERT INTO `especie`( `nombreEspecie`)"
+          ."VALUES ('$nombreEspecie')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');

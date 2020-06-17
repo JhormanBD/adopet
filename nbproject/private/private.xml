@@ -10,6 +10,7 @@
             <file>file:/C:/xampp/htdocs/adopet-ufps/dao/interfaz/IConexion.php</file>
             <file>file:/C:/xampp/htdocs/adopet-ufps/facade/MascotaFacade.php</file>
             <file>file:/C:/xampp/htdocs/adopet-ufps/dao/entities/MascotaDao.php</file>
+            <file>file:/C:/adopet/facade/NotificacionFacade.php</file>
         </group>
     </open-files>
 </project-private>

@@ -34,9 +34,9 @@ class EspecieFacade {
    * @param idEspecie
    * @param nombreEspecie
    */
-  public static function insert( $idEspecie,  $nombreEspecie){
+  public static function insert($nombreEspecie){
       $especie = new Especie();
-      $especie->setIdEspecie($idEspecie); 
+       
       $especie->setNombreEspecie($nombreEspecie); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());

@@ -11,6 +11,7 @@ include_once realpath('../dao/interfaz/INotificacionDao.php');
 include_once realpath('../dto/Notificacion.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Usuario.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class NotificacionDao implements INotificacionDao{
 
