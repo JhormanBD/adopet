@@ -13,8 +13,11 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
  * and open the template in the editor.
  */
 
-include_once realpath('../facade/HistorialFacade.php');
+include_once realpath('../facade/HistorialmascotaFacade.php');
+
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
-$idHistorial = strip_tags($dataObject->idHistorial);
-HistorialFacade::delete($idHistorial);
+
+$idHistorialMascota = strip_tags($dataObject->idHistorialMascota);
+HistorialmascotaFacade::delete($idHistorialMascota);
+

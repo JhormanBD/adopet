@@ -11,6 +11,7 @@
 include_once realpath('../dao/interfaz/IHistorialDao.php');
 include_once realpath('../dto/Historial.php');
 include_once realpath('../dto/Usuario.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class HistorialDao implements IHistorialDao {
 

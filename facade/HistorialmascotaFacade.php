@@ -38,9 +38,8 @@ class HistorialmascotaFacade {
    * @param observacion
    * @param mascota_idMascota
    */
-  public static function insert( $idHistorialMascota,  $fechaHistorialMascota,  $descripcion,  $observacion,  $mascota_idMascota){
+  public static function insert($fechaHistorialMascota,  $descripcion,  $observacion,  $mascota_idMascota){
       $historialmascota = new Historialmascota();
-      $historialmascota->setIdHistorialMascota($idHistorialMascota); 
       $historialmascota->setFechaHistorialMascota($fechaHistorialMascota); 
       $historialmascota->setDescripcion($descripcion); 
       $historialmascota->setObservacion($observacion); 

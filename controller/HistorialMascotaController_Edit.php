@@ -14,32 +14,32 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
  * and open the template in the editor.
  */
 
-include_once realpath('../facade/HistorialFacade.php');
+include_once realpath('../facade/HistorialmascotaFacade.php');
 
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
-$idHistorial = strip_tags($dataObject->idHistorial);
-$Descripcion = strip_tags($dataObject->Descripcion);
-$tipo = strip_tags($dataObject->tipo);
-$Usuario_idUsuario = strip_tags($dataObject->idUsuario);
-$usuario = new Usuario();
-$usuario->setIdUsuario($Usuario_idUsuario);
+$idHistorialMascota = strip_tags($dataObject->idHistorialMascota);
+$descripcion = strip_tags($dataObject->descripcion);
+$Observacion = strip_tags($dataObject->Observacion);
+$Mascota_idMascota = strip_tags($dataObject->idMascota);
+$mascota = new Mascota();
+$mascota->setIdMascota($Mascota_idMascota);
 
 //formatear la fecha
-$originalDate = $dataObject->fechaHistorial;
+$originalDate = $dataObject->fechaHistorialMascota;
 $newDate = date("Y-m-d", strtotime($originalDate));
-$fechaHistorial = strip_tags($newDate);
+$fechaHistorialMascota = strip_tags($newDate);
 
 $respuesta = 0;
-if ($idHistorial === "" || $fechaHistorial === "" || $Descripcion === "" || $tipo === "" || $Usuario_idUsuario === "") {
+if ($idHistorialMascota === "" || $fechaHistorialMascota === "" || $descripcion === "" || $Observacion === "" || $Mascota_idMascota === "") {
     echo $respuesta;
 } else {
-    $respuesta = HistorialFacade::update($idHistorial, $fechaHistorial, $Descripcion, $tipo, $usuario);
-
+    $respuesta = HistorialmascotaFacade::update($idHistorialMascota, $fechaHistorialMascota, $descripcion, $Observacion, $mascota);
     if ($respuesta > 0) {
         echo $respuesta = true;
     } else {
         echo $respuesta;
     }
 }
+

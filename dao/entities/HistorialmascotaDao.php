@@ -10,6 +10,7 @@
 include_once realpath('../dao/interfaz/IHistorialmascotaDao.php');
 include_once realpath('../dto/Historialmascota.php');
 include_once realpath('../dto/Mascota.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class HistorialmascotaDao implements IHistorialmascotaDao{
 
@@ -29,15 +30,14 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($historialmascota){
-      $idHistorialMascota=$historialmascota->getIdHistorialMascota();
 $fechaHistorialMascota=$historialmascota->getFechaHistorialMascota();
 $descripcion=$historialmascota->getDescripcion();
 $observacion=$historialmascota->getObservacion();
 $mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
 
       try {
-          $sql= "INSERT INTO `historialmascota`( `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`)"
-          ."VALUES ('$idHistorialMascota','$fechaHistorialMascota','$descripcion','$observacion','$mascota_idMascota')";
+          $sql= "INSERT INTO `historialmascota`(`fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`)"
+          ."VALUES ('$fechaHistorialMascota','$descripcion','$observacion','$mascota_idMascota')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
