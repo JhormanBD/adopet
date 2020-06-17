@@ -21,7 +21,7 @@ include_once realpath('../facade/EspecieFacade.php');
 
     $idEspecie = strip_tags($dataObject->idEspecie);
     $nombreEspecie = strip_tags($dataObject->nombreEspecie);
-    $respuesta= false;
+    $respuesta= 0;
         
         if ($idEspecie==='' || $nombreEspecie === '' ) {
         
