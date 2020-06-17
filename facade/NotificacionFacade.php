@@ -121,7 +121,14 @@ class NotificacionFacade {
      $notificacionDao->close();
      return $result;
   }
-
+  
+  public static function ListById($id_Usuario){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $notificacionDao =$FactoryDao->getnotificacionDao(self::getDataBaseDefault());
+     $result = $notificacionDao->listById($id_Usuario);
+     $notificacionDao->close();
+     return $result;
+  }
 
 }
 //That`s all folks!
