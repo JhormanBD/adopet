@@ -20,7 +20,7 @@ include_once realpath('../facade/EspecieFacade.php');
         $dataObject = json_decode($JSONData);
         
         $nombreEspecie = strip_tags($dataObject->nombreEspecie);
-        $respuesta= false;
+        $respuesta= 0;
         
         if ($nombreEspecie === '' ) {
         
@@ -28,13 +28,20 @@ include_once realpath('../facade/EspecieFacade.php');
             
         }else{
             
-            $respuesta= EspecieFacade::insert($nombreEspecie);
+        $respuesta= EspecieFacade::insert($nombreEspecie);
+        
+        if ($respuesta > 0) {
+   
+        $rta ="{\"result\":\"ok\"}";
+        $msg = "{\"msg\":\"exito\"}";
+        echo "[{$rta}]";
+
+        } else {
+        $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+        $rta = "{\"result\":\"false\"}";
+        echo "[{$rta}]";
+        }
+        }
             
-                if ($respuesta>0) {
-                
-                    echo $respuesta = true;}
-                else{
-                    echo $respuesta;
-            }
-        }  
+              
         

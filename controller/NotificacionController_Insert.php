@@ -18,32 +18,39 @@ include_once realpath('../facade/NotificacionFacade.php');
         $dataObject = json_decode($JSONData);
         
         $nombreEspecie = strip_tags($dataObject->nombreEspecie);
+     
+        $originalDate = $dataObject->fechamensaje;
+        $newDate = date("Y-m-d", strtotime($originalDate));
+        $fechamensaje = strip_tags($newDate);
         
-        $idmensaje = strip_tags($dataObject->idmensaje);
-        $fechaMensaje = strip_tags($dataObject->fechaMensaje);
-        $Fundacion_idFundacion = strip_tags($dataObject->Fundacion_idFundacion);
+        $idFundacion = strip_tags($dataObject->idFundacion);
         $fundacion= new Fundacion();
         $fundacion->setIdFundacion($Fundacion_idFundacion);
-        $Usuario_idUsuario = strip_tags($dataObject->Usuario_idUsuario);
+        $idUsuario = strip_tags($dataObject->idUsuario);
         $usuario= new Usuario();
         $usuario->setIdUsuario($Usuario_idUsuario);
         $Descripcion = strip_tags($dataObject->Descripcion);
         
-        $respuesta= false;
+        $respuesta= 0;
         
-        if ($idmensaje === '' || $fechamensaje === '' || $Fundacion_idFundacion ==='' || $Usuario_idUsuario === '' || $Descripcion=== '' ) {
+        if ( $fechamensaje === '' || $idFundacion ==='' || $idUsuario === '' || $Descripcion=== '' ) {
         
             echo $respuesta;
             
         }else{
             
-            $respuesta= NotificacionFacade::insert($idmensaje, $fechaMensaje, $fundacion, $usuario, $Descripcion);
+            $respuesta= NotificacionFacade::insert($fechaMensaje, $fundacion, $usuario, $Descripcion);
             
-                if ($respuesta>0) {
-                
-                    echo $respuesta = true;}
-                else{
-                    echo $respuesta;
+                if ($respuesta > 0) {
+   
+            $rta ="{\"result\":\"ok\"}";
+            $msg = "{\"msg\":\"exito\"}";
+            echo "[{$rta}]";
+
+            } else {
+            $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+            $rta = "{\"result\":\"false\"}";
+            echo "[{$rta}]";
             }
         }  
         
