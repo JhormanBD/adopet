@@ -13,6 +13,7 @@ require_once realpath('../dto/Notificacion.php');
 require_once realpath('../dao/interfaz/INotificacionDao.php');
 require_once realpath('../dto/Fundacion.php');
 require_once realpath('../dto/Usuario.php');
+require_once realpath('../dao/interfaz/IEspecieDao.php');
 
 class NotificacionFacade {
 
