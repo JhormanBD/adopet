@@ -12,6 +12,16 @@
             <file>file:/C:/xampp/htdocs/adopet-ufps/dao/entities/MascotaDao.php</file>
             <file>file:/C:/adopet/controller/NotificacionController_Delete.php</file>
             <file>file:/C:/adopet/facade/NotificacionFacade.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/controller/HistorialMascotaController_ListAll.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/dao/entities/HistorialmascotaDao.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/controller/HistorialMascotaController_ListByMascota.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/dao/factory/FactoryDao.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/controller/MascotaController_Insert.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/controller/FotoController_Insert.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/dao/conexion/Conexion.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/dao/interfaz/IConexion.php</file>
+            <file>file:/C:/xampp/htdocs/adopet-ufps/facade/HistorialmascotaFacade.php</file>
         </group>
+            
     </open-files>
 </project-private>
