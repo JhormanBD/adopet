@@ -23,11 +23,17 @@ if ($nombreDocumento === '' || $nombre_ruta === '' || $idUsuario === '') {
     echo $respuesta;
 } else {
     $respuesta = DocumentoFacade::insert($nombreDocumento, $nombre_ruta, $usuario);
-    if ($respuesta > 0) {
-        echo $respuesta = true;
+  if ($respuesta > 0) {
+   
+    $rta ="{\"result\":\"ok\"}";
+    $msg = "{\"msg\":\"exito\"}";
+    echo "[{$rta}]";
+   
     } else {
-        echo $respuesta;
-    }
+    $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+    $rta = "{\"result\":\"false\"}";
+    echo "[{$rta}]";
+}
 }
 
 function saveDocument()
