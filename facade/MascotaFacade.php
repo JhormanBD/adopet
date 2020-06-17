@@ -69,17 +69,6 @@ class MascotaFacade {
      return $rtn;
   }
   
-  public static function insert_1($especie_idEspecie){
-      $mascota = new Mascota();
-      $mascota->setEspecie_idEspecie($especie_idEspecie); 
-     
-     $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
-     $rtn = $mascotaDao->insert_1($mascota);
-     $mascotaDao->close();
-     return $rtn;
-  }
- 
   /**
    * Selecciona un objeto Mascota de la base de datos a partir de su(s) llave(s) primaria(s).
    * Puede recibir NullPointerException desde los métodos del Dao
