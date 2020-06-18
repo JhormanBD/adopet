@@ -7,6 +7,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header('Content-Type: text/html; charset=utf-8');
 header("content-type: application/json; charset=utf-8");
 header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
+
 include_once realpath('../facade/DocumentoFacade.php');
 
 $list = DocumentoFacade::listAll();
