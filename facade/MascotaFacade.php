@@ -51,7 +51,7 @@ class MascotaFacade {
    * @param fechaSalida
    * @param veterinaria_idVeterinaria
    */
-  public static function insert($especie_idEspecie,  $nombreMascota,  $edadMascota,  $sexoMascota,  $disponibilidadMascota,  $fundacion_idFundacion,  $fechaIngreso,  $veterinaria_idVeterinaria){
+  public static function insert($especie_idEspecie,  $nombreMascota,  $edadMascota,  $sexoMascota,  $disponibilidadMascota,  $fundacion_idFundacion,  $fechaIngreso, $fechaSalida, $veterinaria_idVeterinaria){
       $mascota = new Mascota();
       $mascota->setEspecie_idEspecie($especie_idEspecie); 
       $mascota->setNombreMascota($nombreMascota); 
@@ -60,13 +60,13 @@ class MascotaFacade {
       $mascota->setDisponibilidadMascota($disponibilidadMascota); 
       $mascota->setFundacion_idFundacion($fundacion_idFundacion); 
       $mascota->setFechaIngreso($fechaIngreso); 
+      $mascota->setFechaSalida($fechaSalida); 
       $mascota->setVeterinaria_idVeterinaria($veterinaria_idVeterinaria); 
-
-     $FactoryDao=new FactoryDao(self::getGestorDefault());
-     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
-     $rtn = $mascotaDao->insert($mascota);
-     $mascotaDao->close();
-     return $rtn;
+      $FactoryDao=new FactoryDao(self::getGestorDefault());
+      $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+      $rtn = $mascotaDao->insert($mascota);
+      $mascotaDao->close();
+      return $rtn;
   }
   
   /**

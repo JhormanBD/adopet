@@ -10,6 +10,7 @@
 include_once realpath('../dao/interfaz/IFundacionDao.php');
 include_once realpath('../dto/Fundacion.php');
 include_once realpath('../dto/Usuario.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class FundacionDao implements IFundacionDao{
 
@@ -104,6 +105,22 @@ $usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
       }
   }
 
+/**
+     * Elimina un objeto Fundacion en la base de datos.
+     * @param fundacion objeto con la(s) llave(s) primaria(s) para consultar
+     * @return  Valor de la llave primaria eliminada
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
+  public function updateEliminar($fundacion){
+      $idFundacion=$fundacion->getIdFundacion();
+
+      try {
+          $sql ="UPDATE `fundacion` SET `estado` = 0  WHERE `idFundacion`='$idFundacion'";
+          return $this->insertarConsulta($sql);
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      }
+  }
     /**
      * Elimina un objeto Fundacion en la base de datos.
      * @param fundacion objeto con la(s) llave(s) primaria(s) para consultar
@@ -131,7 +148,7 @@ $usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
       try {
           $sql ="SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `Usuario_idUsuario`"
           ."FROM `fundacion`"
-          ."WHERE 1";
+          ."WHERE estado = 1 ";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $fundacion= new Fundacion();

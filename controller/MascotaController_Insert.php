@@ -17,10 +17,15 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 include_once realpath('../facade/MascotaFacade.php');
 //include_once realpath('../correo/enviarMail.php');
+include_once realpath('../facade/Foto_mascotaFacade.php');
+
 
  
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
+
+
+
 
 $Especie_idEspecie = strip_tags($dataObject->idEspecie);
 $especie = new Especie();
@@ -38,7 +43,9 @@ $fundacion->setIdFundacion($Fundacion_idFundacion);
 $originalDate = $dataObject->fechaIngreso;
 $newDate = date("Y-m-d", strtotime($originalDate));
 $fechaIngreso = strip_tags($newDate);
-$fechaSalida = strip_tags($dataObject->fechaSalida);
+$foto= strip_tags($dataObject->fechaSalida);
+//$fechaSalida = strip_tags($dataObject->fechaSalida);
+//$fechaSalida = $foto;
 $Vinculacion_idVeterinaria = strip_tags($dataObject->idVeterinaria);
 $vinculacion= new Vinculacion();
 $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
@@ -51,81 +58,26 @@ if ($Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' ||
 } else {
 
     //insert devuelve es un numero si incerto   
-    $respuesta = MascotaFacade::insert($especie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion, $fechaIngreso, $vinculacion);
+$respuesta = MascotaFacade::insert($especie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion, $fechaIngreso,$fechaSalida, $vinculacion);
 
-    
-    
-        $foto_mascota_nombre = 'foto';
-        $foto_mascota_ruta = $fechaSalida;
-        $Mascota_idMascota = strip_tags($dataObject->Mascota_idMascota);
-        $mascota= new Mascota();
-        $mascota->setIdMascota($Mascota_idMascota);
-        
-     $respuesta =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
-    
     if ($respuesta > 0) {
    
     $rta ="{\"result\":\"ok\"}";
     $msg = "{\"msg\":\"exito\"}";
-    echo "[{$rta}]";
+    
+        $foto_mascota_nombre = 'foto';
+        $foto_mascota_ruta = $foto;
+        $Mascota_idMascota = $respuesta;
+        $mascota= new Mascota();
+        $mascota->setIdMascota($Mascota_idMascota);
+       $respuesta2 =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
+    
+    echo $respuesta2;
    
     } else {
     $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
     $rta = "{\"result\":\"false\"}";
     echo "[{$rta}]";
 }
-    
-    $allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-
-// Destination where image will be uploaded
-$destination = "../../../fotos/";
-
-if (empty($_FILES['image_to_upload']))
-{
-  echo json_encode(array('message' => 'Failed catch the file'));
-  http_response_code(500);
-  return;
-}
-
-//
-// Validate the extension file
-//
-$initialName = $_FILES['image_to_upload']['name'];
-
-$newName = explode('.', $initialName);
-
-$lengthName = count($newName);
-
-$extensionFile = strtolower($newName[-- $lengthName]);
-
-if (!in_array($extensionFile, $allowedExtensions))
-{
-    echo json_encode(array('message' => 'Extension not allowed')); 
-    http_response_code(500);
-    return;
-}
-
-//
-// Assign a new image name random
-//
-$imageName = time() . '_' . rand(0, 100) . '.' . $extensionFile;
-
-$uploadPath = $destination . $imageName;
-// echo $uploadPath;
-
-//
-// Try upload the image
-//
-if (move_uploaded_file($_FILES['image_to_upload']['tmp_name'] , $uploadPath))
-{
-    echo json_encode(array("message" => "Successfully uploaded image")); 
-    http_response_code(200);
-    return;
-} else {
-    echo json_encode(array("message" => "Something went wrong")); 
-    http_response_code(500);
-    return;
-}
-}
-
+}   
     

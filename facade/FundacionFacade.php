@@ -104,6 +104,21 @@ class FundacionFacade {
      $fundacionDao->close();
   }
 
+/**
+   * Elimina un objeto Fundacion de la base de datos a partir de su(s) llave(s) primaria(s).
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @param idFundacion
+   */
+  public static function updateEliminar($idFundacion){
+      $fundacion = new Fundacion();
+      $fundacion->setIdFundacion($idFundacion); 
+
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $fundacionDao =$FactoryDao->getfundacionDao(self::getDataBaseDefault());
+     $fundacionDao->updateEliminar($fundacion);
+     $fundacionDao->close();
+  }
+  
   /**
    * Elimina un objeto Fundacion de la base de datos a partir de su(s) llave(s) primaria(s).
    * Puede recibir NullPointerException desde los métodos del Dao
