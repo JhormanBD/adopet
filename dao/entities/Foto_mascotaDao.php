@@ -115,7 +115,7 @@ $mascota_idMascota=$foto_mascota->getMascota_idMascota()->getIdMascota();
      * @return ArrayList<Foto_mascota> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function listAll(){
+    public function listAll(){
       $lista = array();
       try {
           $sql ="SELECT `idfoto_mascota`, `foto_mascota_nombre`, `foto_mascota_ruta`, `Mascota_idMascota`"
@@ -140,11 +140,38 @@ $mascota_idMascota=$foto_mascota->getMascota_idMascota()->getIdMascota();
       }
   }
 
+  
+  public function listAll_Random(){
+      $lista = array();
+      try {
+          $sql ="SELECT `idfoto_mascota`, `foto_mascota_nombre`, `foto_mascota_ruta`, `Mascota_idMascota`"
+                  . "FROM `foto_mascota` ORDER BY RAND()LIMIT 6" ;
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $foto_mascota= new Foto_mascota();
+          $foto_mascota->setIdfoto_mascota($data[$i]['idfoto_mascota']);
+          $foto_mascota->setFoto_mascota_nombre($data[$i]['foto_mascota_nombre']);
+          $foto_mascota->setFoto_mascota_ruta($data[$i]['foto_mascota_ruta']);
+           $mascota = new Mascota();
+           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+           $foto_mascota->setMascota_idMascota($mascota);
+
+          array_push($lista,$foto_mascota);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
     /**
      * Busca un objeto Foto_mascota en la base de datos.
      * @return ArrayList<Foto_mascota> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
+  
+  
   public function listAllById($idMascota){
       $lista = array();
       try {
@@ -169,6 +196,8 @@ $mascota_idMascota=$foto_mascota->getMascota_idMascota()->getIdMascota();
       return null;
       }
   }
+  
+  
 
       public function insertarConsulta($sql){
           $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
