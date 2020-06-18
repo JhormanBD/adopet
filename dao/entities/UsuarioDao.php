@@ -109,7 +109,7 @@ $fechaIngreso=$usuario->getFechaIngreso();
 $foto=$usuario->getFoto();
 
       try {
-          $sql= "UPDATE `usuario` SET`idUsuario`='$idUsuario' ,`TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' ,`password`='$password' ,`estado`='$estado' ,`fechaNacimiento`='$fechaNacimiento' ,`fechaIngreso`='$fechaIngreso' ,`foto`='$foto' WHERE `idUsuario`='$idUsuario' ";
+          $sql= "UPDATE `usuario` SET`idUsuario`='$idUsuario' ,`TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' ,`password`='$password' ,`estado`='$estado' ,`fechaNacimiento`='$fechaNacimiento' ,`fechaIngreso`='$fechaIngreso' ,`clienteId`='$foto' WHERE `idUsuario`='$idUsuario' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');

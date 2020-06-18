@@ -115,6 +115,13 @@ class Foto_mascotaFacade {
      $foto_mascotaDao->close();
      return $result;
   }
+  public static function listAll_Random(){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $foto_mascotaDao =$FactoryDao->getfoto_mascotaDao(self::getDataBaseDefault());
+     $result = $foto_mascotaDao->listAll_Random();
+     $foto_mascotaDao->close();
+     return $result;
+  }
 
   /**
    * Lista todos los objetos Foto_mascota de la base de datos.

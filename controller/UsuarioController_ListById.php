@@ -13,8 +13,13 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 
 include_once realpath('../facade/UsuarioFacade.php');
 
-$idUsuario = strip_tags($_POST['idUsuario']);
+$JSONData = file_get_contents("php://input");
+$dataObject = json_decode($JSONData);
 
+
+ $idUsuario = strip_tags($dataObject->idUsuario);
+
+ 
         $list=UsuarioFacade::listAllById($idUsuario);
         $rta="";
         foreach ($list as $obj => $Usuario) {	

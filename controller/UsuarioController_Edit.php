@@ -32,7 +32,7 @@ $dataObject = json_decode($JSONData);
         $estado = strip_tags($dataObject->estado);
         $fechaNacimiento = strip_tags($dataObject->fechaNacimiento);
         $fechaIngreso = strip_tags($dataObject->fechaIngreso);
-        $foto = strip_tags($dataObject->foto);
+        $foto = strip_tags($dataObject->clienteId);
 //        UsuarioFacade::insert($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto);
 
         $respuesta = false;
@@ -43,7 +43,7 @@ if ($tipousuario === '' || $nombreUsuario === '' || $apellidoUsuario === '' || $
 } else {
 
     //insert devuelve es un numero si incerto   
-    $respuesta =  UsuarioFacade::update($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso);
+    $respuesta =  UsuarioFacade::update($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso,$foto);
 
     if ($respuesta > 0) {
    
