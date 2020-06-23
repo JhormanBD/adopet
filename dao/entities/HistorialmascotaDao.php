@@ -1,8 +1,9 @@
 <?php
+
 /*
-              -------Creado por-------
-             \(x.x )/ Anarchy \( x.x)/
-              ------------------------
+  -------Creado por-------
+  \(x.x )/ Anarchy \( x.x)/
+  ------------------------
  */
 
 //    ¡Vaya! ¡Al fin harás algo mejor que una calculadora!  \\
@@ -12,15 +13,15 @@ include_once realpath('../dto/Historialmascota.php');
 include_once realpath('../dto/Mascota.php');
 include_once realpath('../dao/entities/conexion3.php');
 
-class HistorialmascotaDao implements IHistorialmascotaDao{
+class HistorialmascotaDao implements IHistorialmascotaDao {
 
-private $cn;
+    private $cn;
 
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
     function __construct($conexion) {
-            $this->cn =$conexion;
+        $this->cn = $conexion;
     }
 
     /**
@@ -29,20 +30,20 @@ private $cn;
      * @return  Valor asignado a la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function insert($historialmascota){
-$fechaHistorialMascota=$historialmascota->getFechaHistorialMascota();
-$descripcion=$historialmascota->getDescripcion();
-$observacion=$historialmascota->getObservacion();
-$mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
+    public function insert($historialmascota) {
+        $fechaHistorialMascota = $historialmascota->getFechaHistorialMascota();
+        $descripcion = $historialmascota->getDescripcion();
+        $observacion = $historialmascota->getObservacion();
+        $mascota_idMascota = $historialmascota->getMascota_idMascota()->getIdMascota();
 
-      try {
-          $sql= "INSERT INTO `historialmascota`(`fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`)"
-          ."VALUES ('$fechaHistorialMascota','$descripcion','$observacion','$mascota_idMascota')";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "INSERT INTO `historialmascota`(`fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`)"
+                    . "VALUES ('$fechaHistorialMascota','$descripcion','$observacion','$mascota_idMascota')";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Historialmascota en la base de datos.
@@ -50,29 +51,29 @@ $mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
      * @return El objeto consultado o null
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function select($historialmascota){
-      $idHistorialMascota=$historialmascota->getIdHistorialMascota();
+    public function select($historialmascota) {
+        $idHistorialMascota = $historialmascota->getIdHistorialMascota();
 
-      try {
-          $sql= "SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
-          ."FROM `historialmascota`"
-          ."WHERE `idHistorialMascota`='$idHistorialMascota'";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-          $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
-          $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
-          $historialmascota->setDescripcion($data[$i]['descripcion']);
-          $historialmascota->setObservacion($data[$i]['Observacion']);
-           $mascota = new Mascota();
-           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
-           $historialmascota->setMascota_idMascota($mascota);
-
-          }
-      return $historialmascota;      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+        try {
+            $sql = "SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
+                    . "FROM `historialmascota`"
+                    . "WHERE `idHistorialMascota`='$idHistorialMascota'";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
+                $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
+                $historialmascota->setDescripcion($data[$i]['descripcion']);
+                $historialmascota->setObservacion($data[$i]['Observacion']);
+                $mascota = new Mascota();
+                $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+                $historialmascota->setMascota_idMascota($mascota);
+            }
+            return $historialmascota;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
     /**
      * Modifica un objeto Historialmascota en la base de datos.
@@ -80,20 +81,20 @@ $mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
      * @return  Valor de la llave primaria 
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function update($historialmascota){
-      $idHistorialMascota=$historialmascota->getIdHistorialMascota();
-$fechaHistorialMascota=$historialmascota->getFechaHistorialMascota();
-$descripcion=$historialmascota->getDescripcion();
-$observacion=$historialmascota->getObservacion();
-$mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
+    public function update($historialmascota) {
+        $idHistorialMascota = $historialmascota->getIdHistorialMascota();
+        $fechaHistorialMascota = $historialmascota->getFechaHistorialMascota();
+        $descripcion = $historialmascota->getDescripcion();
+        $observacion = $historialmascota->getObservacion();
+        $mascota_idMascota = $historialmascota->getMascota_idMascota()->getIdMascota();
 
-      try {
-          $sql= "UPDATE `historialmascota` SET`idHistorialMascota`='$idHistorialMascota' ,`fechaHistorialMascota`='$fechaHistorialMascota' ,`descripcion`='$descripcion' ,`Observacion`='$observacion' ,`Mascota_idMascota`='$mascota_idMascota' WHERE `idHistorialMascota`='$idHistorialMascota' ";
-         return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "UPDATE `historialmascota` SET`idHistorialMascota`='$idHistorialMascota' ,`fechaHistorialMascota`='$fechaHistorialMascota' ,`descripcion`='$descripcion' ,`Observacion`='$observacion' ,`Mascota_idMascota`='$mascota_idMascota' WHERE `idHistorialMascota`='$idHistorialMascota' ";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Elimina un objeto Historialmascota en la base de datos.
@@ -101,68 +102,98 @@ $mascota_idMascota=$historialmascota->getMascota_idMascota()->getIdMascota();
      * @return  Valor de la llave primaria eliminada
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function delete($historialmascota){
-      $idHistorialMascota=$historialmascota->getIdHistorialMascota();
+    public function delete($historialmascota) {
+        $idHistorialMascota = $historialmascota->getIdHistorialMascota();
 
-      try {
-          $sql ="DELETE FROM `historialmascota` WHERE `idHistorialMascota`='$idHistorialMascota'";
-          return $this->insertarConsulta($sql);
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      }
-  }
+        try {
+            $sql = "DELETE FROM `historialmascota` WHERE `idHistorialMascota`='$idHistorialMascota'";
+            return $this->insertarConsulta($sql);
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+        }
+    }
 
     /**
      * Busca un objeto Historialmascota en la base de datos.
      * @return ArrayList<Historialmascota> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
-  public function listAll(){
-      $lista = array();
-      try {
-          $sql ="SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
-          ."FROM `historialmascota`"
-          ."WHERE 1";
-          $data = $this->ejecutarConsulta($sql);
-          for ($i=0; $i < count($data) ; $i++) {
-              $historialmascota= new Historialmascota();
-          $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
-          $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
-          $historialmascota->setDescripcion($data[$i]['descripcion']);
-          $historialmascota->setObservacion($data[$i]['Observacion']);
-           $mascota = new Mascota();
-           $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
-           $historialmascota->setMascota_idMascota($mascota);
+    public function listAll() {
+        $lista = array();
+        try {
+            $sql = "SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
+                    . "FROM `historialmascota`"
+                    . "WHERE 1";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $historialmascota = new Historialmascota();
+                $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
+                $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
+                $historialmascota->setDescripcion($data[$i]['descripcion']);
+                $historialmascota->setObservacion($data[$i]['Observacion']);
+                $mascota = new Mascota();
+                $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+                $historialmascota->setMascota_idMascota($mascota);
 
-          array_push($lista,$historialmascota);
-          }
-      return $lista;
-      } catch (SQLException $e) {
-          throw new Exception('Primary key is null');
-      return null;
-      }
-  }
+                array_push($lista, $historialmascota);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
-      public function insertarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $sentencia = null;
-          return $this->cn->lastInsertId();
+    public function listByMascota($idMascota) {
+        $lista = array();
+        try {
+            $sql = "SELECT `idHistorialMascota`, `fechaHistorialMascota`, `descripcion`, `Observacion`, `Mascota_idMascota`"
+                    . "FROM `historialmascota`"
+                    . "WHERE `Mascota_idMascota`='$idMascota'";
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $historialmascota = new Historialmascota();
+                $historialmascota->setIdHistorialMascota($data[$i]['idHistorialMascota']);
+                $historialmascota->setFechaHistorialMascota($data[$i]['fechaHistorialMascota']);
+                $historialmascota->setDescripcion($data[$i]['descripcion']);
+                $historialmascota->setObservacion($data[$i]['Observacion']);
+                $mascota = new Mascota();
+                $mascota->setIdMascota($data[$i]['Mascota_idMascota']);
+                $historialmascota->setMascota_idMascota($mascota);
+
+                array_push($lista, $historialmascota);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
     }
-      public function ejecutarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $data = $sentencia->fetchAll();
-          $sentencia = null;
-          return $data;
+
+    public function insertarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $sentencia = null;
+        return $this->cn->lastInsertId();
     }
+
+    public function ejecutarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $data = $sentencia->fetchAll();
+        $sentencia = null;
+        return $data;
+    }
+
     /**
      * Cierra la conexión actual a la base de datos
      */
-  public function close(){
-      $cn=null;
-  }
+    public function close() {
+        $cn = null;
+    }
+
 }
+
 //That`s all folks!
