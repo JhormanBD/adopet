@@ -17,7 +17,12 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 include_once realpath('../facade/MascotaFacade.php');
 
 
-$list = MascotaFacade::listById();
+$JSONData = file_get_contents("php://input");
+$dataObject = json_decode($JSONData);
+
+$idMascota = strip_tags($dataObject->idMascota);
+
+$list = MascotaFacade::ListByIdUser($idMascota);
 $rta = "";
 foreach ($list as $obj => $Mascota) {
     $rta .= "{
