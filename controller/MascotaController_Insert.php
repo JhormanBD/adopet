@@ -17,10 +17,15 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 include_once realpath('../facade/MascotaFacade.php');
 //include_once realpath('../correo/enviarMail.php');
+include_once realpath('../facade/Foto_mascotaFacade.php');
+
 
  
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
+
+
+
 
 $Especie_idEspecie = strip_tags($dataObject->idEspecie);
 $especie = new Especie();
@@ -38,10 +43,13 @@ $fundacion->setIdFundacion($Fundacion_idFundacion);
 $originalDate = $dataObject->fechaIngreso;
 $newDate = date("Y-m-d", strtotime($originalDate));
 $fechaIngreso = strip_tags($newDate);
-$fechaSalida = strip_tags($dataObject->fechaSalida);
+$foto= strip_tags($dataObject->fechaSalida);
+//$fechaSalida = strip_tags($dataObject->fechaSalida);
+//$fechaSalida = $foto;
 $Vinculacion_idVeterinaria = strip_tags($dataObject->idVeterinaria);
 $vinculacion= new Vinculacion();
 $vinculacion->setIdVeterinaria($Vinculacion_idVeterinaria);
+
 $respuesta = 0;
 
 //guiarse por los datos que recibe el insert
@@ -50,20 +58,26 @@ if ($Especie_idEspecie === '' || $nombreMascota === '' || $edadMascota === '' ||
 } else {
 
     //insert devuelve es un numero si incerto   
-    $respuesta = MascotaFacade::insert($especie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion, $fechaIngreso, $vinculacion);
+$respuesta = MascotaFacade::insert($especie, $nombreMascota, $edadMascota, $sexoMascota, $disponibilidadMascota, $fundacion, $fechaIngreso,$fechaSalida, $vinculacion);
 
-    
     if ($respuesta > 0) {
    
     $rta ="{\"result\":\"ok\"}";
     $msg = "{\"msg\":\"exito\"}";
-    echo "[{$rta}]";
+    
+        $foto_mascota_nombre = 'foto';
+        $foto_mascota_ruta = $foto;
+        $Mascota_idMascota = $respuesta;
+        $mascota= new Mascota();
+        $mascota->setIdMascota($Mascota_idMascota);
+       $respuesta2 =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
+    
+    echo $respuesta2;
    
     } else {
     $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
     $rta = "{\"result\":\"false\"}";
     echo "[{$rta}]";
 }
-}
-
+}   
     

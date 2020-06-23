@@ -119,6 +119,13 @@ class HistorialFacade {
      return $result;
   }
 
+     public static function listByUser($idUsuario){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $historialDao =$FactoryDao->gethistorialDao(self::getDataBaseDefault());
+     $result = $historialDao->listByUser($idUsuario);
+     $historialDao->close();
+     return $result;
+  }
 
 }
 //That`s all folks!

@@ -37,9 +37,9 @@ class Foto_mascotaFacade {
    * @param foto_mascota_ruta
    * @param mascota_idMascota
    */
-  public static function insert( $idfoto_mascota,  $foto_mascota_nombre,  $foto_mascota_ruta,  $mascota_idMascota){
+  public static function insert(   $foto_mascota_nombre,  $foto_mascota_ruta,  $mascota_idMascota){
       $foto_mascota = new Foto_mascota();
-      $foto_mascota->setIdfoto_mascota($idfoto_mascota); 
+  //    $foto_mascota->setIdfoto_mascota($idfoto_mascota); 
       $foto_mascota->setFoto_mascota_nombre($foto_mascota_nombre); 
       $foto_mascota->setFoto_mascota_ruta($foto_mascota_ruta); 
       $foto_mascota->setMascota_idMascota($mascota_idMascota); 
@@ -112,6 +112,19 @@ class Foto_mascotaFacade {
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $foto_mascotaDao =$FactoryDao->getfoto_mascotaDao(self::getDataBaseDefault());
      $result = $foto_mascotaDao->listAll();
+     $foto_mascotaDao->close();
+     return $result;
+  }
+
+  /**
+   * Lista todos los objetos Foto_mascota de la base de datos.
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @return $result Array con los objetos Foto_mascota en base de datos o Null
+   */
+  public static function listAllById($idMascota){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $foto_mascotaDao =$FactoryDao->getfoto_mascotaDao(self::getDataBaseDefault());
+     $result = $foto_mascotaDao->listAllById($idMascota);
      $foto_mascotaDao->close();
      return $result;
   }

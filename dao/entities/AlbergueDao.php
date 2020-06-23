@@ -10,6 +10,7 @@
 include_once realpath('../dao/interfaz/IAlbergueDao.php');
 include_once realpath('../dto/Albergue.php');
 include_once realpath('../dto/Fundacion.php');
+include_once realpath('../dao/entities/conexion3.php');
 
 class AlbergueDao implements IAlbergueDao{
 
@@ -29,14 +30,13 @@ private $cn;
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
   public function insert($albergue){
-      $idAlbergue=$albergue->getIdAlbergue();
 $nombreAlbergue=$albergue->getNombreAlbergue();
 $telefonoAlbergue=$albergue->getTelefonoAlbergue();
 $direccionAlbergue=$albergue->getDireccionAlbergue();
 $fundacion_idFundacion=$albergue->getFundacion_idFundacion()->getIdFundacion();
 
       try {
-          $sql= "INSERT INTO `albergue`( `idAlbergue`, `nombreAlbergue`, `telefonoAlbergue`, `direccionAlbergue`, `Fundacion_idFundacion`)"
+          $sql= "INSERT INTO `albergue`(`nombreAlbergue`, `telefonoAlbergue`, `direccionAlbergue`, `Fundacion_idFundacion`)"
           ."VALUES ('$idAlbergue','$nombreAlbergue','$telefonoAlbergue','$direccionAlbergue','$fundacion_idFundacion')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {

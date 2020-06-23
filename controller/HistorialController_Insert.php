@@ -1,7 +1,13 @@
 <?php
-header("Access-Control-Allow-Origin: *");  
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");  
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
+//header("Access-Control-Allow-Headers: X-Requested-With");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Content-Type: text/html; charset=utf-8');
+header("content-type: application/json; charset=utf-8");
+header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,20 +15,34 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
  */
 include_once realpath('../facade/HistorialFacade.php');
 
-$fechaHistorial = strip_tags($_POST['fechaHistorial']);
-$Descripcion = strip_tags($_POST['Descripcion']);
-$tipo = strip_tags($_POST['tipo']);
-$Usuario_idUsuario = strip_tags($_POST['idUsuario']);
+$JSONData = file_get_contents("php://input");
+$dataObject = json_decode($JSONData);
+
+$Descripcion = strip_tags($dataObject->Descripcion);
+$tipo = strip_tags($dataObject->tipo);
+$Usuario_idUsuario = strip_tags($dataObject->idUsuario);
 $usuario = new Usuario();
 $usuario->setIdUsuario($Usuario_idUsuario);
-$respuesta = false;
-if ($fechaHistorial === "" || $Descripcion === "" || $tipo === "" || $Usuario_idUsuario === "" || $Usuario_idUsuario === "") {
+
+//formatear la fecha
+$originalDate = $dataObject->fechaHistorial;
+$newDate = date("Y-m-d", strtotime($originalDate));
+$fechaHistorial = strip_tags($newDate);
+
+$respuesta = 0;
+if ($fechaHistorial === "" || $Descripcion === "" || $tipo === "" || $Usuario_idUsuario === "") {
     echo $respuesta;
 } else {
     $respuesta = HistorialFacade::insert($fechaHistorial, $Descripcion, $tipo, $usuario);
+    if ($respuesta > 0) {
+
+        $rta = "{\"result\":\"ok\"}";
+        $msg = "{\"msg\":\"exito\"}";
+        echo "[{$rta}]";
+    } else {
+        $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+        $rta = "{\"result\":\"false\"}";
+        echo "[{$rta}]";
+    }
 }
-if ($respuesta > 0) {
-    echo $respuesta = true;
-} else {
-    echo $respuesta;
-}
+

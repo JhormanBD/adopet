@@ -22,9 +22,9 @@ foreach ($list as $obj => $Historial) {
 
 if ($rta != "") {
     $rta = substr($rta, 0, -1);
+    echo $rta = "[{$rta}]";
     $msg = "{\"msg\":\"exito\"}";
 } else {
     $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
-    $rta = "{\"result\":\"No se encontraron registros.\"}";
+    echo $rta = "{\"result\":\"No se encontraron registros.\"}";
 }
-echo "[{$msg},{$rta}]";

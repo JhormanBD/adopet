@@ -46,12 +46,12 @@ private $cn;
         $disponibilidadMascota = $mascota->getDisponibilidadMascota();
         $fundacion_idFundacion = $mascota->getFundacion_idFundacion()->getIdFundacion();
         $fechaIngreso = $mascota->getFechaIngreso();
-//        $fechaSalida = $mascota->getFechaSalida();
+        $fechaSalida = $mascota->getFechaSalida();
         $veterinaria_idVeterinaria = $mascota->getVeterinaria_idVeterinaria()->getIdVeterinaria();
 
         try {
-            $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`,  `Veterinaria_idVeterinaria`)"
-                    . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$veterinaria_idVeterinaria')";
+            $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`,`fechaSalida`,  `Veterinaria_idVeterinaria`)"
+                    . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$fechaSalida','$veterinaria_idVeterinaria')";
             return $this->insertarConsulta($sql);
         } catch (SQLException $e) {
             throw new Exception('Primary key is null');
@@ -254,14 +254,16 @@ private $cn;
           $sentencia = null;
           return $this->cn->lastInsertId();
     }
-      public function ejecutarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $data = $sentencia->fetchAll();
-          $sentencia = null;
-          return $data;
+
+    public function ejecutarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $data = $sentencia->fetchAll();
+        $sentencia = null;
+        return $data;
     }
+
     /**
      * Cierra la conexión actual a la base de datos
      */

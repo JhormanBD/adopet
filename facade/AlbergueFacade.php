@@ -38,9 +38,8 @@ class AlbergueFacade {
    * @param direccionAlbergue
    * @param fundacion_idFundacion
    */
-  public static function insert( $idAlbergue,  $nombreAlbergue,  $telefonoAlbergue,  $direccionAlbergue,  $fundacion_idFundacion){
-      $albergue = new Albergue();
-      $albergue->setIdAlbergue($idAlbergue); 
+  public static function insert($nombreAlbergue,  $telefonoAlbergue,  $direccionAlbergue,  $fundacion_idFundacion){
+      $albergue = new Albergue(); 
       $albergue->setNombreAlbergue($nombreAlbergue); 
       $albergue->setTelefonoAlbergue($telefonoAlbergue); 
       $albergue->setDireccionAlbergue($direccionAlbergue); 
