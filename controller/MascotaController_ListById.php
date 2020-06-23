@@ -22,7 +22,7 @@ $dataObject = json_decode($JSONData);
 
 $idMascota = strip_tags($dataObject->idMascota);
 
-$list = MascotaFacade::ListByIdUser($idMascota);
+$list = MascotaFacade::ListById($idMascota);
 $rta = "";
 foreach ($list as $obj => $Mascota) {
     $rta .= "{

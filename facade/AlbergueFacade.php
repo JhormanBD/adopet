@@ -119,6 +119,14 @@ class AlbergueFacade {
      return $result;
   }
 
+  public static function listByFundacion($idFundacion){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $albergueDao =$FactoryDao->getalbergueDao(self::getDataBaseDefault());
+     $result = $albergueDao->listByFundacion($idFundacion);
+     $albergueDao->close();
+     return $result;
+  }
+
 
 }
 //That`s all folks!

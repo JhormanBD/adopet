@@ -143,6 +143,32 @@ $fundacion_idFundacion=$albergue->getFundacion_idFundacion()->getIdFundacion();
       }
   }
 
+  public function listByFundacion($idFundacion){
+      $lista = array();
+      try {
+          $sql ="SELECT `idAlbergue`, `nombreAlbergue`, `telefonoAlbergue`, `direccionAlbergue`, `Fundacion_idFundacion`"
+          ."FROM `albergue`"
+          ."WHERE 1 AND Fundacion_idFundacion = '$idFundacion'";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $albergue= new Albergue();
+          $albergue->setIdAlbergue($data[$i]['idAlbergue']);
+          $albergue->setNombreAlbergue($data[$i]['nombreAlbergue']);
+          $albergue->setTelefonoAlbergue($data[$i]['telefonoAlbergue']);
+          $albergue->setDireccionAlbergue($data[$i]['direccionAlbergue']);
+           $fundacion = new Fundacion();
+           $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
+           $albergue->setFundacion_idFundacion($fundacion);
+
+          array_push($lista,$albergue);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
       public function insertarConsulta($sql){
           $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $sentencia=$this->cn->prepare($sql);

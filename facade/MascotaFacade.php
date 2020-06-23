@@ -166,6 +166,15 @@ class MascotaFacade {
       
   }
 
+  public static function ListById($idMascota){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->ListById($idMascota);
+     $mascotaDao->close();
+     return $result;
+      
+  }
+
 
 }
 //That`s all folks!
