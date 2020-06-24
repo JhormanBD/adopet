@@ -35,8 +35,8 @@ $url=$redsocial->getUrl();
 $fundacion_idFundacion=$redsocial->getFundacion_idFundacion()->getIdFundacion();
 
       try {
-          $sql= "INSERT INTO `redsocial`( `idRedesSociales`, `nombre`, `url`, `Fundacion_idFundacion`)"
-          ."VALUES ('$idRedesSociales','$nombre','$url','$fundacion_idFundacion')";
+          $sql= "INSERT INTO `redsocial`(`nombre`, `url`, `Fundacion_idFundacion`)"
+          ."VALUES ('$nombre','$url','$fundacion_idFundacion')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');

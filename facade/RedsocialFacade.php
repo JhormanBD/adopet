@@ -37,9 +37,8 @@ class RedsocialFacade {
    * @param url
    * @param fundacion_idFundacion
    */
-  public static function insert( $idRedesSociales,  $nombre,  $url,  $fundacion_idFundacion){
+  public static function insert($nombre,  $url,  $fundacion_idFundacion){
       $redsocial = new Redsocial();
-      $redsocial->setIdRedesSociales($idRedesSociales); 
       $redsocial->setNombre($nombre); 
       $redsocial->setUrl($url); 
       $redsocial->setFundacion_idFundacion($fundacion_idFundacion); 

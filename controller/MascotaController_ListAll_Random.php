@@ -29,7 +29,7 @@ foreach ($list as $obj => $Mascota) {
 	    \"disponibilidadMascota\":\"{$Mascota->getdisponibilidadMascota()}\",
 	    \"idFundacion\":\"{$Mascota->getFundacion_idFundacion()->getidFundacion()}\",
 	    \"fechaIngreso\":\"{$Mascota->getfechaIngreso()}\",
-	    \"fechaSalida\":\"{$Mascota->getfechaSalida()}\",
+	    \"foto_mascota_ruta\":\"{$Mascota->getfechaSalida()}\",
 	    \"idVeterinaria\":\"{$Mascota->getVeterinaria_idVeterinaria()->getidVeterinaria()}\"
 	       },";
 }
