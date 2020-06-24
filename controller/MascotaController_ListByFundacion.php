@@ -16,8 +16,13 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 include_once realpath('../facade/MascotaFacade.php');
 
+$JSONData = file_get_contents("php://input");
+$dataObject = json_decode($JSONData);
 
-$list = MascotaFacade::listAll_Random();
+$fundacion = strip_tags($dataObject->idFundacion);
+//$fundacion = "2";
+
+$list = MascotaFacade::listByFundacion($fundacion);
 $rta = "";
 foreach ($list as $obj => $Mascota) {
     $rta .= "{
@@ -29,7 +34,7 @@ foreach ($list as $obj => $Mascota) {
 	    \"disponibilidadMascota\":\"{$Mascota->getdisponibilidadMascota()}\",
 	    \"idFundacion\":\"{$Mascota->getFundacion_idFundacion()->getidFundacion()}\",
 	    \"fechaIngreso\":\"{$Mascota->getfechaIngreso()}\",
-	    \"foto_mascota_ruta\":\"{$Mascota->getfechaSalida()}\",
+	    \"fechaSalida\":\"{$Mascota->getfechaSalida()}\",
 	    \"idVeterinaria\":\"{$Mascota->getVeterinaria_idVeterinaria()->getidVeterinaria()}\"
 	       },";
 }
