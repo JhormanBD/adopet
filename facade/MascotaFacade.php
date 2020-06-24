@@ -168,6 +168,13 @@ class MascotaFacade {
      $mascotaDao->close();
      return $result;
   }
+  public static function listByFundacion_User($user){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->listByFundacion_User($user);
+     $mascotaDao->close();
+     return $result;
+  }
   
   public static function listAll_Random(){
      $FactoryDao=new FactoryDao(self::getGestorDefault());

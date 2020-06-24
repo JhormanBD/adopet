@@ -19,10 +19,10 @@ include_once realpath('../facade/MascotaFacade.php');
 $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
-$fundacion = strip_tags($dataObject->idFundacion);
-//$fundacion = "2";
+//$user = strip_tags($dataObject->idUsuario);
+$user = "1";
 
-$list = MascotaFacade::listByFundacion($fundacion);
+$list = MascotaFacade::listByFundacion_User($user);
 $rta = "";
 foreach ($list as $obj => $Mascota) {
     $rta .= "{
