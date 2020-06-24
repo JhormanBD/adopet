@@ -17,36 +17,32 @@ header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 include_once realpath('../facade/Foto_mascotaFacade.php');
 
-//$JSONData = file_get_contents("php://input");
-//$dataObject = json_decode($JSONData);
-//
-//$Especie_idEspecie = strip_tags($dataObject->idEspecie);
 
-//  // $idfoto_mascota = strip_tags($_POST['idfoto_mascota']);
-//        $foto_mascota_nombre = 'foto';
-//        $foto_mascota_ruta = strip_tags($dataObject->foto_mascota_ruta);
-//        $Mascota_idMascota = strip_tags($dataObject->idMascota);
-//        $mascota= new Mascota();
-//        $mascota->setIdMascota($Mascota_idMascota);
-//     $respuesta =  Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
-////return true;
+$foto_mascota_nombre = 'foto';
+$Mascota_idMascota = strip_tags($_POST['idMascota']);
+$mascota= new Mascota();
+$mascota->setIdMascota($Mascota_idMascota);
      
-     // $idfoto_mascota = strip_tags($_POST['idfoto_mascota']);
-        $foto_mascota_nombre = 'foto';
-        $foto_mascota_ruta = strip_tags($_POST['foto_mascota_ruta']);
-        $Mascota_idMascota = strip_tags($_POST['idMascota']);
-        $mascota= new Mascota();
-        $mascota->setIdMascota($Mascota_idMascota);
-     $respuesta= Foto_mascotaFacade::insert($idfoto_mascota, $foto_mascota_nombre, $foto_mascota_ruta, $mascota);
+//Recorro todos los elementos
 
-   if ($respuesta > 0) {
-   
-    $rta ="{\"result\":\"ok\"}";
-    $msg = "{\"msg\":\"exito\"}";
-    echo "[{$rta}]";
-   
-    } else {
-    $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
-    $rta = "{\"result\":\"false\"}";
-    echo "[{$rta}]";
+for($i = 1 ; $i <= 3; $i++){
+    $foto =  strip_tags($_POST['foto_mascota_ruta_'.$i]);
+    
+    if(isset($foto) && !empty($foto)){
+    $respuesta= Foto_mascotaFacade::insert( $foto_mascota_nombre, $foto, $mascota);
+    }
 }
+
+ 
+
+   //if ($respuesta > 0) {
+   
+  ///  $rta ="{\"result\":\"ok\"}";
+//    $msg = "{\"msg\":\"exito\"}";
+ //   echo "[{$rta}]";
+   
+  //  } else {
+  //  $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+  //  $rta = "{\"result\":\"false\"}";
+  //  echo "[{$rta}]";
+//}

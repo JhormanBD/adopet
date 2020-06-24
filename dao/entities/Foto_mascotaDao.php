@@ -60,6 +60,7 @@ $mascota_idMascota=$foto_mascota->getMascota_idMascota()->getIdMascota();
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
           $foto_mascota->setIdfoto_mascota($data[$i]['idfoto_mascota']);
+          
           $foto_mascota->setFoto_mascota_nombre($data[$i]['foto_mascota_nombre']);
           $foto_mascota->setFoto_mascota_ruta($data[$i]['foto_mascota_ruta']);
            $mascota = new Mascota();
@@ -150,6 +151,7 @@ $mascota_idMascota=$foto_mascota->getMascota_idMascota()->getIdMascota();
           for ($i=0; $i < count($data) ; $i++) {
               $foto_mascota= new Foto_mascota();
           $foto_mascota->setIdfoto_mascota($data[$i]['idfoto_mascota']);
+          $foto_mascota->setEdad_mascota($data[$i]['edad_mascota']);
           $foto_mascota->setFoto_mascota_nombre($data[$i]['foto_mascota_nombre']);
           $foto_mascota->setFoto_mascota_ruta($data[$i]['foto_mascota_ruta']);
            $mascota = new Mascota();

@@ -210,6 +210,43 @@ private $cn;
             return null;
         }
     }
+    public function listAll_Random() {
+        $lista = array();
+        try {
+            $sql = "SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`, `edadMascota`, `sexoMascota`, `disponibilidadMascota`, `fechaIngreso`, `fechaSalida`, `Fundacion_idFundacion`, `Veterinaria_idVeterinaria`, `fechareg` FROM `foto_mascotas` ORDER BY RAND()LIMIT 6"
+                    
+//                    "SELECT `idMascota`, `Especie_idEspecie`, `nombreMascota`,concat(PERIOD_DIFF( DATE_FORMAT(CURDATE(), '%Y%m') , DATE_FORMAT(`edadMascota`, '%Y%m') ),'  Meses' )  AS `edadMascota`, `sexoMascota`, `disponibilidadMascota`,  `fechaIngreso`, foto_mascota.foto_mascota_ruta as `fechaSalida`,`Fundacion_idFundacion` ,`Veterinaria_idVeterinaria`, `fechareg` FROM `mascota`
+//INNER JOIN foto_mascota
+//ON foto_mascota.idfoto_mascota=mascota.idMascota ORDER BY RAND()LIMIT 6"
+                    ;
+            $data = $this->ejecutarConsulta($sql);
+            for ($i = 0; $i < count($data); $i++) {
+                $mascota = new Mascota();
+                $mascota->setIdMascota($data[$i]['idMascota']);
+                $especie = new Especie();
+                $especie->setIdEspecie($data[$i]['Especie_idEspecie']);
+                $mascota->setEspecie_idEspecie($especie);
+                $mascota->setNombreMascota($data[$i]['nombreMascota']);
+                $mascota->setEdadMascota($data[$i]['edadMascota']);
+                $mascota->setSexoMascota($data[$i]['sexoMascota']);
+                $mascota->setDisponibilidadMascota($data[$i]['disponibilidadMascota']);
+                $fundacion = new Fundacion();
+                $fundacion->setIdFundacion($data[$i]['Fundacion_idFundacion']);
+                $mascota->setFundacion_idFundacion($fundacion);
+                $mascota->setFechaIngreso($data[$i]['fechaIngreso']);
+                $mascota->setFechaSalida($data[$i]['fechaSalida']);
+                $vinculacion = new Vinculacion();
+                $vinculacion->setIdVeterinaria($data[$i]['Veterinaria_idVeterinaria']);
+                $mascota->setVeterinaria_idVeterinaria($vinculacion);
+
+                array_push($lista, $mascota);
+            }
+            return $lista;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
 
     public function ListByType($tipoMascota) {
         $lista = array();

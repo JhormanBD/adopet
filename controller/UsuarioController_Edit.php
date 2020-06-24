@@ -20,7 +20,7 @@ $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
         $idUsuario = strip_tags($dataObject->idUsuario);
-        $Tipousuario_idTipoUsuario = strip_tags($dataObject->idTipoUsuario);
+        $Tipousuario_idTipoUsuario = "1";
         $tipousuario= new Tipousuario();
         $tipousuario->setIdTipoUsuario($Tipousuario_idTipoUsuario);
         $nombreUsuario = strip_tags($dataObject->nombreUsuario);
@@ -28,24 +28,23 @@ $dataObject = json_decode($JSONData);
         $cedula = strip_tags($dataObject->cedula);
         $direccion = strip_tags($dataObject->direccion);
         $correo = strip_tags($dataObject->correo);
-        $password = strip_tags($dataObject->password);
-        $estado = strip_tags($dataObject->estado);
-        $fechaNacimiento = strip_tags($dataObject->fechaNacimiento);
-        $fechaIngreso = strip_tags($dataObject->fechaIngreso);
-        $foto = strip_tags($dataObject->clienteId);
-//        UsuarioFacade::insert($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto);
+        $estado = "1";
+        $originalDate = strip_tags($dataObject->fechaNacimiento);
+        $newDate = date("Y-m-d", strtotime($originalDate));
+        $fechaNacimiento = strip_tags($newDate);
 
-        $respuesta = false;
+
+        $respuesta = 0;
 
 //guiarse por los datos que recibe el insert
-if ($tipousuario === '' || $nombreUsuario === '' || $apellidoUsuario === '' || $cedula === '' || $direccion === '' || $correo === '' || $password === ''|| $estado === ''|| $fechaNacimiento === ''|| $fechaIngreso === '') {
+if ($tipousuario === '' || $nombreUsuario === '' || $apellidoUsuario === '' || $cedula === '' || $direccion === '' || $correo === '' ||  $estado === ''|| $fechaNacimiento === '') {
     echo $respuesta;
 } else {
 
     //insert devuelve es un numero si incerto   
-    $respuesta =  UsuarioFacade::update($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso,$foto);
+    $respuesta =  UsuarioFacade::update($idUsuario, $tipousuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo,  $estado, $fechaNacimiento);
 
-    if ($respuesta > 0) {
+     if ($respuesta > 0) {
    
     $rta ="{\"result\":\"ok\"}";
     $msg = "{\"msg\":\"exito\"}";

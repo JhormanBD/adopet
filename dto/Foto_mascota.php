@@ -11,6 +11,7 @@
 class Foto_mascota {
 
   private $idfoto_mascota;
+  private $edad_mascota;
   private $foto_mascota_nombre;
   private $foto_mascota_ruta;
   private $Mascota_idMascota;
@@ -19,6 +20,15 @@ class Foto_mascota {
      * Constructor de Foto_mascota
     */
      public function __construct(){}
+
+     
+function getEdad_mascota() {
+    return $this->edad_mascota;
+}
+
+function setEdad_mascota($edad_mascota) {
+    $this->edad_mascota = $edad_mascota;
+}
 
     /**
      * Devuelve el valor correspondiente a idfoto_mascota

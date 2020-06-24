@@ -157,6 +157,14 @@ class MascotaFacade {
      return $result;
   }
   
+  public static function listAll_Random(){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->listAll_Random();
+     $mascotaDao->close();
+     return $result;
+  }
+  
   public static function ListByType($tipoMascota){
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());

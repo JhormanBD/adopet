@@ -45,7 +45,7 @@ class UsuarioFacade {
    * @param fechaIngreso
    * @param foto
    */
-  public static function insert( $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,  $correo,  $password,  $estado,  $fechaNacimiento,  $foto){
+  public static function insert( $tipoUsuario_idTipoUsuario,  $nombreUsuario,  $apellidoUsuario,  $cedula,  $direccion,$fechaNacimiento,  $correo,   $estado){
       $usuario = new Usuario();
 //      $usuario->setIdUsuario($idUsuario); 
       $usuario->setTipoUsuario_idTipoUsuario($tipoUsuario_idTipoUsuario); 
@@ -54,11 +54,11 @@ class UsuarioFacade {
       $usuario->setCedula($cedula); 
       $usuario->setDireccion($direccion); 
       $usuario->setCorreo($correo); 
-      $usuario->setPassword($password); 
+//      $usuario->setPassword($password); 
       $usuario->setEstado($estado); 
       $usuario->setFechaNacimiento($fechaNacimiento); 
 //      $usuario->setFechaIngreso($fechaIngreso); 
-      $usuario->setFoto($foto); 
+//      $usuario->setFoto($foto); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
@@ -67,12 +67,12 @@ class UsuarioFacade {
      return $rtn;
   }
   
-  public static function buscarCc($cedula){
+  public static function buscarCorreo($correo){
       $usuario = new Usuario();
-      $usuario->setCedula($cedula); 
+      $usuario->setCorreo($correo); 
       $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
-     $rtn = $usuarioDao->buscarCc($usuario);
+     $rtn = $usuarioDao->buscarCorreo($usuario);
      $usuarioDao->close();
      return $rtn;
   }
@@ -110,7 +110,7 @@ class UsuarioFacade {
    * @param fechaIngreso
    * @param foto
    */
-  public static function update($idUsuario, $tipoUsuario_idTipoUsuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $password, $estado, $fechaNacimiento, $fechaIngreso, $foto){
+  public static function update($idUsuario, $tipoUsuario_idTipoUsuario, $nombreUsuario, $apellidoUsuario, $cedula, $direccion, $correo, $estado, $fechaNacimiento){
       $usuario = self::select($idUsuario);
       $usuario->setTipoUsuario_idTipoUsuario($tipoUsuario_idTipoUsuario); 
       $usuario->setNombreUsuario($nombreUsuario); 
@@ -118,11 +118,11 @@ class UsuarioFacade {
       $usuario->setCedula($cedula); 
       $usuario->setDireccion($direccion); 
       $usuario->setCorreo($correo); 
-      $usuario->setPassword($password); 
+    //  $usuario->setPassword($password); 
       $usuario->setEstado($estado); 
       $usuario->setFechaNacimiento($fechaNacimiento); 
-      $usuario->setFechaIngreso($fechaIngreso); 
-      $usuario->setFoto($foto); 
+    //  $usuario->setFechaIngreso($fechaIngreso); 
+   //   $usuario->setFoto($foto); 
 
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
@@ -184,6 +184,14 @@ class UsuarioFacade {
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
      $result = $usuarioDao->listAllById($idUsuario);
+     $usuarioDao->close();
+     return $result;
+  }
+  
+  public static function listAllByCorreo($correo){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $usuarioDao =$FactoryDao->getusuarioDao(self::getDataBaseDefault());
+     $result = $usuarioDao->listAllByCorreo($correo);
      $usuarioDao->close();
      return $result;
   }
