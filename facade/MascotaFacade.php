@@ -165,6 +165,14 @@ class MascotaFacade {
      return $result;
   }
   
+  public static function ListMoreAdoptedByFundation($idFundacion) {
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->ListMoreAdoptedByFundation($idFundacion);
+     $mascotaDao->close();
+     return $result; 
+  }
+  
   public static function ListByType($tipoMascota){
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());

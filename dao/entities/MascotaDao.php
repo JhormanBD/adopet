@@ -17,20 +17,22 @@ include_once realpath('../dao/entities/conexion3.php');
 
 class MascotaDao implements IMascotaDao {
 
-  //  private $bd;//linea modificada poncho
-private $cn;
+    //  private $bd;//linea modificada poncho
+    private $cn;
+
     /**
      * Inicializa una única conexión a la base de datos, que se usará para cada consulta.
      */
-  //  function __construct() {
-       // $this->cn = $conexion;
+    //  function __construct() {
+    // $this->cn = $conexion;
 //        $this->bd = new conexion2();//linea modificada poncho
- //   }
+    //   }
 
 
-  function __construct($conexion) {
-            $this->cn =$conexion;
+    function __construct($conexion) {
+        $this->cn = $conexion;
     }
+
     /**
      * Guarda un objeto Mascota en la base de datos.
      * @param mascota objeto a guardar
@@ -57,7 +59,7 @@ private $cn;
             throw new Exception('Primary key is null');
         }
     }
-    
+
     public function insert_1($mascota) {
 
         $especie_idEspecie = $mascota->getEspecie_idEspecie()->getIdEspecie();
@@ -72,8 +74,8 @@ private $cn;
         try {
             $sql = "INSERT INTO `mascota`( `Especie_idEspecie`, `nombreMascota`, `edadMascota`,`sexoMascota`,`disponibilidadMascota`, `Fundacion_idFundacion`, `fechaIngreso`,`Veterinaria_idVeterinaria`)"
                     . "VALUES ('$especie_idEspecie','$nombreMascota','$edadMascota','$sexoMascota','$disponibilidadMascota','$fundacion_idFundacion','$fechaIngreso','$veterinaria_idVeterinaria')";
-             $rpta= $this->insertarConsulta($sql);
-             return $rpta;
+            $rpta = $this->insertarConsulta($sql);
+            return $rpta;
         } catch (SQLException $e) {
             throw new Exception('Primary key is null');
         }
@@ -248,6 +250,27 @@ private $cn;
         }
     }
 
+    public function ListMoreAdoptedByFundation($idFundacion) {
+        try {
+            $sql = "SELECT e.nombreEspecie, count(m.idMascota)
+                    FROM especie e 
+                    INNER JOIN mascota m 
+                    ON e.idEspecie=m.Especie_idEspecie 
+                    INNER JOIN fundacion f 
+                    ON m.Fundacion_idFundacion = f.idFundacion
+                    WHERE m.disponibilidadMascota=0
+                    AND f.idFundacion = '$idFundacion'
+                    GROUP BY e.nombreEspecie
+                    ORDER BY e.nombreEspecie desc 
+                    LIMIT 1";
+            $data = $this->ejecutarConsulta($sql);
+            return $data;
+        } catch (SQLException $e) {
+            throw new Exception('Primary key is null');
+            return null;
+        }
+    }
+
     public function ListByType($tipoMascota) {
         $lista = array();
         try {
@@ -283,13 +306,12 @@ private $cn;
         }
     }
 
-
-     public function insertarConsulta($sql){
-          $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $sentencia=$this->cn->prepare($sql);
-          $sentencia->execute(); 
-          $sentencia = null;
-          return $this->cn->lastInsertId();
+    public function insertarConsulta($sql) {
+        $this->cn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sentencia = $this->cn->prepare($sql);
+        $sentencia->execute();
+        $sentencia = null;
+        return $this->cn->lastInsertId();
     }
 
     public function ejecutarConsulta($sql) {
@@ -304,14 +326,13 @@ private $cn;
     /**
      * Cierra la conexión actual a la base de datos
      */
-  public function close(){
-      $cn=null;
-  }
- 
+    public function close() {
+        $cn = null;
+    }
+
     /**
      * Cierra la conexión actual a la base de datos
      */
-   
 }
 
 //That`s all folks!
