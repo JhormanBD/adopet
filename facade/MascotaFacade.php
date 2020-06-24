@@ -156,6 +156,18 @@ class MascotaFacade {
      $mascotaDao->close();
      return $result;
   }
+  /**
+   * Lista todos los objetos Mascota de la base de datos.
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @return $result Array con los objetos Mascota en base de datos o Null
+   */
+  public static function listByFundacion($fundacion){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $mascotaDao =$FactoryDao->getmascotaDao(self::getDataBaseDefault());
+     $result = $mascotaDao->listByFundacion($fundacion);
+     $mascotaDao->close();
+     return $result;
+  }
   
   public static function listAll_Random(){
      $FactoryDao=new FactoryDao(self::getGestorDefault());
