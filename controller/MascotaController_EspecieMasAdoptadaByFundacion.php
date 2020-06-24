@@ -21,7 +21,6 @@ $dataObject = json_decode($JSONData);
 $idFundacion = strip_tags($dataObject->idFundacion);
 $rta = MascotaFacade::ListMoreAdoptedByFundation($idFundacion);
 if ($rta != "") {
-
     echo $rta;
     $msg = "{\"msg\":\"exito\"}";
 } else {

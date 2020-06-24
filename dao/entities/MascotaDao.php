@@ -258,7 +258,9 @@ class MascotaDao implements IMascotaDao {
                     ON e.idEspecie=m.Especie_idEspecie 
                     INNER JOIN fundacion f 
                     ON m.Fundacion_idFundacion = f.idFundacion
-                    WHERE m.disponibilidadMascota=0
+                    INNER JOIN solicitud s 
+                    ON s.Mascota_idMascota = m.idMascota
+                    WHERE s.aprobacion=1
                     AND f.idFundacion = '$idFundacion'
                     GROUP BY e.nombreEspecie
                     ORDER BY e.nombreEspecie desc 
