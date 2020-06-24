@@ -177,6 +177,38 @@ $usuario_idUsuario=$fundacion->getUsuario_idUsuario()->getIdUsuario();
      * @return ArrayList<Fundacion> Puede contener los objetos consultados o estar vacío
      * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
      */
+  public function listAllRamdon(){
+      $lista = array();
+      try {
+          $sql ="SELECT `idFundacion`, `nombreFundacion`, `direccionFundacion`, `telefonoFundacion`, `nit`, `correo`, `nombrepropietario`, `estado`, `Usuario_idUsuario` FROM `foto_fundaciones` WHERE  estado = 1 ORDER BY RAND()LIMIT 6";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $fundacion= new Fundacion();
+          $fundacion->setIdFundacion($data[$i]['idFundacion']);
+          $fundacion->setNombreFundacion($data[$i]['nombreFundacion']);
+          $fundacion->setDireccionFundacion($data[$i]['direccionFundacion']);
+          $fundacion->setTelefonoFundacion($data[$i]['telefonoFundacion']);
+          $fundacion->setNit($data[$i]['nit']);
+          $fundacion->setCorreo($data[$i]['correo']);
+          $fundacion->setNombrepropietario($data[$i]['nombrepropietario']);
+           $usuario = new Usuario();
+           $usuario->setIdUsuario($data[$i]['Usuario_idUsuario']);
+           $fundacion->setUsuario_idUsuario($usuario);
+
+          array_push($lista,$fundacion);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
+    /**
+     * Busca un objeto Fundacion en la base de datos.
+     * @return ArrayList<Fundacion> Puede contener los objetos consultados o estar vacío
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
   public function listAll_ByUser($user){
       $lista = array();
       try {

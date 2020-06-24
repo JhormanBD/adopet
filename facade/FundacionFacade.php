@@ -139,6 +139,19 @@ class FundacionFacade {
    * Puede recibir NullPointerException desde los métodos del Dao
    * @return $result Array con los objetos Fundacion en base de datos o Null
    */
+  public static function listAllRamdon(){
+     $FactoryDao=new FactoryDao(self::getGestorDefault());
+     $fundacionDao =$FactoryDao->getfundacionDao(self::getDataBaseDefault());
+     $result = $fundacionDao->listAllRamdon();
+     $fundacionDao->close();
+     return $result;
+  }
+  
+  /**
+   * Lista todos los objetos Fundacion de la base de datos.
+   * Puede recibir NullPointerException desde los métodos del Dao
+   * @return $result Array con los objetos Fundacion en base de datos o Null
+   */
   public static function listAll(){
      $FactoryDao=new FactoryDao(self::getGestorDefault());
      $fundacionDao =$FactoryDao->getfundacionDao(self::getDataBaseDefault());

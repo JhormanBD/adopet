@@ -11,7 +11,16 @@ include_once realpath('../facade/Fundacion_fotoFacade.php');
 
 class Fundacion_fotoController {
 
-
+    public static function insert(){
+        $idfundacion_foto = strip_tags($_POST['idfundacion_foto']);
+        $fundacion_fotonombre = strip_tags($_POST['fundacion_fotonombre']);
+        $fundacion_foto_ruta = strip_tags($_POST['fundacion_foto_ruta']);
+        $Fundacion_idFundacion = strip_tags($_POST['Fundacion_idFundacion']);
+        $fundacion= new Fundacion();
+        $fundacion->setIdFundacion($Fundacion_idFundacion);
+        Fundacion_fotoFacade::insert($idfundacion_foto, $fundacion_fotonombre, $fundacion_foto_ruta, $fundacion);
+return true;
+    }
 
     public static function listAll(){
         $list=Fundacion_fotoFacade::listAll();
