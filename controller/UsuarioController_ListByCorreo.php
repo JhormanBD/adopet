@@ -22,10 +22,11 @@ $JSONData = file_get_contents("php://input");
 $dataObject = json_decode($JSONData);
 
 
- $idUsuario = strip_tags($dataObject->idUsuario);
+ $correo = strip_tags($dataObject->correo);
+
 
  
-        $list=UsuarioFacade::listAllById($idUsuario);
+        $list=UsuarioFacade::listAllByCorreo($correo);
         $rta="";
         foreach ($list as $obj => $Usuario) {	
 	       $rta.="{
@@ -36,18 +37,19 @@ $dataObject = json_decode($JSONData);
 	    \"cedula\":\"{$Usuario->getcedula()}\",
 	    \"direccion\":\"{$Usuario->getdireccion()}\",
 	    \"correo\":\"{$Usuario->getcorreo()}\",
+	
 	    \"estado\":\"{$Usuario->getestado()}\",
 	    \"fechaNacimiento\":\"{$Usuario->getfechaNacimiento()}\"
-
-	   
+	 
+	  
 	       },";
         }
 
-        if($rta!=""){
-	       $rta = substr($rta, 0, -1);
-	       $msg="{\"msg\":\"exito\"}";
-        }else{
-	       $msg="{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
-	       $rta="{\"result\":\"No se encontraron registros.\"}";	
-        }
-        echo  "[{$msg},{$rta}]";
+      if ($rta != "") {
+    $rta = substr($rta, 0, -1);
+    echo $rta = "[{$rta}]";
+    $msg = "{\"msg\":\"exito\"}";
+} else {
+    $msg = "{\"msg\":\"MANEJO DE EXCEPCIONES AQUÍ\"}";
+    echo $rta = "{\"result\":\"No se encontraron registros.\"}";
+}

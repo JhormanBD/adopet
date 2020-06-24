@@ -36,15 +36,15 @@ $apellidoUsuario=$usuario->getApellidoUsuario();
 $cedula=$usuario->getCedula();
 $direccion=$usuario->getDireccion();
 $correo=$usuario->getCorreo();
-$password=$usuario->getPassword();
+//$password=$usuario->getPassword();
 $estado=$usuario->getEstado();
-$fechaNacimiento=$usuario->getFechaNacimiento();
+//$fechaNacimiento=$usuario->getFechaNacimiento();
 //$fechaIngreso=$usuario->getFechaIngreso();
-$foto=$usuario->getFoto();
+//$foto=$usuario->getFoto();
 
       try {
-          $sql= "INSERT INTO `usuario`( `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `foto`)"
-          ."VALUES ('$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$password','$estado','$fechaNacimiento','$foto')";
+          $sql= "INSERT INTO `usuario`( `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`,  `estado`)"
+          ."VALUES ('$tipoUsuario_idTipoUsuario','$nombreUsuario','$apellidoUsuario','$cedula','$direccion','$correo','$estado')";
           return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -102,14 +102,14 @@ $apellidoUsuario=$usuario->getApellidoUsuario();
 $cedula=$usuario->getCedula();
 $direccion=$usuario->getDireccion();
 $correo=$usuario->getCorreo();
-$password=$usuario->getPassword();
+//$password=$usuario->getPassword();
 $estado=$usuario->getEstado();
 $fechaNacimiento=$usuario->getFechaNacimiento();
-$fechaIngreso=$usuario->getFechaIngreso();
-$foto=$usuario->getFoto();
+//$fechaIngreso=$usuario->getFechaIngreso();
+//$foto=$usuario->getFoto();
 
       try {
-          $sql= "UPDATE `usuario` SET`idUsuario`='$idUsuario' ,`TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' ,`password`='$password' ,`estado`='$estado' ,`fechaNacimiento`='$fechaNacimiento' ,`fechaIngreso`='$fechaIngreso' ,`clienteId`='$foto' WHERE `idUsuario`='$idUsuario' ";
+          $sql= "UPDATE `usuario` SET `TipoUsuario_idTipoUsuario`='$tipoUsuario_idTipoUsuario' ,`nombreUsuario`='$nombreUsuario' ,`apellidoUsuario`='$apellidoUsuario' ,`cedula`='$cedula' ,`direccion`='$direccion' ,`correo`='$correo' , `estado`='$estado' ,`fechaNacimiento`='$fechaNacimiento'  WHERE `idUsuario`='$idUsuario' ";
          return $this->insertarConsulta($sql);
       } catch (SQLException $e) {
           throw new Exception('Primary key is null');
@@ -192,14 +192,14 @@ $foto=$usuario->getFoto();
   }
   
   
-  public function buscarCc($usuario){
+  public function buscarCorreo($usuario){
       
-     $cedula=$usuario->getCedula();
+     $correo=$usuario->getCorreo();
           
       try {
           $sql ="SELECT `idUsuario` "
           ."FROM `usuario`"
-          ."WHERE `cedula`=$cedula";
+          ."WHERE `correo` = '$correo'";
           $data = $this->ejecutarConsulta($sql);
           if (!empty($data)) {
                 return true;
@@ -246,6 +246,44 @@ $foto=$usuario->getFoto();
           $sql ="SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
           ."FROM `usuario`"
           ."WHERE `idUsuario` = $idUsuario";
+          $data = $this->ejecutarConsulta($sql);
+          for ($i=0; $i < count($data) ; $i++) {
+              $usuario= new Usuario();
+          $usuario->setIdUsuario($data[$i]['idUsuario']);
+           $tipousuario = new Tipousuario();
+           $tipousuario->setIdTipoUsuario($data[$i]['TipoUsuario_idTipoUsuario']);
+           $usuario->setTipoUsuario_idTipoUsuario($tipousuario);
+          $usuario->setNombreUsuario($data[$i]['nombreUsuario']);
+          $usuario->setApellidoUsuario($data[$i]['apellidoUsuario']);
+          $usuario->setCedula($data[$i]['cedula']);
+          $usuario->setDireccion($data[$i]['direccion']);
+          $usuario->setCorreo($data[$i]['correo']);
+          $usuario->setPassword($data[$i]['password']);
+          $usuario->setEstado($data[$i]['estado']);
+          $usuario->setFechaNacimiento($data[$i]['fechaNacimiento']);
+          $usuario->setFechaIngreso($data[$i]['fechaIngreso']);
+          $usuario->setFoto($data[$i]['foto']);
+
+          array_push($lista,$usuario);
+          }
+      return $lista;
+      } catch (SQLException $e) {
+          throw new Exception('Primary key is null');
+      return null;
+      }
+  }
+
+    /**
+     * Busca un objeto Usuario en la base de datos. por idUsuario
+     * @return ArrayList<Usuario> Puede contener los objetos consultados o estar vacío
+     * @throws NullPointerException Si los objetos correspondientes a las llaves foraneas son null
+     */
+  public function listAllByCorreo($correo){
+      $lista = array();
+      try {
+          $sql ="SELECT `idUsuario`, `TipoUsuario_idTipoUsuario`, `nombreUsuario`, `apellidoUsuario`, `cedula`, `direccion`, `correo`, `password`, `estado`, `fechaNacimiento`, `fechaIngreso`, `foto`"
+          ."FROM `usuario`"
+          ."WHERE `correo` = '$correo'";
           $data = $this->ejecutarConsulta($sql);
           for ($i=0; $i < count($data) ; $i++) {
               $usuario= new Usuario();
